@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build TypeScript",
+      "type": "shell",
+      "command": "npx tsc",
+      "group": "build",
+      "problemMatcher": ["$tsc"]
+    },
+    {
+      "label": "Start Dev Server",
+      "type": "shell",
+      "command": "npx ts-node-dev src/app.ts",
+      "isBackground": true,
+      "group": "test",
+      "problemMatcher": []
+    }
+  ]
+}

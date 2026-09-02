@@ -1,0 +1,521 @@
+// Prisma Schema for AgroBazaar - Multi-Actor Agri-Commerce & Agri-Fintech Platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// ENUMS
+// -------------------------------------------------------------
+enum UserRole {
+  BUYER
+  WHOLESALER
+  FARMER
+  AGRO_TRANSPORTER
+  FINANCIAL_OFFICER
+  ADMIN
+}
+
+enum CreditTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+enum ProduceUnit {
+  KG
+  CRATE        // Casier (Tomatoes, peppers)
+  BAG_50KG     // Sac 50kg (Potatoes, onions, maize)
+  BAG_100KG    // Sac 100kg (Cassava, beans, coffee)
+  BUCKET       // Seau (Small local market portions)
+  BUNCH        // Régime (Plantains, bananas)
+  NET          // Filet (Citrus, fruits)
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  ESCROW_LOCKED
+  CONFIRMED_BY_FARMER
+  DISPATCHED
+  DELIVERED
+  COMPLETED
+  DISPUTED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  MTN_MOMO
+  ORANGE_MONEY
+  CASH_ON_DELIVERY
+  BANK_TRANSFER
+}
+
+enum LoanStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  DISBURSED
+  REPAID
+  REJECTED
+  DEFAULTED
+}
+
+enum InstitutionType {
+  MICROFINANCE_EMF
+  RURAL_COOP_NJANGI
+  COMMERCIAL_BANK
+  AGRI_FUND
+}
+
+// -------------------------------------------------------------
+// USER & IDENTITY (CORE)
+// -------------------------------------------------------------
+model User {
+  id              String         @id @default(uuid())
+  name            String
+  email           String         @unique
+  phone           String         @unique
+  passwordHash    String
+  avatarUrl       String?
+  role            UserRole       @default(BUYER)
+  isVerified      Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  // Profile extensions (1-to-1 relations based on role)
+  farmerProfile       FarmerProfile?
+  wholesalerProfile   WholesalerProfile?
+  transporterProfile  TransporterProfile?
+  financialProfile    FinancialProfile?
+
+  // Relations
+  ordersBuyer         Order[]            @relation("BuyerOrders")
+  reviewsGiven        Review[]
+  sentMessages        Message[]          @relation("SentMessages")
+  receivedMessages    Message[]          @relation("ReceivedMessages")
+  savedYields         SavedYield[]
+  likedPosts          PostLike[]
+  postComments        PostComment[]
+  cartItems           CartItem[]
+
+  @@index([role])
+  @@index([email])
+  @@index([phone])
+}
+
+// -------------------------------------------------------------
+// ACTOR 1: FARMER / COOPERATIVE PROFILE
+// -------------------------------------------------------------
+model FarmerProfile {
+  id               String         @id @default(uuid())
+  userId           String         @unique
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  farmName         String
+  region           String         // e.g., West, Northwest, Southwest, Littoral, Centre
+  division         String?        // e.g., Noun, Mezam, Fako, Moungo
+  city             String         // e.g., Foumbot, Bamenda, Buea, Penja, Dschang
+  gpsLatitude      Float?
+  gpsLongitude     Float?
+  bio              String?
+  coverPhoto       String?
+  nationalIdNumber String?
+  cooperativeName  String?        // e.g., UCCAO, CAPLAME, Foumbot Tomato Coop
+  
+  rating           Float          @default(5.0)
+  totalRatings     Int            @default(0)
+  totalFollowers   Int            @default(0)
+  farmSizeHectares Float?
+  primaryCrops     String[]       // e.g., ["Tomatoes", "Irish Potatoes", "Coffee", "Penja Pepper"]
+  
+  creditTier       CreditTier     @default(BRONZE)
+  creditScore      Int            @default(500) // 300 - 850
+  
+  yields           AgroYield[]
+  posts            Post[]
+  loanApplications LoanApplication[]
+  orderItemsSold   OrderItem[]    @relation("FarmerOrderItems")
+  
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([region, city])
+  @@index([creditTier])
+}
+
+// -------------------------------------------------------------
+// ACTOR 2: WHOLESALER / BUYAM-SELLAM PROFILE
+// -------------------------------------------------------------
+model WholesalerProfile {
+  id                   String     @id @default(uuid())
+  userId               String     @unique
+  user                 User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  businessName         String     // e.g., "Muea Central Buyam-Sellam Enterprise"
+  tradeLicenseNumber   String?
+  primaryMarketCity    String     // e.g., Douala Sandaga, Yaounde Mokolo
+  buyingCapacityTons   Float?     @default(1.0)
+  preferredCommodities String[]   // e.g., ["Plantains", "Cassava", "Tomatoes"]
+  
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+}
+
+// -------------------------------------------------------------
+// ACTOR 3: AGRO-TRANSPORTER / LOGISTICS PARTNER
+// -------------------------------------------------------------
+model TransporterProfile {
+  id                  String      @id @default(uuid())
+  userId              String      @unique
+  user                User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  vehicleType         String      // e.g., "Canter Truck (5 Ton)", "Pickup Van (1.5 Ton)", "Tricycle"
+  licensePlate        String
+  maxLoadKg           Float
+  operatingCorridors  String[]    // e.g., ["Foumbot -> Douala", "Bamenda -> Bafoussam -> Yaounde"]
+  isAvailable         Boolean     @default(true)
+  currentGpsLat       Float?
+  currentGpsLng       Float?
+  
+  deliveryTrips       DeliveryTrip[]
+  
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+}
+
+// -------------------------------------------------------------
+// ACTOR 4: FINANCIAL INSTITUTION / NJANGI MICROFINANCE
+// -------------------------------------------------------------
+model FinancialProfile {
+  id               String          @id @default(uuid())
+  userId           String          @unique
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  institutionName  String          // e.g., "Advans Cameroun", "Afriland MC2", "Bafoussam Rural Credit"
+  institutionType  InstitutionType @default(MICROFINANCE_EMF)
+  licenseNumber    String
+  headquartersCity String          @default("Douala")
+  totalDisbursed   Decimal         @default(0) @db.Decimal(14, 2)
+  activeLoanCount  Int             @default(0)
+  
+  loanProducts     LoanProduct[]
+  
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+// -------------------------------------------------------------
+// MARKETPLACE & INVENTORY (AGROYIELDS)
+// -------------------------------------------------------------
+model Category {
+  id          String      @id @default(uuid())
+  name        String      @unique // English name e.g. "Vegetables & Greens"
+  frenchName  String?     // Nom français e.g. "Légumes & Maraîchers"
+  icon        String?
+  imageUrl    String?
+  description String?
+  
+  yields      AgroYield[]
+}
+
+model AgroYield {
+  id                      String             @id @default(uuid())
+  farmerId                String
+  farmer                  FarmerProfile      @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  categoryId              String
+  category                Category           @relation(fields: [categoryId], references: [id])
+  
+  title                   String             // e.g., "Fresh Foumbot Vine Tomatoes"
+  frenchTitle             String?            // e.g., "Tomates Fraîches de Foumbot"
+  description             String
+  originRegion            String             // e.g., "Foumbot, West Region"
+  
+  pricePerUnit            Decimal            @db.Decimal(10, 2) // Price in FCFA
+  oldPrice                Decimal?           @db.Decimal(10, 2)
+  unit                    ProduceUnit        @default(KG)
+  stockQuantity           Float              // Available quantity in units
+  minOrderQuantity        Float              @default(1.0)
+  
+  // Bulk / Buyam-Sellam Wholesaler Pricing
+  isWholesaleBulkAvailable Boolean           @default(false)
+  bulkMinQuantity         Float?             // e.g. 10 crates or 500kg
+  bulkPricePerUnit        Decimal?           @db.Decimal(10, 2)
+  
+  isAvailable             Boolean            @default(true)
+  isOrganic               Boolean            @default(false)
+  harvestDate             DateTime?
+  mediaUrls               String[]
+  rating                  Float              @default(5.0)
+  
+  cartItems               CartItem[]
+  orderItems              OrderItem[]
+  savedBy                 SavedYield[]
+  reviews                 Review[]
+  pricingTiers            YieldPricingTier[]
+  
+  createdAt               DateTime           @default(now())
+  updatedAt               DateTime           @updatedAt
+
+  @@index([categoryId])
+  @@index([farmerId])
+  @@index([originRegion])
+}
+
+model YieldPricingTier {
+  id           String    @id @default(uuid())
+  yieldId      String
+  yield        AgroYield @relation(fields: [yieldId], references: [id], onDelete: Cascade)
+  minQuantity  Float
+  maxQuantity  Float?
+  unitPrice    Decimal   @db.Decimal(10, 2)
+
+  @@index([yieldId])
+}
+
+// -------------------------------------------------------------
+// SOCIAL HARVEST STORIES (AGROFEED)
+// -------------------------------------------------------------
+model Post {
+  id            String         @id @default(uuid())
+  farmerId      String
+  farmer        FarmerProfile  @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  content       String         // e.g., "Harvesting our sweet potatoes today in Bamenda! #FreshProduce"
+  mediaUrl      String
+  isVideo       Boolean        @default(false)
+  linkedYieldId String?        // Direct 1-tap buy link
+  likesCount    Int            @default(0)
+  commentsCount Int            @default(0)
+  
+  likes         PostLike[]
+  comments      PostComment[]
+  
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([farmerId])
+}
+
+model PostLike {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([postId, userId])
+}
+
+model PostComment {
+  id        String   @id @default(uuid())
+  postId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  content   String
+  createdAt DateTime @default(now())
+}
+
+// -------------------------------------------------------------
+// SHOPPING BASKET & ORDERS (ESCROW PROTECTED)
+// -------------------------------------------------------------
+model CartItem {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  yieldId   String
+  yield     AgroYield @relation(fields: [yieldId], references: [id], onDelete: Cascade)
+  quantity  Float
+  createdAt DateTime  @default(now())
+
+  @@unique([userId, yieldId])
+}
+
+model Order {
+  id               String         @id @default(uuid())
+  orderNumber      String         @unique @default(cuid())
+  buyerId          String
+  buyer            User           @relation("BuyerOrders", fields: [buyerId], references: [id])
+  status           OrderStatus    @default(PENDING_PAYMENT)
+  paymentMethod    PaymentMethod  @default(MTN_MOMO)
+  
+  subtotal         Decimal        @db.Decimal(10, 2)
+  deliveryFee      Decimal        @db.Decimal(10, 2)
+  totalAmount      Decimal        @db.Decimal(10, 2) // in FCFA
+  
+  deliveryAddress  String
+  deliveryCity     String
+  deliveryPhone    String
+  deliveryNotes    String?
+  paymentReference String?
+  isEscrowReleased Boolean        @default(false)
+  
+  items            OrderItem[]
+  escrow           EscrowRecord?
+  deliveryTrip     DeliveryTrip?
+  
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([buyerId])
+  @@index([status])
+}
+
+model OrderItem {
+  id         String        @id @default(uuid())
+  orderId    String
+  order      Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  yieldId    String
+  yield      AgroYield     @relation(fields: [yieldId], references: [id])
+  farmerId   String
+  farmer     FarmerProfile @relation("FarmerOrderItems", fields: [farmerId], references: [id])
+  
+  quantity   Float
+  unitPrice  Decimal       @db.Decimal(10, 2)
+  totalPrice Decimal       @db.Decimal(10, 2)
+}
+
+model EscrowRecord {
+  id             String    @id @default(uuid())
+  orderId        String    @unique
+  order          Order     @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  
+  amountHeld     Decimal   @db.Decimal(10, 2)
+  farmerPayout   Decimal   @db.Decimal(10, 2)
+  transporterFee Decimal   @default(0) @db.Decimal(10, 2)
+  platformFee    Decimal   @db.Decimal(10, 2)
+  
+  isDisputed     Boolean   @default(false)
+  disputeReason  String?
+  releasedAt     DateTime?
+  
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model DeliveryTrip {
+  id            String              @id @default(uuid())
+  orderId       String              @unique
+  order         Order               @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  transporterId String
+  transporter   TransporterProfile  @relation(fields: [transporterId], references: [id])
+  
+  pickupAddress String
+  dropoffAddress String
+  pickupOtp     String?
+  dropoffOtp    String?
+  isPickedUp    Boolean             @default(false)
+  isDelivered   Boolean             @default(false)
+  
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+}
+
+// -------------------------------------------------------------
+// AGRI-FINTECH: LOANS, NJANGI & CREDIT SCORING
+// -------------------------------------------------------------
+model LoanProduct {
+  id                   String           @id @default(uuid())
+  financialProfileId   String
+  institution          FinancialProfile @relation(fields: [financialProfileId], references: [id], onDelete: Cascade)
+  
+  title                String           // e.g. "Seasonal Fertilizer & Seed Advance"
+  frenchTitle          String?          // e.g. "Avance Engrais & Semences de Saison"
+  description          String
+  minAmount            Decimal          @db.Decimal(10, 2)
+  maxAmount            Decimal          @db.Decimal(10, 2)
+  interestRatePercent  Float            @default(5.0)
+  durationMonths       Int              @default(6)
+  requiredCreditTier   CreditTier       @default(BRONZE)
+  
+  applications         LoanApplication[]
+  createdAt            DateTime         @default(now())
+}
+
+model LoanApplication {
+  id                    String        @id @default(uuid())
+  farmerId              String
+  farmer                FarmerProfile @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  productId             String
+  product               LoanProduct   @relation(fields: [productId], references: [id])
+  
+  purpose               String
+  requestedAmount       Decimal       @db.Decimal(10, 2)
+  approvedAmount        Decimal?      @db.Decimal(10, 2)
+  interestRate          Float         @default(5.0)
+  durationMonths        Int           @default(6)
+  status                LoanStatus    @default(SUBMITTED)
+  
+  repaymentDeductionPct Float         @default(20.0) // 20% of each future sale withheld automatically
+  totalRepaidAmount     Decimal       @default(0) @db.Decimal(10, 2)
+  
+  disbursedAt           DateTime?
+  dueAt                 DateTime?
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@index([farmerId])
+  @@index([status])
+}
+
+// -------------------------------------------------------------
+// MESSAGING & PEER REPUTATION
+// -------------------------------------------------------------
+model Conversation {
+  id             String    @id @default(uuid())
+  participantAId String
+  participantBId String
+  lastMessage    String?
+  updatedAt      DateTime  @updatedAt
+  messages       Message[]
+
+  @@unique([participantAId, participantBId])
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id])
+  receiverId     String
+  receiver       User         @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  
+  content        String
+  isRead         Boolean      @default(false)
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
+}
+
+model Review {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id])
+  yieldId   String
+  yield     AgroYield @relation(fields: [yieldId], references: [id], onDelete: Cascade)
+  
+  rating    Int       // 1 to 5 stars
+  comment   String?
+  createdAt DateTime  @default(now())
+
+  @@index([yieldId])
+}
+
+model SavedYield {
+  id        String    @id @default(uuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  yieldId   String
+  yield     AgroYield @relation(fields: [yieldId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+
+  @@unique([userId, yieldId])
+}
