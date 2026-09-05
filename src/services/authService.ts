@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 import { AuthUserPayload } from '../types';
 
 const prisma = new PrismaClient();
-const JWT_SECRET = process.env.JWT_SECRET || 'agrobazaar_super_secret_jwt_key_2026_cameroon';
+const JWT_SECRET = process.env.JWT_SECRET || 'agromarket_super_secret_jwt_key_2026_cameroon';
 
 export interface RegisterDto {
   name: string;

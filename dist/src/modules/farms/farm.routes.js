@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const farm_controller_1 = require("./farm.controller");
+const authMiddleware_1 = require("../../core/middleware/authMiddleware");
+const router = (0, express_1.Router)();
+router.post('/', authMiddleware_1.authenticateJWT, farm_controller_1.createFarm);
+router.get('/my-farms', authMiddleware_1.authenticateJWT, farm_controller_1.getMyFarms);
+router.get('/:id', authMiddleware_1.optionalAuth, farm_controller_1.getFarmById);
+router.put('/:id', authMiddleware_1.authenticateJWT, farm_controller_1.updateFarm);
+router.get('/:id/analytics', farm_controller_1.getFarmAnalytics);
+exports.default = router;

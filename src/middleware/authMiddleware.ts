@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import { AuthRequest, AuthUserPayload } from '../types';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'agrobazaar_super_secret_jwt_key_2026_cameroon';
+const JWT_SECRET = process.env.JWT_SECRET || 'agromarket_super_secret_jwt_key_2026_cameroon';
 
 export const authenticateJWT = (req: AuthRequest, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;

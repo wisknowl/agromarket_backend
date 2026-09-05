@@ -1,6 +1,6 @@
-# AgroLink Backend
+# agromarket Backend
 
-This is the backend for the AgroLink app, built with Node.js, Express, TypeScript, PostgreSQL, and JWT authentication.
+This is the backend for the agromarket app, built with Node.js, Express, TypeScript, PostgreSQL, and JWT authentication.
 
 ## Getting Started
 

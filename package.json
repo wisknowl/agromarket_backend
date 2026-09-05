@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "AgroBazaar Backend - Multi-Actor Agri-Commerce & Agri-Fintech API",
+  "description": "agromarket Backend - Multi-Actor Agri-Commerce & Agri-Fintech API",
   "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",

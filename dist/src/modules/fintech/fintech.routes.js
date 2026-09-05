@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const fintech_controller_1 = require("./fintech.controller");
+const authMiddleware_1 = require("../../core/middleware/authMiddleware");
+const roleMiddleware_1 = require("../../core/middleware/roleMiddleware");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.get('/credit-score', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.getCreditScore);
+router.get('/products', fintech_controller_1.getLoanProducts);
+router.post('/apply', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.applyLoan);
+exports.default = router;

@@ -1,0 +1,55 @@
+import { Response } from 'express';
+import * as orderService from './order.service';
+import { AuthRequest } from '../../core/types';
+
+export const checkout = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const order = await orderService.createEscrowOrder(req.user.id, req.body);
+    res.status(201).json({ message: 'Order created with Escrow lock', order });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Checkout failed' });
+  }
+};
+
+export const getMyOrders = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const orders = await orderService.getBuyerOrders(req.user.id);
+    res.status(200).json(orders);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch orders' });
+  }
+};
+
+export const getFarmerSales = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const sales = await orderService.getFarmerOrders(req.user.id);
+    res.status(200).json(sales);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch sales' });
+  }
+};
+
+export const releaseEscrow = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const result = await orderService.releaseEscrowFunds(req.params.id, req.user.id);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Escrow release failed' });
+  }
+};

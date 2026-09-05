@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const order_controller_1 = require("./order.controller");
+const authMiddleware_1 = require("../../core/middleware/authMiddleware");
+const roleMiddleware_1 = require("../../core/middleware/roleMiddleware");
+const client_1 = require("@prisma/client");
+const router = (0, express_1.Router)();
+router.post('/checkout', authMiddleware_1.authenticateJWT, order_controller_1.checkout);
+router.get('/my-orders', authMiddleware_1.authenticateJWT, order_controller_1.getMyOrders);
+router.get('/farmer-sales', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), order_controller_1.getFarmerSales);
+router.post('/:id/release-escrow', authMiddleware_1.authenticateJWT, order_controller_1.releaseEscrow);
+exports.default = router;

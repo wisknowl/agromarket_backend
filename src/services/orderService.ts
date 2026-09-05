@@ -36,7 +36,7 @@ export const createEscrowOrder = async (buyerId: string, data: CheckoutDto) => {
 
     orderItemsData.push({
       yieldId: yieldItem.id,
-      farmerId: yieldItem.farmerId,
+      farmerId: yieldItem.farmerId || yieldItem.farmId || '',
       quantity: item.quantity,
       unitPrice: price,
       totalPrice: itemTotal,

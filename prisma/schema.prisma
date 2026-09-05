@@ -1,4 +1,4 @@
-// Prisma Schema for AgroBazaar - Multi-Actor Agri-Commerce & Agri-Fintech Platform
+// Prisma Schema for agromarket - Multi-Actor Agri-Commerce & Agri-Fintech Platform
 
 generator client {
   provider = "prisma-client-js"
@@ -19,6 +19,16 @@ enum UserRole {
   AGRO_TRANSPORTER
   FINANCIAL_OFFICER
   ADMIN
+}
+
+enum FarmCategory {
+  CROPS
+  LIVESTOCK
+  POULTRY
+  AQUACULTURE
+  GREENHOUSE
+  MIXED
+  HORTICULTURE
 }
 
 enum CreditTier {
@@ -95,6 +105,9 @@ model User {
   transporterProfile  TransporterProfile?
   financialProfile    FinancialProfile?
 
+  // Multi-Farm Ownership
+  farms               Farm[]
+
   // Relations
   ordersBuyer         Order[]            @relation("BuyerOrders")
   reviewsGiven        Review[]
@@ -104,10 +117,50 @@ model User {
   likedPosts          PostLike[]
   postComments        PostComment[]
   cartItems           CartItem[]
+  posts               Post[]             @relation("UserPosts")
+  following           Follow[]           @relation("UserFollowing")
+  followers           Follow[]           @relation("UserFollowers")
 
   @@index([role])
   @@index([email])
   @@index([phone])
+}
+
+// -------------------------------------------------------------
+// ACTOR 1: REGISTERED FARMS (MULTI-FARM DOMAIN)
+// -------------------------------------------------------------
+model Farm {
+  id              String        @id @default(uuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name            String
+  category        FarmCategory  @default(CROPS)
+  description     String?
+  region          String
+  division        String?
+  city            String
+  location        String?
+  gpsLatitude     Float?
+  gpsLongitude    Float?
+  sizeHectares    Float?        @default(1.0)
+  coverPhoto      String?
+  avatarPhoto     String?
+  primaryProduce  String[]
+  certifications  String[]
+  isVerified      Boolean       @default(false)
+  rating          Float         @default(5.0)
+  totalRatings    Int           @default(0)
+  
+  yields          AgroYield[]
+  posts           Post[]
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([region, city])
+  @@index([category])
 }
 
 // -------------------------------------------------------------
@@ -227,8 +280,10 @@ model Category {
 
 model AgroYield {
   id                      String             @id @default(uuid())
-  farmerId                String
-  farmer                  FarmerProfile      @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  farmerId                String?
+  farmer                  FarmerProfile?     @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  farmId                  String?
+  farm                    Farm?              @relation(fields: [farmId], references: [id], onDelete: SetNull)
   categoryId              String
   category                Category           @relation(fields: [categoryId], references: [id])
   
@@ -265,6 +320,7 @@ model AgroYield {
 
   @@index([categoryId])
   @@index([farmerId])
+  @@index([farmId])
   @@index([originRegion])
 }
 
@@ -284,8 +340,12 @@ model YieldPricingTier {
 // -------------------------------------------------------------
 model Post {
   id            String         @id @default(uuid())
-  farmerId      String
-  farmer        FarmerProfile  @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  farmerId      String?
+  farmer        FarmerProfile? @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  farmId        String?
+  farm          Farm?          @relation(fields: [farmId], references: [id], onDelete: SetNull)
+  userId        String?
+  user          User?          @relation("UserPosts", fields: [userId], references: [id], onDelete: Cascade)
   content       String         // e.g., "Harvesting our sweet potatoes today in Bamenda! #FreshProduce"
   mediaUrl      String
   isVideo       Boolean        @default(false)
@@ -300,6 +360,8 @@ model Post {
   updatedAt     DateTime       @updatedAt
 
   @@index([farmerId])
+  @@index([farmId])
+  @@index([userId])
 }
 
 model PostLike {
@@ -518,4 +580,17 @@ model SavedYield {
   createdAt DateTime  @default(now())
 
   @@unique([userId, yieldId])
+}
+
+model Follow {
+  id          String   @id @default(uuid())
+  followerId  String
+  follower    User     @relation("UserFollowing", fields: [followerId], references: [id], onDelete: Cascade)
+  followingId String
+  following   User     @relation("UserFollowers", fields: [followingId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }
