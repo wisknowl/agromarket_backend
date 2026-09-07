@@ -55,3 +55,17 @@ export const commentPost = async (req: AuthRequest, res: Response): Promise<void
     res.status(400).json({ message: error.message || 'Failed to add comment' });
   }
 };
+
+export const deleteFeedPost = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const result = await postService.deletePost(req.params.id, req.user.id, req.user.role);
+    res.status(200).json(result);
+  } catch (error: any) {
+    const statusCode = error.message === 'Post not found' ? 404 : error.message.includes('Unauthorized') ? 403 : 400;
+    res.status(statusCode).json({ message: error.message || 'Failed to delete post' });
+  }
+};

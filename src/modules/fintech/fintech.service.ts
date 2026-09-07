@@ -82,3 +82,23 @@ export const applyForSeasonalLoan = async (
     },
   });
 };
+
+export const getMyLoanApplications = async (userId: string) => {
+  const farmer = await prisma.farmerProfile.findUnique({
+    where: { userId },
+  });
+
+  if (!farmer) throw new Error('Farmer profile not found');
+
+  return prisma.loanApplication.findMany({
+    where: { farmerId: farmer.id },
+    include: {
+      product: {
+        include: {
+          institution: true,
+        },
+      },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+};

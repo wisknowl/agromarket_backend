@@ -25,14 +25,16 @@ export const getAllYields = async (params: {
   category?: string;
   region?: string;
   search?: string;
+  farmId?: string;
   isWholesale?: boolean;
   isOrganic?: boolean;
 }) => {
-  const { category, region, search, isWholesale, isOrganic } = params;
+  const { category, region, search, farmId, isWholesale, isOrganic } = params;
 
   return prisma.agroYield.findMany({
     where: {
       isAvailable: true,
+      ...(farmId && { farmId }),
       ...(category && {
         category: {
           name: { contains: category, mode: 'insensitive' },

@@ -36,3 +36,16 @@ export const applyLoan = async (req: AuthRequest, res: Response): Promise<void> 
     res.status(400).json({ message: error.message || 'Failed to submit loan application' });
   }
 };
+
+export const getMyLoans = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const applications = await fintechService.getMyLoanApplications(req.user.id);
+    res.status(200).json(applications);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Failed to fetch loan applications' });
+  }
+};

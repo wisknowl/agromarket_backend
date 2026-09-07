@@ -232,3 +232,35 @@ export const toggleFollowUser = async (followerId: string, followingId: string) 
   }
 };
 
+export const updateProfile = async (
+  userId: string,
+  data: { name?: string; phone?: string; avatarUrl?: string; bio?: string }
+) => {
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      ...(data.name && { name: data.name }),
+      ...(data.phone && { phone: data.phone }),
+      ...(data.avatarUrl && { avatarUrl: data.avatarUrl }),
+    },
+    include: {
+      farms: true,
+      farmerProfile: true,
+      wholesalerProfile: true,
+      transporterProfile: true,
+      financialProfile: true,
+    },
+  });
+
+  if (data.bio && updatedUser.farmerProfile) {
+    await prisma.farmerProfile.update({
+      where: { userId },
+      data: { bio: data.bio },
+    });
+  }
+
+  const { passwordHash: _, ...safeUser } = updatedUser;
+  return safeUser;
+};
+
+

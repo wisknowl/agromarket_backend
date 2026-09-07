@@ -4,7 +4,13 @@ export const getAllPosts = async (params?: { farmId?: string; userId?: string })
   return prisma.post.findMany({
     where: {
       ...(params?.farmId && { farmId: params.farmId }),
-      ...(params?.userId && { userId: params.userId }),
+      ...(params?.userId && {
+        OR: [
+          { userId: params.userId },
+          { farmer: { userId: params.userId } },
+          { farm: { userId: params.userId } },
+        ],
+      }),
     },
     include: {
       farm: true,
@@ -109,4 +115,29 @@ export const addPostComment = async (postId: string, userId: string, content: st
   });
 
   return comment;
+};
+
+export const deletePost = async (postId: string, userId: string, userRole?: string) => {
+  const post = await prisma.post.findUnique({
+    where: { id: postId },
+    include: { farmer: true },
+  });
+
+  if (!post) {
+    throw new Error('Post not found');
+  }
+
+  // Only post author, farm owner, or admin can delete
+  const isOwner = post.userId === userId || post.farmer?.userId === userId || userRole === 'ADMIN';
+  if (!isOwner) {
+    throw new Error('Unauthorized to delete this post');
+  }
+
+  // Clean up likes and comments first
+  await prisma.postLike.deleteMany({ where: { postId } }).catch(() => {});
+  await prisma.postComment.deleteMany({ where: { postId } }).catch(() => {});
+
+  // Delete post
+  await prisma.post.delete({ where: { id: postId } });
+  return { success: true, message: 'Post deleted successfully' };
 };

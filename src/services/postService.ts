@@ -2,8 +2,17 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getAllPosts = async () => {
+export const getAllPosts = async (params?: { farmId?: string; userId?: string }) => {
   return prisma.post.findMany({
+    where: {
+      ...(params?.farmId && { farmId: params.farmId }),
+      ...(params?.userId && {
+        OR: [
+          { userId: params.userId },
+          { farmer: { userId: params.userId } },
+        ],
+      }),
+    },
     include: {
       farmer: {
         include: {

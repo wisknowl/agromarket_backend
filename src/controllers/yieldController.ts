@@ -4,11 +4,12 @@ import * as yieldService from '../services/yieldService';
 
 export const getYields = async (req: Request, res: Response) => {
   try {
-    const { category, region, search, isWholesale, isOrganic } = req.query;
+    const { category, region, search, farmId, isWholesale, isOrganic } = req.query;
     const yields = await yieldService.getAllYields({
       category: category as string,
       region: region as string,
       search: search as string,
+      farmId: farmId as string,
       isWholesale: isWholesale === 'true' ? true : isWholesale === 'false' ? false : undefined,
       isOrganic: isOrganic === 'true' ? true : isOrganic === 'false' ? false : undefined,
     });

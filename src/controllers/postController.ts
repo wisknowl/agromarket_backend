@@ -2,9 +2,10 @@ import { Request, Response } from 'express';
 import { AuthRequest } from '../types';
 import * as postService from '../services/postService';
 
-export const getFeed = async (_req: Request, res: Response) => {
+export const getFeed = async (req: Request, res: Response) => {
   try {
-    const posts = await postService.getAllPosts();
+    const { farmId, userId } = req.query as { farmId?: string; userId?: string };
+    const posts = await postService.getAllPosts({ farmId, userId });
     res.json(posts);
   } catch (error: any) {
     res.status(500).json({ message: error.message });

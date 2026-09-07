@@ -75,3 +75,18 @@ export const followUser = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
+export const updateMyProfile = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const updated = await authService.updateProfile(req.user.id, req.body);
+    res.status(200).json({ message: 'Profile updated successfully', user: updated });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Could not update profile' });
+  }
+};
+
+
+
