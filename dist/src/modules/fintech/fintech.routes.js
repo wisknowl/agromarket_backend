@@ -8,5 +8,8 @@ const client_1 = require("@prisma/client");
 const router = (0, express_1.Router)();
 router.get('/credit-score', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.getCreditScore);
 router.get('/products', fintech_controller_1.getLoanProducts);
+router.get('/loans/products', fintech_controller_1.getLoanProducts);
+router.get('/my-loans', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.getMyLoans);
 router.post('/apply', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.applyLoan);
+router.post('/loans/apply', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), fintech_controller_1.applyLoan);
 exports.default = router;

@@ -1,4 +1,5 @@
 import prisma from '../../core/database/prisma';
+import { FeedRankingEngine, CandidatePost, UserContext } from './engine';
 
 export const getAllPosts = async (params?: { farmId?: string; userId?: string }) => {
   return prisma.post.findMany({
@@ -37,6 +38,73 @@ export const getAllPosts = async (params?: { farmId?: string; userId?: string })
     },
     orderBy: { createdAt: 'desc' },
   });
+};
+
+export const getRankedFeed = async (context?: UserContext & { limit?: number }) => {
+  const posts = await prisma.post.findMany({
+    take: context?.limit || 50,
+    include: {
+      farm: true,
+      user: {
+        select: { id: true, name: true, phone: true, avatarUrl: true, role: true },
+      },
+      farmer: {
+        include: {
+          user: {
+            select: { id: true, name: true, phone: true, avatarUrl: true },
+          },
+        },
+      },
+      likes: true,
+      comments: {
+        include: {
+          user: {
+            select: { id: true, name: true, avatarUrl: true },
+          },
+        },
+        take: 3,
+        orderBy: { createdAt: 'desc' },
+      },
+    },
+    orderBy: { createdAt: 'desc' },
+  });
+
+  const candidates: CandidatePost[] = posts.map((p) => ({
+    id: p.id,
+    farmerId: p.farmerId,
+    farmId: p.farmId,
+    userId: p.userId,
+    content: p.content,
+    mediaUrl: p.mediaUrl,
+    isVideo: p.isVideo,
+    linkedYieldId: p.linkedYieldId,
+    likesCount: p.likesCount,
+    commentsCount: p.commentsCount,
+    createdAt: p.createdAt,
+    updatedAt: p.updatedAt,
+    farmLatitude: p.farm?.gpsLatitude || p.farmer?.gpsLatitude || null,
+    farmLongitude: p.farm?.gpsLongitude || p.farmer?.gpsLongitude || null,
+    farmerCreditScore: p.farmer?.creditScore || null,
+    farmerCreditTier: p.farmer?.creditTier || null,
+    farm: p.farm,
+    user: p.user,
+    farmer: p.farmer,
+    likes: p.likes,
+    comments: p.comments,
+  }));
+
+  const rankedScores = FeedRankingEngine.rankPosts(candidates, context);
+  return rankedScores.map((s) => ({
+    ...s.post,
+    rankingMetadata: {
+      totalRankScore: s.totalRankScore,
+      affinityScore: s.affinityScore,
+      engagementRate: s.engagementRate,
+      geoProximityScore: s.geoProximityScore,
+      freshnessDecay: s.freshnessDecay,
+      isPartnerBoosted: s.isPartnerBoosted,
+    },
+  }));
 };
 
 export const createPost = async (

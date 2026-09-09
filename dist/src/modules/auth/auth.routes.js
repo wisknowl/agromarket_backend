@@ -7,6 +7,7 @@ const router = (0, express_1.Router)();
 router.post('/register', auth_controller_1.register);
 router.post('/login', auth_controller_1.login);
 router.get('/me', authMiddleware_1.authenticateJWT, auth_controller_1.getMe);
+router.put('/profile', authMiddleware_1.authenticateJWT, auth_controller_1.updateMyProfile);
 router.get('/profile/:id', authMiddleware_1.optionalAuth, auth_controller_1.getPublicProfile);
 router.post('/profile/:id/follow', authMiddleware_1.authenticateJWT, auth_controller_1.followUser);
 exports.default = router;

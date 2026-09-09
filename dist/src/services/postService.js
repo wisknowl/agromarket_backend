@@ -3,8 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.addPostComment = exports.toggleLikePost = exports.createPost = exports.getAllPosts = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const getAllPosts = async () => {
+const getAllPosts = async (params) => {
     return prisma.post.findMany({
+        where: {
+            ...(params?.farmId && { farmId: params.farmId }),
+            ...(params?.userId && {
+                OR: [
+                    { userId: params.userId },
+                    { farmer: { userId: params.userId } },
+                ],
+            }),
+        },
         include: {
             farmer: {
                 include: {

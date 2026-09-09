@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.toggleFollowUser = exports.getUserPublicProfile = exports.getCurrentUserProfile = exports.loginUser = exports.registerUser = void 0;
+exports.updateProfile = exports.toggleFollowUser = exports.getUserPublicProfile = exports.getCurrentUserProfile = exports.loginUser = exports.registerUser = void 0;
 const client_1 = require("@prisma/client");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -199,3 +199,29 @@ const toggleFollowUser = async (followerId, followingId) => {
     }
 };
 exports.toggleFollowUser = toggleFollowUser;
+const updateProfile = async (userId, data) => {
+    const updatedUser = await prisma_1.default.user.update({
+        where: { id: userId },
+        data: {
+            ...(data.name && { name: data.name }),
+            ...(data.phone && { phone: data.phone }),
+            ...(data.avatarUrl && { avatarUrl: data.avatarUrl }),
+        },
+        include: {
+            farms: true,
+            farmerProfile: true,
+            wholesalerProfile: true,
+            transporterProfile: true,
+            financialProfile: true,
+        },
+    });
+    if (data.bio && updatedUser.farmerProfile) {
+        await prisma_1.default.farmerProfile.update({
+            where: { userId },
+            data: { bio: data.bio },
+        });
+    }
+    const { passwordHash: _, ...safeUser } = updatedUser;
+    return safeUser;
+};
+exports.updateProfile = updateProfile;

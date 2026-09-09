@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOverviewStats = exports.resolveDisputeOrder = exports.getDisputes = exports.setFlag = exports.getFlags = void 0;
+exports.resolveDisputeOrder = exports.getDisputes = exports.setLoanStatus = exports.getFinancialInstitutions = exports.getLoans = exports.verifyFarm = exports.getFarms = exports.setFarmerTier = exports.verifyUser = exports.updateUser = exports.getUsers = exports.getOverviewStats = exports.setFlag = exports.getFlags = void 0;
 const adminService = __importStar(require("./admin.service"));
 const getFlags = async (_req, res) => {
     try {
@@ -60,6 +60,115 @@ const setFlag = async (req, res) => {
     }
 };
 exports.setFlag = setFlag;
+const getOverviewStats = async (_req, res) => {
+    try {
+        const stats = await adminService.getPlatformStats();
+        res.status(200).json(stats);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch platform stats' });
+    }
+};
+exports.getOverviewStats = getOverviewStats;
+const getUsers = async (req, res) => {
+    try {
+        const { role, search } = req.query;
+        const users = await adminService.getAdminUsers({ role, search });
+        res.status(200).json(users);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch users' });
+    }
+};
+exports.getUsers = getUsers;
+const updateUser = async (req, res) => {
+    try {
+        const updated = await adminService.updateUserByAdmin(req.params.id, req.body);
+        res.status(200).json({ message: 'User updated successfully', user: updated });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update user' });
+    }
+};
+exports.updateUser = updateUser;
+const verifyUser = async (req, res) => {
+    try {
+        const { isVerified } = req.body;
+        const user = await adminService.toggleUserVerification(req.params.id, isVerified);
+        res.status(200).json({ message: 'User verification updated', user });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update user verification' });
+    }
+};
+exports.verifyUser = verifyUser;
+const setFarmerTier = async (req, res) => {
+    try {
+        const { tier } = req.body;
+        if (!tier) {
+            res.status(400).json({ message: 'tier is required (BRONZE, SILVER, GOLD, PLATINUM)' });
+            return;
+        }
+        const farmer = await adminService.updateFarmerTier(req.params.id, tier);
+        res.status(200).json({ message: 'Farmer tier updated', farmer });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update farmer tier' });
+    }
+};
+exports.setFarmerTier = setFarmerTier;
+const getFarms = async (_req, res) => {
+    try {
+        const farms = await adminService.getAdminFarms();
+        res.status(200).json(farms);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch farms' });
+    }
+};
+exports.getFarms = getFarms;
+const verifyFarm = async (req, res) => {
+    try {
+        const { isVerified } = req.body;
+        const farm = await adminService.toggleFarmVerification(req.params.id, isVerified);
+        res.status(200).json({ message: 'Farm verification updated', farm });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update farm verification' });
+    }
+};
+exports.verifyFarm = verifyFarm;
+const getLoans = async (_req, res) => {
+    try {
+        const loans = await adminService.getAdminLoans();
+        res.status(200).json(loans);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch loans' });
+    }
+};
+exports.getLoans = getLoans;
+const getFinancialInstitutions = async (_req, res) => {
+    try {
+        const institutions = await adminService.getAdminFinancialInstitutions();
+        res.status(200).json(institutions);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch financial institutions' });
+    }
+};
+exports.getFinancialInstitutions = getFinancialInstitutions;
+const setLoanStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
+        const loan = await adminService.updateLoanStatus(req.params.id, status);
+        res.status(200).json({ message: 'Loan status updated', loan });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update loan status' });
+    }
+};
+exports.setLoanStatus = setLoanStatus;
 const getDisputes = async (_req, res) => {
     try {
         const disputes = await adminService.getDisputedOrders();
@@ -81,13 +190,3 @@ const resolveDisputeOrder = async (req, res) => {
     }
 };
 exports.resolveDisputeOrder = resolveDisputeOrder;
-const getOverviewStats = async (_req, res) => {
-    try {
-        const stats = await adminService.getPlatformStats();
-        res.status(200).json(stats);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message || 'Failed to fetch platform stats' });
-    }
-};
-exports.getOverviewStats = getOverviewStats;

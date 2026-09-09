@@ -14,6 +14,7 @@ import { farmRoutes } from './modules/farms';
 import { buyamSellamRoutes } from './modules/buyam-sellam';
 import { adminRoutes } from './modules/admin';
 import { uploadRoutes } from './modules/upload';
+import { telemetryRoutes } from './core/telemetry/telemetry.routes';
 
 dotenv.config();
 
@@ -70,6 +71,7 @@ app.use('/api/farms', farmRoutes);
 app.use('/api/wholesaler', buyamSellamRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/telemetry', telemetryRoutes);
 
 // Global Error Handler
 app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {

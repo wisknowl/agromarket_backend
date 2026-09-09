@@ -6,6 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const os_1 = __importDefault(require("os"));
+const path_1 = __importDefault(require("path"));
 const auth_1 = require("./modules/auth");
 const yields_1 = require("./modules/yields");
 const feed_1 = require("./modules/feed");
@@ -15,12 +17,15 @@ const chat_1 = require("./modules/chat");
 const farms_1 = require("./modules/farms");
 const buyam_sellam_1 = require("./modules/buyam-sellam");
 const admin_1 = require("./modules/admin");
+const upload_1 = require("./modules/upload");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use((0, cors_1.default)({ origin: '*' }));
 app.use(express_1.default.json());
+// Serve Static Uploads (Videos & Images)
+app.use('/uploads', express_1.default.static(path_1.default.join(process.cwd(), 'uploads')));
 // Request Logger (Prints visited URLs & methods to CLI)
 app.use((req, res, next) => {
     const start = Date.now();
@@ -61,6 +66,7 @@ app.use('/api/chat', chat_1.chatRoutes);
 app.use('/api/farms', farms_1.farmRoutes);
 app.use('/api/wholesaler', buyam_sellam_1.buyamSellamRoutes);
 app.use('/api/admin', admin_1.adminRoutes);
+app.use('/api/upload', upload_1.uploadRoutes);
 // Global Error Handler
 app.use((err, _req, res, _next) => {
     console.error('Unhandled server error:', err);
@@ -69,8 +75,16 @@ app.use((err, _req, res, _next) => {
 if (process.env.NODE_ENV !== 'test') {
     const serverPort = Number(PORT) || 5000;
     app.listen(serverPort, '0.0.0.0', () => {
-        console.log(`🌱 AgroMarket Modular Server running on http://0.0.0.0:${serverPort}`);
-        console.log(`📡 Local Network Access: http://192.168.1.15:${serverPort}`);
+        console.log(`🌱 AgroMarket Modular Server running on port ${serverPort}`);
+        const interfaces = os_1.default.networkInterfaces();
+        for (const name of Object.keys(interfaces)) {
+            for (const iface of interfaces[name] || []) {
+                if (iface.family === 'IPv4' && !iface.internal) {
+                    console.log(`📡 Network Access (${name}): http://${iface.address}:${serverPort}`);
+                }
+            }
+        }
+        console.log(`💻 Local Access: http://localhost:${serverPort}`);
         console.log(`📱 Android Emulator Access: http://10.0.2.2:${serverPort}`);
     });
 }

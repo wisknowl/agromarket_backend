@@ -12,4 +12,5 @@ router.post('/', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireR
 router.post('/:id/like', authMiddleware_1.authenticateJWT, post_controller_1.likePost);
 router.post('/:id/comments', authMiddleware_1.authenticateJWT, post_controller_1.commentPost);
 router.post('/:id/comment', authMiddleware_1.authenticateJWT, post_controller_1.commentPost);
+router.delete('/:id', authMiddleware_1.authenticateJWT, post_controller_1.deleteFeedPost);
 exports.default = router;

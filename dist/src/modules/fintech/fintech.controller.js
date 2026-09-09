@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.applyLoan = exports.getLoanProducts = exports.getCreditScore = void 0;
+exports.getMyLoans = exports.applyLoan = exports.getLoanProducts = exports.getCreditScore = void 0;
 const fintechService = __importStar(require("./fintech.service"));
 const getCreditScore = async (req, res) => {
     try {
@@ -73,3 +73,17 @@ const applyLoan = async (req, res) => {
     }
 };
 exports.applyLoan = applyLoan;
+const getMyLoans = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const applications = await fintechService.getMyLoanApplications(req.user.id);
+        res.status(200).json(applications);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to fetch loan applications' });
+    }
+};
+exports.getMyLoans = getMyLoans;

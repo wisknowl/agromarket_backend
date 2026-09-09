@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.followUser = exports.getPublicProfile = exports.getMe = exports.login = exports.register = void 0;
+exports.updateMyProfile = exports.followUser = exports.getPublicProfile = exports.getMe = exports.login = exports.register = void 0;
 const authService = __importStar(require("./auth.service"));
 const register = async (req, res) => {
     try {
@@ -110,3 +110,17 @@ const followUser = async (req, res) => {
     }
 };
 exports.followUser = followUser;
+const updateMyProfile = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const updated = await authService.updateProfile(req.user.id, req.body);
+        res.status(200).json({ message: 'Profile updated successfully', user: updated });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Could not update profile' });
+    }
+};
+exports.updateMyProfile = updateMyProfile;

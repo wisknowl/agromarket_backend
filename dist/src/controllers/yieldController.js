@@ -37,11 +37,12 @@ exports.getCategories = exports.createYield = exports.getYield = exports.getYiel
 const yieldService = __importStar(require("../services/yieldService"));
 const getYields = async (req, res) => {
     try {
-        const { category, region, search, isWholesale, isOrganic } = req.query;
+        const { category, region, search, farmId, isWholesale, isOrganic } = req.query;
         const yields = await yieldService.getAllYields({
             category: category,
             region: region,
             search: search,
+            farmId: farmId,
             isWholesale: isWholesale === 'true' ? true : isWholesale === 'false' ? false : undefined,
             isOrganic: isOrganic === 'true' ? true : isOrganic === 'false' ? false : undefined,
         });

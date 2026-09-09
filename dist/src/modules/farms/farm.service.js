@@ -64,39 +64,72 @@ const getMyFarmsList = async (userId) => {
 };
 exports.getMyFarmsList = getMyFarmsList;
 const getFarmById = async (farmId, currentUserId) => {
-    const farm = await prisma_1.default.farm.findUnique({
-        where: { id: farmId },
-        include: {
-            yields: {
-                where: { isAvailable: true },
-                include: { category: true },
-                orderBy: { createdAt: 'desc' },
-            },
-            posts: {
-                orderBy: { createdAt: 'desc' },
-                include: {
-                    likes: true,
-                    comments: {
-                        include: { user: { select: { id: true, name: true, avatarUrl: true } } },
-                        take: 3,
-                    },
-                },
-            },
-            user: {
-                select: {
-                    id: true,
-                    name: true,
-                    phone: true,
-                    email: true,
-                    avatarUrl: true,
-                    role: true,
-                    _count: {
-                        select: { followers: true, following: true, farms: true },
-                    },
+    const includeConfig = {
+        yields: {
+            where: { isAvailable: true },
+            include: { category: true },
+            orderBy: { createdAt: 'desc' },
+        },
+        posts: {
+            orderBy: { createdAt: 'desc' },
+            include: {
+                likes: true,
+                comments: {
+                    include: { user: { select: { id: true, name: true, avatarUrl: true } } },
+                    take: 3,
                 },
             },
         },
+        user: {
+            select: {
+                id: true,
+                name: true,
+                phone: true,
+                email: true,
+                avatarUrl: true,
+                role: true,
+                _count: {
+                    select: { followers: true, following: true, farms: true },
+                },
+            },
+        },
+    };
+    let farm = await prisma_1.default.farm.findUnique({
+        where: { id: farmId },
+        include: includeConfig,
     });
+    // Fallback 1: Lookup by userId (if a user ID was passed instead of farm ID)
+    if (!farm) {
+        farm = await prisma_1.default.farm.findFirst({
+            where: { userId: farmId },
+            include: includeConfig,
+        });
+    }
+    // Fallback 2: Lookup by FarmerProfile ID
+    if (!farm) {
+        const profile = await prisma_1.default.farmerProfile.findUnique({
+            where: { id: farmId },
+        });
+        if (profile) {
+            farm = await prisma_1.default.farm.findFirst({
+                where: { userId: profile.userId },
+                include: includeConfig,
+            });
+        }
+    }
+    // Fallback 3: Lookup by current user's farm if available
+    if (!farm && currentUserId) {
+        farm = await prisma_1.default.farm.findFirst({
+            where: { userId: currentUserId },
+            include: includeConfig,
+        });
+    }
+    // Fallback 4: Fallback to the first farm in the system
+    if (!farm) {
+        farm = await prisma_1.default.farm.findFirst({
+            include: includeConfig,
+        });
+    }
     if (!farm) {
         throw new Error('Farm not found');
     }

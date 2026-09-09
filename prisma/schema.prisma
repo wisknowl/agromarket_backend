@@ -195,6 +195,7 @@ model FarmerProfile {
   posts            Post[]
   loanApplications LoanApplication[]
   orderItemsSold   OrderItem[]    @relation("FarmerOrderItems")
+  creditAuditSnapshots FarmerCreditAuditSnapshot[]
   
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
@@ -410,7 +411,9 @@ model Order {
   
   subtotal         Decimal        @db.Decimal(10, 2)
   deliveryFee      Decimal        @db.Decimal(10, 2)
-  totalAmount      Decimal        @db.Decimal(10, 2) // in FCFA
+  totalAmount      Decimal        @db.Decimal(10, 2) // in currency (e.g., FCFA / USD)
+  currency         String         @default("XAF") @db.VarChar(3)
+  exchangeRateUsd  Decimal        @default(0.0016) @db.Decimal(10, 6)
   
   deliveryAddress  String
   deliveryCity     String
@@ -525,6 +528,20 @@ model LoanApplication {
 
   @@index([farmerId])
   @@index([status])
+}
+
+model FarmerCreditAuditSnapshot {
+  id               String        @id @default(uuid())
+  farmerId         String
+  farmer           FarmerProfile @relation(fields: [farmerId], references: [id], onDelete: Cascade)
+  score            Int
+  tier             CreditTier
+  algorithmVersion String        @default("v1.0.0-tabi")
+  metricsSnapshot  Json          // JSONB containing the 8 normalized metrics
+  triggeredBy      String        // e.g. "ORDER_COMPLETED_uuid" or "CRON_RECALCULATION"
+  calculatedAt     DateTime      @default(now())
+
+  @@index([farmerId, calculatedAt])
 }
 
 // -------------------------------------------------------------

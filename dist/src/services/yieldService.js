@@ -4,10 +4,11 @@ exports.getAllCategories = exports.createYield = exports.getYieldById = exports.
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
 const getAllYields = async (params) => {
-    const { category, region, search, isWholesale, isOrganic } = params;
+    const { category, region, search, farmId, isWholesale, isOrganic } = params;
     return prisma.agroYield.findMany({
         where: {
             isAvailable: true,
+            ...(farmId && { farmId }),
             ...(category && {
                 category: {
                     name: { contains: category, mode: 'insensitive' },

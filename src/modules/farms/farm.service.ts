@@ -237,3 +237,52 @@ export const getFarmAnalytics = async (farmId: string) => {
   };
 };
 
+export const getMutualPartners = async (userId: string) => {
+  const { SocialGraphEngine } = await import('./engine');
+  const partnerUserIds = await SocialGraphEngine.getMutualPartnerUserIds(userId);
+
+  if (partnerUserIds.length === 0) return [];
+
+  const partners = await prisma.user.findMany({
+    where: { id: { in: partnerUserIds } },
+    select: {
+      id: true,
+      name: true,
+      phone: true,
+      avatarUrl: true,
+      role: true,
+      farmerProfile: {
+        select: {
+          id: true,
+          farmName: true,
+          region: true,
+          city: true,
+          rating: true,
+          creditScore: true,
+          creditTier: true,
+        },
+      },
+      farms: {
+        select: {
+          id: true,
+          name: true,
+          category: true,
+          city: true,
+        },
+      },
+    },
+  });
+
+  return partners.map((p) => ({
+    ...p,
+    isMutualPartner: true,
+    tradePrivileges: SocialGraphEngine.resolvePrivileges(true),
+  }));
+};
+
+export const checkPartnerStatus = async (userId: string, targetUserId: string) => {
+  const { SocialGraphEngine } = await import('./engine');
+  return SocialGraphEngine.evaluatePartnerStatus(userId, targetUserId);
+};
+
+

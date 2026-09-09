@@ -35,9 +35,10 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.commentPost = exports.likePost = exports.createPost = exports.getFeed = void 0;
 const postService = __importStar(require("../services/postService"));
-const getFeed = async (_req, res) => {
+const getFeed = async (req, res) => {
     try {
-        const posts = await postService.getAllPosts();
+        const { farmId, userId } = req.query;
+        const posts = await postService.getAllPosts({ farmId, userId });
         res.json(posts);
     }
     catch (error) {

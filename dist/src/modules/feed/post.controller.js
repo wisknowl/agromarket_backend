@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.commentPost = exports.likePost = exports.createFeedPost = exports.getFeed = void 0;
+exports.deleteFeedPost = exports.commentPost = exports.likePost = exports.createFeedPost = exports.getFeed = void 0;
 const postService = __importStar(require("./post.service"));
 const getFeed = async (req, res) => {
     try {
@@ -93,3 +93,18 @@ const commentPost = async (req, res) => {
     }
 };
 exports.commentPost = commentPost;
+const deleteFeedPost = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const result = await postService.deletePost(req.params.id, req.user.id, req.user.role);
+        res.status(200).json(result);
+    }
+    catch (error) {
+        const statusCode = error.message === 'Post not found' ? 404 : error.message.includes('Unauthorized') ? 403 : 400;
+        res.status(statusCode).json({ message: error.message || 'Failed to delete post' });
+    }
+};
+exports.deleteFeedPost = deleteFeedPost;

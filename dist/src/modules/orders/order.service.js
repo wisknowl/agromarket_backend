@@ -3,15 +3,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.releaseEscrowFunds = exports.getFarmerOrders = exports.getBuyerOrders = exports.createEscrowOrder = void 0;
+exports.releaseEscrowFunds = exports.updateOrderStatus = exports.getFarmerOrders = exports.getBuyerOrders = exports.createEscrowOrder = void 0;
 const client_1 = require("@prisma/client");
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
+const engine_1 = require("./engine");
+const engine_2 = require("../fintech/engine");
 const createEscrowOrder = async (buyerId, data) => {
     if (!data.items || data.items.length === 0) {
         throw new Error('Cannot checkout an empty basket');
     }
+    const currency = data.currency || 'XAF';
     // Calculate items subtotal and verify stock
     let subtotal = 0;
+    let primaryFarmerId = '';
     const orderItemsData = [];
     for (const item of data.items) {
         const yieldItem = await prisma_1.default.agroYield.findUnique({
@@ -25,9 +29,13 @@ const createEscrowOrder = async (buyerId, data) => {
         const price = Number(yieldItem.pricePerUnit);
         const itemTotal = price * item.quantity;
         subtotal += itemTotal;
+        const farmerId = yieldItem.farmerId || yieldItem.farmId || '';
+        if (!primaryFarmerId && farmerId) {
+            primaryFarmerId = farmerId;
+        }
         orderItemsData.push({
             yieldId: yieldItem.id,
-            farmerId: yieldItem.farmerId || yieldItem.farmId || '',
+            farmerId,
             quantity: item.quantity,
             unitPrice: price,
             totalPrice: itemTotal,
@@ -36,19 +44,22 @@ const createEscrowOrder = async (buyerId, data) => {
     // Delivery fee calculation (Cameroon local shipping: 1000 FCFA base, free if 10+ items)
     const totalItemCount = data.items.reduce((sum, i) => sum + i.quantity, 0);
     const deliveryFee = totalItemCount >= 10 ? 0 : 1000;
-    const totalAmount = subtotal + deliveryFee;
-    // Platform fee (5%) and Farmer Payout calculation
-    const platformFee = Math.round(subtotal * 0.05);
-    const transporterFee = deliveryFee;
-    const farmerPayout = subtotal - platformFee;
+    // Compute Multi-Party Atomic Settlement via Engine 3
+    const settlement = await engine_1.SettlementLedger.computeSettlement({
+        subtotal,
+        deliveryFee,
+        currency,
+        farmerId: primaryFarmerId,
+    });
     const order = await prisma_1.default.order.create({
         data: {
             buyerId,
             status: client_1.OrderStatus.ESCROW_LOCKED,
             paymentMethod: data.paymentMethod,
+            currency,
             subtotal,
             deliveryFee,
-            totalAmount,
+            totalAmount: settlement.grossAmount,
             deliveryAddress: data.deliveryAddress,
             deliveryCity: data.deliveryCity,
             deliveryPhone: data.deliveryPhone,
@@ -59,10 +70,10 @@ const createEscrowOrder = async (buyerId, data) => {
             },
             escrow: {
                 create: {
-                    amountHeld: totalAmount,
-                    farmerPayout,
-                    transporterFee,
-                    platformFee,
+                    amountHeld: settlement.grossAmount,
+                    farmerPayout: settlement.farmerNetPayout,
+                    transporterFee: settlement.transporterFee,
+                    platformFee: settlement.platformCommission,
                 },
             },
         },
@@ -73,6 +84,8 @@ const createEscrowOrder = async (buyerId, data) => {
             escrow: true,
         },
     });
+    // Execute FSM transition
+    engine_1.EscrowMachine.transition(order.id, 'ORDER_CREATED', 'ESCROW_LOCKED');
     // Decrement stock
     for (const item of data.items) {
         await prisma_1.default.agroYield.update({
@@ -84,7 +97,10 @@ const createEscrowOrder = async (buyerId, data) => {
     await prisma_1.default.cartItem.deleteMany({
         where: { userId: buyerId },
     });
-    return order;
+    return {
+        ...order,
+        settlementBreakdown: settlement,
+    };
 };
 exports.createEscrowOrder = createEscrowOrder;
 const getBuyerOrders = async (buyerId) => {
@@ -121,14 +137,42 @@ const getFarmerOrders = async (userId) => {
     });
 };
 exports.getFarmerOrders = getFarmerOrders;
+const updateOrderStatus = async (orderId, targetStatus, actorUserId) => {
+    const order = await prisma_1.default.order.findUnique({
+        where: { id: orderId },
+        include: { items: true },
+    });
+    if (!order)
+        throw new Error('Order not found');
+    const currentFsmState = order.status;
+    const targetFsmState = targetStatus;
+    const transition = engine_1.EscrowMachine.transition(orderId, currentFsmState, targetFsmState);
+    if (!transition.valid) {
+        throw new Error(transition.message);
+    }
+    const updatedOrder = await prisma_1.default.order.update({
+        where: { id: orderId },
+        data: { status: targetStatus },
+    });
+    return updatedOrder;
+};
+exports.updateOrderStatus = updateOrderStatus;
 const releaseEscrowFunds = async (orderId, buyerId) => {
     const order = await prisma_1.default.order.findUnique({
         where: { id: orderId },
-        include: { escrow: true },
+        include: {
+            escrow: true,
+            items: {
+                include: { farmer: true },
+            },
+        },
     });
     if (!order || order.buyerId !== buyerId) {
         throw new Error('Unauthorized or order not found');
     }
+    // FSM Transition to ESCROW_RELEASED
+    const currentFsmState = (order.status === 'DELIVERED' ? 'DELIVERED' : 'IN_TRANSIT');
+    engine_1.EscrowMachine.transition(orderId, currentFsmState, 'ESCROW_RELEASED');
     await prisma_1.default.order.update({
         where: { id: orderId },
         data: {
@@ -140,6 +184,24 @@ const releaseEscrowFunds = async (orderId, buyerId) => {
         where: { orderId },
         data: { releasedAt: new Date() },
     });
-    return { success: true, message: 'Escrow funds successfully released to farmer & transporter!' };
+    // Re-calculate credit score for all involved farmers in background
+    const farmerIds = Array.from(new Set(order.items.map((i) => i.farmerId).filter(Boolean)));
+    for (const farmerId of farmerIds) {
+        setImmediate(async () => {
+            try {
+                await engine_2.CreditScoringEngine.evaluateFarmer({
+                    farmerId,
+                    triggeredBy: `ORDER_COMPLETED_${orderId}`,
+                });
+            }
+            catch (e) {
+                console.error(`[EscrowRelease] Auto-rescore failed for farmer ${farmerId}:`, e);
+            }
+        });
+    }
+    return {
+        success: true,
+        message: 'Escrow funds successfully released to farmer & transporter! Credit score updated.',
+    };
 };
 exports.releaseEscrowFunds = releaseEscrowFunds;

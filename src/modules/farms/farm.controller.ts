@@ -58,3 +58,30 @@ export const getFarmAnalytics = async (req: Request, res: Response): Promise<voi
     res.status(404).json({ message: error.message || 'Farm analytics not found' });
   }
 };
+
+export const getPartners = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const partners = await farmService.getMutualPartners(req.user.id);
+    res.status(200).json(partners);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch mutual partners' });
+  }
+};
+
+export const getPartnerStatus = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const status = await farmService.checkPartnerStatus(req.user.id, req.params.targetUserId);
+    res.status(200).json(status);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to evaluate partner status' });
+  }
+};
+
