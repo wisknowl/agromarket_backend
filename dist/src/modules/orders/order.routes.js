@@ -9,5 +9,8 @@ const router = (0, express_1.Router)();
 router.post('/checkout', authMiddleware_1.authenticateJWT, order_controller_1.checkout);
 router.get('/my-orders', authMiddleware_1.authenticateJWT, order_controller_1.getMyOrders);
 router.get('/farmer-sales', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), order_controller_1.getFarmerSales);
+router.get('/:id', authMiddleware_1.authenticateJWT, order_controller_1.getOrder);
+router.put('/:id/status', authMiddleware_1.authenticateJWT, order_controller_1.updateStatus);
 router.post('/:id/release-escrow', authMiddleware_1.authenticateJWT, order_controller_1.releaseEscrow);
+router.post('/:id/confirm-receipt', authMiddleware_1.authenticateJWT, order_controller_1.releaseEscrow);
 exports.default = router;

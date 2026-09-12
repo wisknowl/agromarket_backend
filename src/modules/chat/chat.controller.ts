@@ -41,3 +41,40 @@ export const postMessage = async (req: AuthRequest, res: Response): Promise<void
     res.status(400).json({ message: error.message || 'Failed to send message' });
   }
 };
+
+export const getConversationDetails = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const result = await chatService.getConversationById(req.params.conversationId, req.user.id);
+    if (!result) {
+      res.status(404).json({ message: 'Conversation not found' });
+      return;
+    }
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch conversation' });
+  }
+};
+
+export const getOrCreateConversation = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const targetUserId = req.params.userId;
+    if (targetUserId === req.user.id) {
+      res.status(400).json({ message: 'Cannot chat with yourself' });
+      return;
+    }
+    const result = await chatService.getOrCreateConversationWithUser(req.user.id, targetUserId);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to initialize conversation' });
+  }
+};
+
+

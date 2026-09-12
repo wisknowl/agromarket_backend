@@ -111,17 +111,37 @@ const getCurrentUserProfile = async (userId) => {
         where: { id: userId },
         include: {
             farms: true,
-            farmerProfile: true,
+            farmerProfile: {
+                include: {
+                    loanApplications: true,
+                },
+            },
             wholesalerProfile: true,
             transporterProfile: true,
             financialProfile: true,
+            _count: {
+                select: {
+                    followers: true,
+                    following: true,
+                    farms: true,
+                    posts: true,
+                },
+            },
         },
     });
     if (!user) {
         throw new Error('User not found');
     }
+    const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
     const { passwordHash: _, ...safeUser } = user;
-    return safeUser;
+    return {
+        ...safeUser,
+        followersCount: user._count.followers,
+        followingCount: user._count.following,
+        farmsCount: user._count.farms,
+        postsCount: user._count.posts,
+        agroVestorsCount,
+    };
 };
 exports.getCurrentUserProfile = getCurrentUserProfile;
 const getUserPublicProfile = async (targetUserId, currentUserId) => {
@@ -129,6 +149,13 @@ const getUserPublicProfile = async (targetUserId, currentUserId) => {
         where: { id: targetUserId },
         include: {
             farms: true,
+            farmerProfile: {
+                include: {
+                    loanApplications: true,
+                },
+            },
+            wholesalerProfile: true,
+            transporterProfile: true,
             posts: {
                 orderBy: { createdAt: 'desc' },
                 include: {
@@ -165,6 +192,7 @@ const getUserPublicProfile = async (targetUserId, currentUserId) => {
         });
         isFollowing = Boolean(followRecord);
     }
+    const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
     const { passwordHash: _, ...safeUser } = user;
     return {
         ...safeUser,
@@ -173,6 +201,7 @@ const getUserPublicProfile = async (targetUserId, currentUserId) => {
         followingCount: user._count.following,
         farmsCount: user._count.farms,
         postsCount: user._count.posts,
+        agroVestorsCount,
     };
 };
 exports.getUserPublicProfile = getUserPublicProfile;

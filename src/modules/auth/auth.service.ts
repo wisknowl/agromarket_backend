@@ -138,10 +138,22 @@ export const getCurrentUserProfile = async (userId: string) => {
     where: { id: userId },
     include: {
       farms: true,
-      farmerProfile: true,
+      farmerProfile: {
+        include: {
+          loanApplications: true,
+        },
+      },
       wholesalerProfile: true,
       transporterProfile: true,
       financialProfile: true,
+      _count: {
+        select: {
+          followers: true,
+          following: true,
+          farms: true,
+          posts: true,
+        },
+      },
     },
   });
 
@@ -149,8 +161,17 @@ export const getCurrentUserProfile = async (userId: string) => {
     throw new Error('User not found');
   }
 
+  const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+
   const { passwordHash: _, ...safeUser } = user;
-  return safeUser;
+  return {
+    ...safeUser,
+    followersCount: user._count.followers,
+    followingCount: user._count.following,
+    farmsCount: user._count.farms,
+    postsCount: user._count.posts,
+    agroVestorsCount,
+  };
 };
 
 export const getUserPublicProfile = async (targetUserId: string, currentUserId?: string) => {
@@ -158,6 +179,13 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
     where: { id: targetUserId },
     include: {
       farms: true,
+      farmerProfile: {
+        include: {
+          loanApplications: true,
+        },
+      },
+      wholesalerProfile: true,
+      transporterProfile: true,
       posts: {
         orderBy: { createdAt: 'desc' },
         include: {
@@ -197,6 +225,8 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
     isFollowing = Boolean(followRecord);
   }
 
+  const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+
   const { passwordHash: _, ...safeUser } = user;
   return {
     ...safeUser,
@@ -205,6 +235,7 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
     followingCount: user._count.following,
     farmsCount: user._count.farms,
     postsCount: user._count.posts,
+    agroVestorsCount,
   };
 };
 

@@ -42,12 +42,13 @@ router.post('/events', optionalAuth, (req, res) => {
 router.get('/metrics/:entityType/:entityId', (req, res) => {
   try {
     const { entityType, entityId } = req.params;
-    const metrics = telemetryService.getEntityMetrics(entityType, entityId);
+    const metrics = telemetryService.getEntityMetrics(entityType as 'FARMER' | 'POST' | 'YIELD', entityId);
     res.json({ success: true, metrics });
   } catch (error: any) {
     res.status(500).json({ success: false, error: error.message });
   }
 });
+
 
 export const telemetryRoutes = router;
 export default router;

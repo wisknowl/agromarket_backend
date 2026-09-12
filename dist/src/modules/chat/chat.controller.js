@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postMessage = exports.getMessages = exports.getConversations = void 0;
+exports.getOrCreateConversation = exports.getConversationDetails = exports.postMessage = exports.getMessages = exports.getConversations = void 0;
 const chatService = __importStar(require("./chat.service"));
 const getConversations = async (req, res) => {
     try {
@@ -78,3 +78,40 @@ const postMessage = async (req, res) => {
     }
 };
 exports.postMessage = postMessage;
+const getConversationDetails = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const result = await chatService.getConversationById(req.params.conversationId, req.user.id);
+        if (!result) {
+            res.status(404).json({ message: 'Conversation not found' });
+            return;
+        }
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch conversation' });
+    }
+};
+exports.getConversationDetails = getConversationDetails;
+const getOrCreateConversation = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const targetUserId = req.params.userId;
+        if (targetUserId === req.user.id) {
+            res.status(400).json({ message: 'Cannot chat with yourself' });
+            return;
+        }
+        const result = await chatService.getOrCreateConversationWithUser(req.user.id, targetUserId);
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to initialize conversation' });
+    }
+};
+exports.getOrCreateConversation = getOrCreateConversation;

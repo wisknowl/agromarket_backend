@@ -1,7 +1,7 @@
 import prisma from '../../core/database/prisma';
 
 export const getUserConversations = async (userId: string) => {
-  return prisma.conversation.findMany({
+  const conversations = await prisma.conversation.findMany({
     where: {
       OR: [{ participantAId: userId }, { participantBId: userId }],
     },
@@ -13,6 +13,143 @@ export const getUserConversations = async (userId: string) => {
     },
     orderBy: { updatedAt: 'desc' },
   });
+
+  if (conversations.length === 0) {
+    return [];
+  }
+
+  // Collect other participants
+  const otherUserIds = Array.from(
+    new Set(
+      conversations.map((c) =>
+        c.participantAId === userId ? c.participantBId : c.participantAId
+      )
+    )
+  );
+
+  const users = await prisma.user.findMany({
+    where: { id: { in: otherUserIds } },
+    select: {
+      id: true,
+      name: true,
+      avatarUrl: true,
+      role: true,
+      isVerified: true,
+      farmerProfile: {
+        select: {
+          farmName: true,
+          creditTier: true,
+          creditScore: true,
+        },
+      },
+    },
+  });
+
+  const userMap = new Map(users.map((u) => [u.id, u]));
+
+  return conversations.map((conv) => {
+    const otherId = conv.participantAId === userId ? conv.participantBId : conv.participantAId;
+    const otherUser = userMap.get(otherId);
+
+    const latestMsg = conv.messages[0];
+    const timeFormatted = conv.updatedAt
+      ? new Date(conv.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      : 'Just now';
+
+    return {
+      id: conv.id,
+      participantId: otherId,
+      participantName: otherUser?.name || 'AgroMarket User',
+      participantAvatar: otherUser?.avatarUrl || null,
+      participantRole: otherUser?.role || 'BUYER',
+      farmerName: otherUser?.farmerProfile?.farmName || otherUser?.name,
+      farmerAvatar: otherUser?.avatarUrl || null,
+      isVerified: otherUser?.isVerified || false,
+      creditTier: otherUser?.farmerProfile?.creditTier || 'BRONZE',
+      isOnline: true,
+      lastMessage: conv.lastMessage || latestMsg?.content || 'Started a conversation',
+      lastMessageTime: timeFormatted,
+      updatedAt: conv.updatedAt,
+      unreadCount: 0,
+      messages: conv.messages,
+    };
+  });
+};
+
+export const getOrCreateConversationWithUser = async (userId: string, targetUserId: string) => {
+  let conversation = await prisma.conversation.findFirst({
+    where: {
+      OR: [
+        { participantAId: userId, participantBId: targetUserId },
+        { participantAId: targetUserId, participantBId: userId },
+      ],
+    },
+  });
+
+  if (!conversation) {
+    conversation = await prisma.conversation.create({
+      data: {
+        participantAId: userId,
+        participantBId: targetUserId,
+        lastMessage: 'Conversation started',
+      },
+    });
+  }
+
+  const targetUser = await prisma.user.findUnique({
+    where: { id: targetUserId },
+    select: {
+      id: true,
+      name: true,
+      avatarUrl: true,
+      role: true,
+      isVerified: true,
+      farmerProfile: {
+        select: {
+          farmName: true,
+          creditTier: true,
+          creditScore: true,
+        },
+      },
+    },
+  });
+
+  return {
+    conversation,
+    targetUser,
+  };
+};
+
+export const getConversationById = async (conversationId: string, currentUserId: string) => {
+  const conversation = await prisma.conversation.findUnique({
+    where: { id: conversationId },
+  });
+
+  if (!conversation) return null;
+
+  const otherId = conversation.participantAId === currentUserId ? conversation.participantBId : conversation.participantAId;
+  const otherUser = await prisma.user.findUnique({
+    where: { id: otherId },
+    select: {
+      id: true,
+      name: true,
+      avatarUrl: true,
+      role: true,
+      isVerified: true,
+      farmerProfile: {
+        select: {
+          farmName: true,
+          creditTier: true,
+          creditScore: true,
+        },
+      },
+    },
+  });
+
+  return {
+    conversation,
+    targetUser: otherUser,
+  };
 };
 
 export const getConversationMessages = async (conversationId: string) => {
@@ -67,3 +204,4 @@ export const sendMessage = async (senderId: string, receiverId: string, content:
 
   return { conversation, message };
 };
+

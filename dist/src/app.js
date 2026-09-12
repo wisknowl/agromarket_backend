@@ -18,6 +18,8 @@ const farms_1 = require("./modules/farms");
 const buyam_sellam_1 = require("./modules/buyam-sellam");
 const admin_1 = require("./modules/admin");
 const upload_1 = require("./modules/upload");
+const notifications_1 = require("./modules/notifications");
+const telemetry_routes_1 = require("./core/telemetry/telemetry.routes");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 5000;
@@ -53,6 +55,7 @@ app.get('/', (_req, res) => {
             'farms',
             'buyam-sellam',
             'admin',
+            'notifications',
         ],
     });
 });
@@ -67,6 +70,8 @@ app.use('/api/farms', farms_1.farmRoutes);
 app.use('/api/wholesaler', buyam_sellam_1.buyamSellamRoutes);
 app.use('/api/admin', admin_1.adminRoutes);
 app.use('/api/upload', upload_1.uploadRoutes);
+app.use('/api/notifications', notifications_1.notificationRoutes);
+app.use('/api/telemetry', telemetry_routes_1.telemetryRoutes);
 // Global Error Handler
 app.use((err, _req, res, _next) => {
     console.error('Unhandled server error:', err);

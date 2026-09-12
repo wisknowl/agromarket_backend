@@ -5,6 +5,8 @@ const chat_controller_1 = require("./chat.controller");
 const authMiddleware_1 = require("../../core/middleware/authMiddleware");
 const router = (0, express_1.Router)();
 router.get('/conversations', authMiddleware_1.authenticateJWT, chat_controller_1.getConversations);
+router.get('/with/:userId', authMiddleware_1.authenticateJWT, chat_controller_1.getOrCreateConversation);
+router.get('/:conversationId', authMiddleware_1.authenticateJWT, chat_controller_1.getConversationDetails);
 router.get('/:conversationId/messages', authMiddleware_1.authenticateJWT, chat_controller_1.getMessages);
 router.post('/messages', authMiddleware_1.authenticateJWT, chat_controller_1.postMessage);
 exports.default = router;

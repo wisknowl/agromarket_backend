@@ -37,8 +37,19 @@ exports.deleteFeedPost = exports.commentPost = exports.likePost = exports.create
 const postService = __importStar(require("./post.service"));
 const getFeed = async (req, res) => {
     try {
-        const { farmId, userId } = req.query;
-        const posts = await postService.getAllPosts({ farmId, userId });
+        const { farmId, userId, lat, lng, limit } = req.query;
+        if (farmId || userId) {
+            const posts = await postService.getAllPosts({ farmId, userId });
+            res.status(200).json(posts);
+            return;
+        }
+        const context = {
+            userId: req.user?.id,
+            deliveryLatitude: lat ? parseFloat(lat) : undefined,
+            deliveryLongitude: lng ? parseFloat(lng) : undefined,
+            limit: limit ? parseInt(limit, 10) : 50,
+        };
+        const posts = await postService.getRankedFeed(context);
         res.status(200).json(posts);
     }
     catch (error) {

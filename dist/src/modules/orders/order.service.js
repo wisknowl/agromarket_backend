@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.releaseEscrowFunds = exports.updateOrderStatus = exports.getFarmerOrders = exports.getBuyerOrders = exports.createEscrowOrder = void 0;
+exports.releaseEscrowFunds = exports.updateOrderStatus = exports.getFarmerOrders = exports.getOrderById = exports.getBuyerOrders = exports.createEscrowOrder = void 0;
 const client_1 = require("@prisma/client");
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const engine_1 = require("./engine");
@@ -119,6 +119,28 @@ const getBuyerOrders = async (buyerId) => {
     });
 };
 exports.getBuyerOrders = getBuyerOrders;
+const getOrderById = async (orderId, userId) => {
+    const order = await prisma_1.default.order.findUnique({
+        where: { id: orderId },
+        include: {
+            items: {
+                include: { yield: true, farmer: true },
+            },
+            escrow: true,
+            buyer: {
+                select: { id: true, name: true, phone: true, avatarUrl: true },
+            },
+            deliveryTrip: {
+                include: { transporter: true },
+            },
+        },
+    });
+    if (!order) {
+        throw new Error('Order not found');
+    }
+    return order;
+};
+exports.getOrderById = getOrderById;
 const getFarmerOrders = async (userId) => {
     const farmer = await prisma_1.default.farmerProfile.findUnique({
         where: { userId },

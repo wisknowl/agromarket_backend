@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.releaseEscrow = exports.getFarmerSales = exports.getMyOrders = exports.checkout = void 0;
+exports.updateStatus = exports.releaseEscrow = exports.getFarmerSales = exports.getOrder = exports.getMyOrders = exports.checkout = void 0;
 const orderService = __importStar(require("./order.service"));
 const checkout = async (req, res) => {
     try {
@@ -63,6 +63,20 @@ const getMyOrders = async (req, res) => {
     }
 };
 exports.getMyOrders = getMyOrders;
+const getOrder = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const order = await orderService.getOrderById(req.params.id, req.user.id);
+        res.status(200).json(order);
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message || 'Order not found' });
+    }
+};
+exports.getOrder = getOrder;
 const getFarmerSales = async (req, res) => {
     try {
         if (!req.user?.id) {
@@ -91,3 +105,18 @@ const releaseEscrow = async (req, res) => {
     }
 };
 exports.releaseEscrow = releaseEscrow;
+const updateStatus = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const { status } = req.body;
+        const order = await orderService.updateOrderStatus(req.params.id, status, req.user.id);
+        res.status(200).json({ message: 'Order status updated', order });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to update order status' });
+    }
+};
+exports.updateStatus = updateStatus;

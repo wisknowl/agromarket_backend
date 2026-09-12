@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMyLoans = exports.applyLoan = exports.getLoanProducts = exports.getCreditScore = void 0;
+exports.getMyPatronagesController = exports.getPatronStatusController = exports.patronizeFarmController = exports.getMyInvestments = exports.investInCampaign = exports.createCampaign = exports.getCampaigns = exports.getMyLoans = exports.applyLoan = exports.getLoanProducts = exports.getCreditScore = void 0;
 const fintechService = __importStar(require("./fintech.service"));
 const getCreditScore = async (req, res) => {
     try {
@@ -87,3 +87,97 @@ const getMyLoans = async (req, res) => {
     }
 };
 exports.getMyLoans = getMyLoans;
+const getCampaigns = async (_req, res) => {
+    try {
+        const campaigns = await fintechService.getAgroVestorCampaigns();
+        res.status(200).json(campaigns);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch campaigns' });
+    }
+};
+exports.getCampaigns = getCampaigns;
+const createCampaign = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const campaign = await fintechService.createAgroVestorCampaign(req.user.id, req.body);
+        res.status(201).json({ message: 'AgroVestor campaign launched successfully', campaign });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to launch campaign' });
+    }
+};
+exports.createCampaign = createCampaign;
+const investInCampaign = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const investment = await fintechService.pledgeAgroVestorInvestment(req.user.id, req.body);
+        res.status(201).json({ message: 'Investment pledged and secured in escrow', investment });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to pledge investment' });
+    }
+};
+exports.investInCampaign = investInCampaign;
+const getMyInvestments = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const investments = await fintechService.getMyAgroVestments(req.user.id);
+        res.status(200).json(investments);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to fetch investments' });
+    }
+};
+exports.getMyInvestments = getMyInvestments;
+const patronizeFarmController = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const subscription = await fintechService.patronizeFarm(req.user.id, req.body);
+        res.status(201).json({ message: 'AgroPatron pass activated successfully', subscription });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to subscribe as AgroPatron' });
+    }
+};
+exports.patronizeFarmController = patronizeFarmController;
+const getPatronStatusController = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const status = await fintechService.getFarmPatronStatus(req.user.id, req.params.farmerId);
+        res.status(200).json(status);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to check patron status' });
+    }
+};
+exports.getPatronStatusController = getPatronStatusController;
+const getMyPatronagesController = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const patronages = await fintechService.getMyPatronages(req.user.id);
+        res.status(200).json(patronages);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to fetch active patronages' });
+    }
+};
+exports.getMyPatronagesController = getMyPatronagesController;
