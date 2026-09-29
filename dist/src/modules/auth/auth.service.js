@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProfile = exports.toggleFollowUser = exports.getUserPublicProfile = exports.getCurrentUserProfile = exports.loginUser = exports.registerUser = void 0;
+exports.saveUserPushToken = exports.updateProfile = exports.toggleFollowUser = exports.getUserPublicProfile = exports.getCurrentUserProfile = exports.loginUser = exports.registerUser = void 0;
 const client_1 = require("@prisma/client");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -132,7 +132,8 @@ const getCurrentUserProfile = async (userId) => {
     if (!user) {
         throw new Error('User not found');
     }
-    const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+    // AgroVestors are equity/ROI farm investors, distinct from institutional loans
+    const agroVestorsCount = user.investments?.length ?? 0;
     const { passwordHash: _, ...safeUser } = user;
     return {
         ...safeUser,
@@ -192,7 +193,8 @@ const getUserPublicProfile = async (targetUserId, currentUserId) => {
         });
         isFollowing = Boolean(followRecord);
     }
-    const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+    // AgroVestors are equity/ROI farm investors, distinct from institutional loans
+    const agroVestorsCount = user.investments?.length ?? 0;
     const { passwordHash: _, ...safeUser } = user;
     return {
         ...safeUser,
@@ -254,3 +256,12 @@ const updateProfile = async (userId, data) => {
     return safeUser;
 };
 exports.updateProfile = updateProfile;
+const saveUserPushToken = async (userId, expoPushToken) => {
+    const updatedUser = await prisma_1.default.user.update({
+        where: { id: userId },
+        data: { expoPushToken },
+        select: { id: true, name: true, expoPushToken: true },
+    });
+    return updatedUser;
+};
+exports.saveUserPushToken = saveUserPushToken;

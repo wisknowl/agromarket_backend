@@ -88,5 +88,24 @@ export const updateMyProfile = async (req: AuthRequest, res: Response): Promise<
   }
 };
 
+export const savePushToken = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const { expoPushToken } = req.body;
+    if (!expoPushToken) {
+      res.status(400).json({ message: 'expoPushToken is required' });
+      return;
+    }
+    const updated = await authService.saveUserPushToken(req.user.id, expoPushToken);
+    res.status(200).json({ message: 'Push token saved successfully', user: updated });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Could not save push token' });
+  }
+};
+
+
 
 

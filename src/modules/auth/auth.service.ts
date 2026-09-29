@@ -161,7 +161,8 @@ export const getCurrentUserProfile = async (userId: string) => {
     throw new Error('User not found');
   }
 
-  const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+  // AgroVestors are equity/ROI farm investors, distinct from institutional loans
+  const agroVestorsCount = (user as any).investments?.length ?? 0;
 
   const { passwordHash: _, ...safeUser } = user;
   return {
@@ -225,7 +226,8 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
     isFollowing = Boolean(followRecord);
   }
 
-  const agroVestorsCount = user.farmerProfile?.loanApplications?.length ?? 0;
+  // AgroVestors are equity/ROI farm investors, distinct from institutional loans
+  const agroVestorsCount = (user as any).investments?.length ?? 0;
 
   const { passwordHash: _, ...safeUser } = user;
   return {
@@ -293,5 +295,15 @@ export const updateProfile = async (
   const { passwordHash: _, ...safeUser } = updatedUser;
   return safeUser;
 };
+
+export const saveUserPushToken = async (userId: string, expoPushToken: string) => {
+  const updatedUser = await prisma.user.update({
+    where: { id: userId },
+    data: { expoPushToken },
+    select: { id: true, name: true, expoPushToken: true },
+  });
+  return updatedUser;
+};
+
 
 

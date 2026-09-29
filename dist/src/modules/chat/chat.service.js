@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.sendMessage = exports.getConversationMessages = exports.getConversationById = exports.getOrCreateConversationWithUser = exports.getUserConversations = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
+const push_service_1 = require("../notifications/push.service");
 const getUserConversations = async (userId) => {
     const conversations = await prisma_1.default.conversation.findMany({
         where: {
@@ -187,6 +188,17 @@ const sendMessage = async (senderId, receiverId, content) => {
             sender: { select: { id: true, name: true, avatarUrl: true } },
         },
     });
+    // Asynchronously dispatch real push notification to the recipient
+    const senderName = message.sender?.name || 'AgroMarket Partner';
+    (0, push_service_1.sendPushToUser)(receiverId, {
+        title: `🌾 ${senderName}`,
+        body: content,
+        data: {
+            conversationId: conversation.id,
+            senderId,
+            type: 'CHAT_MESSAGE',
+        },
+    }).catch((err) => console.error('[PUSH ERROR] Failed to dispatch chat notification:', err));
     return { conversation, message };
 };
 exports.sendMessage = sendMessage;

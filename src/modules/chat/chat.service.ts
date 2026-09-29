@@ -1,4 +1,5 @@
 import prisma from '../../core/database/prisma';
+import { sendPushToUser } from '../notifications/push.service';
 
 export const getUserConversations = async (userId: string) => {
   const conversations = await prisma.conversation.findMany({
@@ -201,6 +202,18 @@ export const sendMessage = async (senderId: string, receiverId: string, content:
       sender: { select: { id: true, name: true, avatarUrl: true } },
     },
   });
+
+  // Asynchronously dispatch real push notification to the recipient
+  const senderName = message.sender?.name || 'AgroMarket Partner';
+  sendPushToUser(receiverId, {
+    title: `🌾 ${senderName}`,
+    body: content,
+    data: {
+      conversationId: conversation.id,
+      senderId,
+      type: 'CHAT_MESSAGE',
+    },
+  }).catch((err) => console.error('[PUSH ERROR] Failed to dispatch chat notification:', err));
 
   return { conversation, message };
 };

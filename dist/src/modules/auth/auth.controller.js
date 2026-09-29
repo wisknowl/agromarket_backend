@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateMyProfile = exports.followUser = exports.getPublicProfile = exports.getMe = exports.login = exports.register = void 0;
+exports.savePushToken = exports.updateMyProfile = exports.followUser = exports.getPublicProfile = exports.getMe = exports.login = exports.register = void 0;
 const authService = __importStar(require("./auth.service"));
 const register = async (req, res) => {
     try {
@@ -124,3 +124,22 @@ const updateMyProfile = async (req, res) => {
     }
 };
 exports.updateMyProfile = updateMyProfile;
+const savePushToken = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const { expoPushToken } = req.body;
+        if (!expoPushToken) {
+            res.status(400).json({ message: 'expoPushToken is required' });
+            return;
+        }
+        const updated = await authService.saveUserPushToken(req.user.id, expoPushToken);
+        res.status(200).json({ message: 'Push token saved successfully', user: updated });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Could not save push token' });
+    }
+};
+exports.savePushToken = savePushToken;
