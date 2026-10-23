@@ -81,3 +81,23 @@ export const updateStatus = async (req: AuthRequest, res: Response): Promise<voi
   }
 };
 
+export const checkPaymentStatus = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const result = await orderService.checkOrderPaymentStatus(req.params.id);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(404).json({ message: error.message || 'Payment status check failed' });
+  }
+};
+
+export const campayWebhookHandler = async (req: any, res: Response): Promise<void> => {
+  try {
+    await orderService.handleCampayWebhook(req.body);
+    res.status(200).json({ received: true });
+  } catch (error: any) {
+    console.error('Campay webhook error:', error);
+    res.status(500).json({ message: 'Webhook error' });
+  }
+};
+
+

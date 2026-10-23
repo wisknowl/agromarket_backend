@@ -319,7 +319,7 @@ async function main() {
         data: {
             userId: user.id,
             farmId: farm1.id,
-            content: 'Sorting and boxing our fresh Irish potatoes ready for bulk dispatch to Douala Sandaga market! 🥔 Pre-order your crates now with escrow guarantee. #SantaPotatoes #AgroBazaar #Wholesale',
+            content: 'Sorting and boxing our fresh Irish potatoes ready for bulk dispatch to Douala Sandaga market! 🥔 Pre-order your crates now with escrow guarantee. #SantaPotatoes #AgroMarket #Wholesale',
             mediaUrl: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=800',
             isVideo: false,
             linkedYieldId: yield2.id,
