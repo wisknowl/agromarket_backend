@@ -119,13 +119,19 @@ export const createPost = async (
     farmerId = farmer.id;
   }
 
+  let normalizedMedia = data.mediaUrl;
+  const uploadsIdx = normalizedMedia.indexOf('/uploads/');
+  if (uploadsIdx !== -1) {
+    normalizedMedia = normalizedMedia.substring(uploadsIdx);
+  }
+
   return prisma.post.create({
     data: {
       userId,
       farmerId,
       farmId: data.farmId,
       content: data.content,
-      mediaUrl: data.mediaUrl,
+      mediaUrl: normalizedMedia,
       isVideo: data.isVideo || false,
       linkedYieldId: data.linkedYieldId,
     },
