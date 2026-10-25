@@ -5,7 +5,7 @@ import os from 'os';
 import path from 'path';
 
 import { authRoutes } from './modules/auth';
-import { yieldRoutes } from './modules/yields';
+import { yieldRoutes, getCategories } from './modules/yields';
 import { postRoutes } from './modules/feed';
 import { orderRoutes } from './modules/orders';
 import { fintechRoutes } from './modules/fintech';
@@ -65,6 +65,7 @@ app.get('/', (_req, res) => {
 // Domain Module Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/yields', yieldRoutes);
+app.get('/api/categories', getCategories);
 app.use('/api/posts', postRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/fintech', fintechRoutes);

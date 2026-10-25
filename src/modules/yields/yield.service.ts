@@ -103,14 +103,46 @@ export interface CreateYieldDto {
 }
 
 export const createYield = async (userId: string, data: CreateYieldDto) => {
-  let farmerId: string | undefined;
-  const farmer = await prisma.farmerProfile.findUnique({
+  let farmer = await prisma.farmerProfile.findUnique({
     where: { userId },
   });
 
-  if (farmer) {
-    farmerId = farmer.id;
+  // 0. Ensure farmId is resolved (either passed or user's primary farm)
+  let targetFarmId = data.farmId;
+  if (!targetFarmId) {
+    const defaultFarm = await prisma.farm.findFirst({ where: { userId } });
+    if (defaultFarm) {
+      targetFarmId = defaultFarm.id;
+    }
   }
+
+  // If farmerProfile doesn't exist, create it from the farm or user metadata
+  if (!farmer) {
+    let farmName = 'Family Agro Farm';
+    let region = data.originRegion || 'West Region';
+    let city = 'Foumbot';
+
+    if (targetFarmId) {
+      const farmObj = await prisma.farm.findUnique({ where: { id: targetFarmId } });
+      if (farmObj) {
+        farmName = farmObj.name;
+        region = farmObj.region;
+        city = farmObj.city;
+      }
+    }
+
+    farmer = await prisma.farmerProfile.create({
+      data: {
+        userId,
+        farmName,
+        region,
+        city,
+        creditScore: 500,
+      },
+    });
+  }
+
+  const farmerId = farmer.id;
 
   // 1. Resolve Category Safely to avoid Foreign Key Violations
   let category = await prisma.category.findUnique({
@@ -184,7 +216,7 @@ export const createYield = async (userId: string, data: CreateYieldDto) => {
   return prisma.agroYield.create({
     data: {
       farmerId,
-      farmId: data.farmId,
+      farmId: targetFarmId,
       categoryId: category.id,
       title: data.title,
       frenchTitle: data.frenchTitle,
@@ -219,4 +251,122 @@ export const getAllCategories = async () => {
     },
   });
 };
+
+export interface UpdateYieldDto {
+  title?: string;
+  frenchTitle?: string;
+  description?: string;
+  pricePerUnit?: number;
+  oldPrice?: number;
+  stockQuantity?: number;
+  stockDelta?: number;
+  isAvailable?: boolean;
+  minOrderQuantity?: number;
+  isWholesaleBulkAvailable?: boolean;
+  bulkMinQuantity?: number;
+  bulkPricePerUnit?: number;
+  isOrganic?: boolean;
+  mediaUrls?: string[];
+}
+
+export const updateYield = async (
+  userId: string,
+  userRole: string,
+  yieldId: string,
+  updates: UpdateYieldDto
+) => {
+  const yieldItem = await prisma.agroYield.findUnique({
+    where: { id: yieldId },
+    include: {
+      farm: true,
+      farmer: true,
+    },
+  });
+
+  if (!yieldItem) {
+    throw new Error('AgroYield product not found');
+  }
+
+  const isOwner =
+    yieldItem.farm?.userId === userId ||
+    yieldItem.farmer?.userId === userId ||
+    userRole === 'ADMIN';
+
+  if (!isOwner) {
+    throw new Error('Forbidden: You do not have permission to modify this produce listing');
+  }
+
+  let newStockQuantity = yieldItem.stockQuantity;
+  if (updates.stockQuantity !== undefined) {
+    newStockQuantity = Math.max(0, updates.stockQuantity);
+  } else if (updates.stockDelta !== undefined) {
+    newStockQuantity = Math.max(0, yieldItem.stockQuantity + updates.stockDelta);
+  }
+
+  let isAvailable = updates.isAvailable !== undefined ? updates.isAvailable : yieldItem.isAvailable;
+  if (newStockQuantity === 0 && updates.isAvailable === undefined) {
+    isAvailable = false;
+  } else if (
+    newStockQuantity > 0 &&
+    updates.isAvailable === undefined &&
+    !yieldItem.isAvailable &&
+    updates.stockDelta &&
+    updates.stockDelta > 0
+  ) {
+    isAvailable = true;
+  }
+
+  return prisma.agroYield.update({
+    where: { id: yieldId },
+    data: {
+      ...(updates.title && { title: updates.title }),
+      ...(updates.frenchTitle !== undefined && { frenchTitle: updates.frenchTitle }),
+      ...(updates.description && { description: updates.description }),
+      ...(updates.pricePerUnit !== undefined && { pricePerUnit: updates.pricePerUnit }),
+      ...(updates.oldPrice !== undefined && { oldPrice: updates.oldPrice }),
+      stockQuantity: newStockQuantity,
+      isAvailable,
+      ...(updates.minOrderQuantity !== undefined && { minOrderQuantity: updates.minOrderQuantity }),
+      ...(updates.isWholesaleBulkAvailable !== undefined && {
+        isWholesaleBulkAvailable: updates.isWholesaleBulkAvailable,
+      }),
+      ...(updates.bulkMinQuantity !== undefined && { bulkMinQuantity: updates.bulkMinQuantity }),
+      ...(updates.bulkPricePerUnit !== undefined && { bulkPricePerUnit: updates.bulkPricePerUnit }),
+      ...(updates.isOrganic !== undefined && { isOrganic: updates.isOrganic }),
+      ...(updates.mediaUrls && { mediaUrls: updates.mediaUrls }),
+    },
+    include: {
+      category: true,
+      farm: true,
+      farmer: true,
+      pricingTiers: true,
+    },
+  });
+};
+
+export const deleteYield = async (userId: string, userRole: string, yieldId: string) => {
+  const yieldItem = await prisma.agroYield.findUnique({
+    where: { id: yieldId },
+    include: { farm: true, farmer: true },
+  });
+
+  if (!yieldItem) {
+    throw new Error('AgroYield product not found');
+  }
+
+  const isOwner =
+    yieldItem.farm?.userId === userId ||
+    yieldItem.farmer?.userId === userId ||
+    userRole === 'ADMIN';
+
+  if (!isOwner) {
+    throw new Error('Forbidden: You do not have permission to delete this produce listing');
+  }
+
+  return prisma.agroYield.update({
+    where: { id: yieldId },
+    data: { isAvailable: false, stockQuantity: 0 },
+  });
+};
+
 

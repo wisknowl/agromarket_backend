@@ -1,6 +1,19 @@
 import prisma from '../../core/database/prisma';
 import { FarmCategory } from '@prisma/client';
 
+export interface FarmParcelDto {
+  id?: string;
+  name: string; // e.g. "Main Facility & Hatchery", "Mutengene Broiler Pen"
+  region: string;
+  division?: string;
+  city: string;
+  location?: string;
+  gpsLatitude?: number;
+  gpsLongitude?: number;
+  sizeHectares?: number;
+  isHeadquarters?: boolean;
+}
+
 export interface CreateFarmDto {
   name: string;
   category?: FarmCategory | string;
@@ -16,6 +29,7 @@ export interface CreateFarmDto {
   avatarPhoto?: string;
   primaryProduce?: string[];
   certifications?: string[];
+  parcels?: FarmParcelDto[];
 }
 
 export const createOrRegisterFarm = async (userId: string, data: CreateFarmDto) => {
@@ -24,6 +38,62 @@ export const createOrRegisterFarm = async (userId: string, data: CreateFarmDto) 
     where: { id: userId },
     data: { role: 'FARMER' },
   });
+
+  // Ensure FarmerProfile is automatically created/synced for the farm owner
+  await prisma.farmerProfile.upsert({
+    where: { userId },
+    update: {
+      region: data.region,
+      city: data.city,
+      division: data.division,
+    },
+    create: {
+      userId,
+      farmName: data.name,
+      region: data.region,
+      city: data.city,
+      division: data.division,
+      farmSizeHectares: data.sizeHectares || 1.0,
+      primaryCrops: data.primaryProduce || [],
+      creditScore: 500,
+    },
+  });
+
+  // Process operational parcels/sites
+  let parcelsList = data.parcels || [];
+  if (parcelsList.length === 0) {
+    parcelsList = [
+      {
+        id: `site-${Date.now()}-1`,
+        name: `${data.name} (HQ / Main Plot)`,
+        region: data.region,
+        division: data.division,
+        city: data.city,
+        location: data.location || `${data.city}, ${data.region}`,
+        gpsLatitude: data.gpsLatitude,
+        gpsLongitude: data.gpsLongitude,
+        sizeHectares: data.sizeHectares || 1.0,
+        isHeadquarters: true,
+      },
+    ];
+  } else {
+    parcelsList = parcelsList.map((p, idx) => ({
+      id: p.id || `site-${Date.now()}-${idx + 1}`,
+      name: p.name || `Operating Site ${idx + 1}`,
+      region: p.region || data.region,
+      division: p.division || data.division,
+      city: p.city || data.city,
+      location: p.location || `${p.city || data.city}, ${p.region || data.region}`,
+      gpsLatitude: p.gpsLatitude !== undefined ? Number(p.gpsLatitude) : undefined,
+      gpsLongitude: p.gpsLongitude !== undefined ? Number(p.gpsLongitude) : undefined,
+      sizeHectares: p.sizeHectares !== undefined ? Number(p.sizeHectares) : 1.0,
+      isHeadquarters: p.isHeadquarters !== undefined ? p.isHeadquarters : idx === 0,
+    }));
+  }
+
+  const totalHectares =
+    parcelsList.reduce((acc, p) => acc + (p.sizeHectares || 0), 0) || data.sizeHectares || 1.0;
+  const primarySite = parcelsList.find((p) => p.isHeadquarters) || parcelsList[0];
 
   const parsedCategory = (data.category as FarmCategory) || FarmCategory.CROPS;
 
@@ -34,13 +104,14 @@ export const createOrRegisterFarm = async (userId: string, data: CreateFarmDto) 
       name: data.name,
       category: parsedCategory,
       description: data.description,
-      region: data.region,
-      division: data.division,
-      city: data.city,
-      location: data.location || `${data.city}, ${data.region}`,
-      gpsLatitude: data.gpsLatitude,
-      gpsLongitude: data.gpsLongitude,
-      sizeHectares: data.sizeHectares || 1.0,
+      region: primarySite.region,
+      division: primarySite.division || data.division,
+      city: primarySite.city,
+      location: primarySite.location || data.location || `${primarySite.city}, ${primarySite.region}`,
+      gpsLatitude: primarySite.gpsLatitude ?? data.gpsLatitude,
+      gpsLongitude: primarySite.gpsLongitude ?? data.gpsLongitude,
+      sizeHectares: totalHectares,
+      parcels: parcelsList as any,
       coverPhoto: data.coverPhoto || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800',
       avatarPhoto: data.avatarPhoto,
       primaryProduce: data.primaryProduce || [],
@@ -186,6 +257,13 @@ export const updateFarm = async (farmId: string, userId: string, data: Partial<C
     throw new Error('Farm not found or unauthorized');
   }
 
+  let updatedParcels = data.parcels !== undefined ? data.parcels : existing.parcels;
+  let updatedSizeHectares = data.sizeHectares ?? existing.sizeHectares;
+  if (data.parcels && Array.isArray(data.parcels) && data.parcels.length > 0) {
+    updatedSizeHectares =
+      data.parcels.reduce((sum, p) => sum + (Number(p.sizeHectares) || 0), 0) || updatedSizeHectares;
+  }
+
   return prisma.farm.update({
     where: { id: farmId },
     data: {
@@ -200,7 +278,8 @@ export const updateFarm = async (farmId: string, userId: string, data: Partial<C
       description: data.description ?? existing.description,
       coverPhoto: data.coverPhoto ?? existing.coverPhoto,
       avatarPhoto: data.avatarPhoto ?? existing.avatarPhoto,
-      sizeHectares: data.sizeHectares ?? existing.sizeHectares,
+      sizeHectares: updatedSizeHectares,
+      parcels: updatedParcels as any,
       primaryProduce: data.primaryProduce ?? existing.primaryProduce,
       certifications: data.certifications ?? existing.certifications,
     },

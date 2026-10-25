@@ -152,6 +152,7 @@ model Farm {
   isVerified      Boolean       @default(false)
   rating          Float         @default(5.0)
   totalRatings    Int           @default(0)
+  parcels         Json?         // Structured array of operational sites/plots
   
   yields          AgroYield[]
   posts           Post[]
