@@ -4,6 +4,7 @@ import {
   getMyFarms,
   getFarmById,
   updateFarm,
+  deleteFarm,
   getFarmAnalytics,
   getPartners,
   getPartnerStatus,
@@ -18,7 +19,9 @@ router.get('/partners', authenticateJWT, getPartners);
 router.get('/partner-status/:targetUserId', authenticateJWT, getPartnerStatus);
 router.get('/:id', optionalAuth, getFarmById);
 router.put('/:id', authenticateJWT, updateFarm);
+router.delete('/:id', authenticateJWT, deleteFarm);
 router.get('/:id/analytics', getFarmAnalytics);
 
 export default router;
+
 

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarms = exports.createFarm = void 0;
+exports.deleteFarm = exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarms = exports.createFarm = void 0;
 const farmService = __importStar(require("./farm.service"));
 const createFarm = async (req, res) => {
     try {
@@ -65,7 +65,8 @@ const getMyFarms = async (req, res) => {
 exports.getMyFarms = getMyFarms;
 const getFarmById = async (req, res) => {
     try {
-        const farm = await farmService.getFarmById(req.params.id, req.user?.id);
+        const includeAll = req.query.includeAllYields === 'true';
+        const farm = await farmService.getFarmById(req.params.id, req.user?.id, includeAll);
         res.status(200).json(farm);
     }
     catch (error) {
@@ -125,3 +126,18 @@ const getPartnerStatus = async (req, res) => {
     }
 };
 exports.getPartnerStatus = getPartnerStatus;
+const deleteFarm = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const targetFarmId = req.body?.targetFarmId || req.query?.targetFarmId;
+        const result = await farmService.deleteFarm(req.params.id, req.user.id, targetFarmId);
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to delete farm' });
+    }
+};
+exports.deleteFarm = deleteFarm;

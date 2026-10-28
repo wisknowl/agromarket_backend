@@ -62,6 +62,7 @@ app.get('/', (_req, res) => {
 // Domain Module Routes
 app.use('/api/auth', auth_1.authRoutes);
 app.use('/api/yields', yields_1.yieldRoutes);
+app.get('/api/categories', yields_1.getCategories);
 app.use('/api/posts', feed_1.postRoutes);
 app.use('/api/orders', orders_1.orderRoutes);
 app.use('/api/fintech', fintech_1.fintechRoutes);

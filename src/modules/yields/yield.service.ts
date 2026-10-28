@@ -258,6 +258,10 @@ export interface UpdateYieldDto {
   description?: string;
   pricePerUnit?: number;
   oldPrice?: number;
+  unit?: string;
+  originRegion?: string;
+  categoryId?: string;
+  categoryName?: string;
   stockQuantity?: number;
   stockDelta?: number;
   isAvailable?: boolean;
@@ -316,14 +320,51 @@ export const updateYield = async (
     isAvailable = true;
   }
 
+  const VALID_PRISMA_UNITS = ['KG', 'CRATE', 'BAG_50KG', 'BAG_100KG', 'BUCKET', 'BUNCH', 'NET'];
+  let mappedUnit: ProduceUnit | undefined = undefined;
+  if (updates.unit) {
+    const rawUnit = updates.unit.toUpperCase();
+    if (VALID_PRISMA_UNITS.includes(rawUnit)) {
+      mappedUnit = rawUnit as ProduceUnit;
+    } else if (rawUnit === 'BAG_25KG') {
+      mappedUnit = 'BAG_50KG';
+    } else if (rawUnit === 'BASIN') {
+      mappedUnit = 'BUCKET';
+    } else if (rawUnit === 'PIECE' || rawUnit === 'BUNCH') {
+      mappedUnit = 'BUNCH';
+    } else if (rawUnit === 'TON') {
+      mappedUnit = 'BAG_100KG';
+    } else if (rawUnit === 'CARTON' || rawUnit === 'NET') {
+      mappedUnit = 'NET';
+    } else {
+      mappedUnit = 'KG';
+    }
+  }
+
+  let targetCategoryId = updates.categoryId;
+  if (!targetCategoryId && updates.categoryName) {
+    const cat = await prisma.category.findFirst({
+      where: {
+        OR: [
+          { name: { equals: updates.categoryName, mode: 'insensitive' } },
+          { name: { contains: updates.categoryName.replace(/^cat-/, '').trim(), mode: 'insensitive' } },
+        ],
+      },
+    });
+    if (cat) targetCategoryId = cat.id;
+  }
+
   return prisma.agroYield.update({
     where: { id: yieldId },
     data: {
-      ...(updates.title && { title: updates.title }),
+      ...(updates.title && { title: updates.title.trim() }),
       ...(updates.frenchTitle !== undefined && { frenchTitle: updates.frenchTitle }),
-      ...(updates.description && { description: updates.description }),
+      ...(updates.description !== undefined && { description: updates.description.trim() }),
       ...(updates.pricePerUnit !== undefined && { pricePerUnit: updates.pricePerUnit }),
       ...(updates.oldPrice !== undefined && { oldPrice: updates.oldPrice }),
+      ...(mappedUnit && { unit: mappedUnit }),
+      ...(updates.originRegion && { originRegion: updates.originRegion.trim() }),
+      ...(targetCategoryId && { categoryId: targetCategoryId }),
       stockQuantity: newStockQuantity,
       isAvailable,
       ...(updates.minOrderQuantity !== undefined && { minOrderQuantity: updates.minOrderQuantity }),
@@ -363,10 +404,19 @@ export const deleteYield = async (userId: string, userRole: string, yieldId: str
     throw new Error('Forbidden: You do not have permission to delete this produce listing');
   }
 
-  return prisma.agroYield.update({
-    where: { id: yieldId },
-    data: { isAvailable: false, stockQuantity: 0 },
-  });
+  const orderCount = await prisma.orderItem.count({ where: { yieldId } });
+  if (orderCount === 0) {
+    await prisma.savedYield.deleteMany({ where: { yieldId } });
+    await prisma.cartItem.deleteMany({ where: { yieldId } });
+    await prisma.yieldPricingTier.deleteMany({ where: { yieldId } });
+    return prisma.agroYield.delete({ where: { id: yieldId } });
+  } else {
+    // If order history exists, soft-delete and detach so order records remain intact
+    return prisma.agroYield.update({
+      where: { id: yieldId },
+      data: { isAvailable: false, stockQuantity: 0, farmId: null },
+    });
+  }
 };
 
 

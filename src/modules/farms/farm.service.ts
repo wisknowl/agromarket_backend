@@ -149,10 +149,14 @@ export const getMyFarmsList = async (userId: string) => {
   });
 };
 
-export const getFarmById = async (farmId: string, currentUserId?: string) => {
+export const getFarmById = async (
+  farmId: string,
+  currentUserId?: string,
+  includeAllYields: boolean = false
+) => {
   const includeConfig = {
     yields: {
-      where: { isAvailable: true },
+      where: includeAllYields ? undefined : { isAvailable: true },
       include: { category: true },
       orderBy: { createdAt: 'desc' as const },
     },
@@ -240,6 +244,16 @@ export const getFarmById = async (farmId: string, currentUserId?: string) => {
   }
 
   const isOwner = Boolean(currentUserId && currentUserId === farm.userId);
+
+  // If the caller is the farm owner or explicitly requested all yields (e.g. Farm Management Workspace),
+  // ensure all yields (both active and paused) are returned so the producer can unpause and manage them.
+  if (isOwner || includeAllYields) {
+    farm.yields = await prisma.agroYield.findMany({
+      where: { farmId: farm.id },
+      include: { category: true },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 
   return {
     ...farm,
@@ -363,5 +377,107 @@ export const checkPartnerStatus = async (userId: string, targetUserId: string) =
   const { SocialGraphEngine } = await import('./engine');
   return SocialGraphEngine.evaluatePartnerStatus(userId, targetUserId);
 };
+
+export const deleteFarm = async (farmId: string, userId: string, targetFarmId?: string) => {
+  const existing = await prisma.farm.findFirst({
+    where: { id: farmId, userId },
+  });
+
+  if (!existing) {
+    throw new Error('Farm not found or unauthorized');
+  }
+
+  // Safety check: ensure no active unfulfilled escrow orders exist for produce from this farm
+  const activeOrders = await prisma.order.findMany({
+    where: {
+      status: { in: ['PENDING_PAYMENT', 'ESCROW_LOCKED', 'CONFIRMED_BY_FARMER', 'DISPATCHED'] as any },
+      items: {
+        some: {
+          yield: { farmId },
+        },
+      },
+    },
+    select: { id: true, orderNumber: true },
+  });
+
+  if (activeOrders.length > 0) {
+    const orderNumbers = activeOrders.map((o) => o.orderNumber || o.id).join(', ');
+    throw new Error(`Cannot delete farm with active unfulfilled orders (${orderNumbers}). Please settle deliveries or resolve escrow orders first.`);
+  }
+
+  // Case 1: Migrate produce & posts to another farm owned by the same user
+  if (targetFarmId && targetFarmId !== farmId) {
+    const targetFarm = await prisma.farm.findFirst({
+      where: { id: targetFarmId, userId },
+    });
+    if (!targetFarm) {
+      throw new Error('Target migration farm not found or unauthorized');
+    }
+
+    // Reassign all yields to target farm
+    await prisma.agroYield.updateMany({
+      where: { farmId },
+      data: { farmId: targetFarmId },
+    });
+
+    // Reassign all posts to target farm
+    await prisma.post.updateMany({
+      where: { farmId },
+      data: { farmId: targetFarmId },
+    });
+
+    // Delete the old farm
+    await prisma.farm.delete({
+      where: { id: farmId },
+    });
+
+    return {
+      success: true,
+      message: `Farm deleted successfully. Produce and stories migrated to ${targetFarm.name}.`,
+      id: farmId,
+      migratedTo: targetFarmId,
+    };
+  }
+
+  // Case 2: Permanent deletion of farm and all associated produce & posts
+  // 1. Delete all harvest stories tied to this farm (cascade deletes likes & comments)
+  await prisma.post.deleteMany({
+    where: { farmId },
+  });
+
+  // 2. Delete or delist all produce lots tied to this farm
+  const farmYields = await prisma.agroYield.findMany({
+    where: { farmId },
+    include: { orderItems: true },
+  });
+
+  for (const y of farmYields) {
+    if (y.orderItems && y.orderItems.length > 0) {
+      // Historical order exists: preserve record integrity but delist from marketplace
+      await prisma.agroYield.update({
+        where: { id: y.id },
+        data: {
+          isAvailable: false,
+          stockQuantity: 0,
+          farmId: null,
+        },
+      });
+    } else {
+      // Delete cart items and saved yields, then hard delete yield
+      await prisma.cartItem.deleteMany({ where: { yieldId: y.id } });
+      await prisma.savedYield.deleteMany({ where: { yieldId: y.id } });
+      await prisma.review.deleteMany({ where: { yieldId: y.id } });
+      await prisma.agroYield.delete({ where: { id: y.id } });
+    }
+  }
+
+  // 3. Delete the farm record itself
+  await prisma.farm.delete({
+    where: { id: farmId },
+  });
+
+  return { success: true, message: 'Farm and all attached assets deleted successfully', id: farmId };
+};
+
 
 

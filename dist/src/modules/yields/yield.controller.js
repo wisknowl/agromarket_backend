@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getCategories = exports.postYield = exports.getYield = exports.listYields = void 0;
+exports.removeYield = exports.patchYieldStock = exports.putYield = exports.getCategories = exports.postYield = exports.getYield = exports.listYields = void 0;
 const yieldService = __importStar(require("./yield.service"));
 const listYields = async (req, res) => {
     try {
@@ -86,3 +86,53 @@ const getCategories = async (_req, res) => {
     }
 };
 exports.getCategories = getCategories;
+const putYield = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const updatedYield = await yieldService.updateYield(req.user.id, req.user.role || 'FARMER', req.params.id, req.body);
+        res.status(200).json({ message: 'Yield updated successfully', yield: updatedYield });
+    }
+    catch (error) {
+        const status = error.message.includes('Forbidden') ? 403 : error.message.includes('not found') ? 404 : 400;
+        res.status(status).json({ message: error.message || 'Failed to update yield' });
+    }
+};
+exports.putYield = putYield;
+const patchYieldStock = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        const { delta, stockQuantity, isAvailable } = req.body;
+        const updatedYield = await yieldService.updateYield(req.user.id, req.user.role || 'FARMER', req.params.id, {
+            stockDelta: delta !== undefined ? Number(delta) : undefined,
+            stockQuantity: stockQuantity !== undefined ? Number(stockQuantity) : undefined,
+            isAvailable: isAvailable !== undefined ? Boolean(isAvailable) : undefined,
+        });
+        res.status(200).json({ message: 'Harvest stock updated successfully', yield: updatedYield });
+    }
+    catch (error) {
+        const status = error.message.includes('Forbidden') ? 403 : error.message.includes('not found') ? 404 : 400;
+        res.status(status).json({ message: error.message || 'Failed to update harvest stock' });
+    }
+};
+exports.patchYieldStock = patchYieldStock;
+const removeYield = async (req, res) => {
+    try {
+        if (!req.user?.id) {
+            res.status(401).json({ message: 'Authentication required' });
+            return;
+        }
+        await yieldService.deleteYield(req.user.id, req.user.role || 'FARMER', req.params.id);
+        res.status(200).json({ message: 'Yield listing archived successfully' });
+    }
+    catch (error) {
+        const status = error.message.includes('Forbidden') ? 403 : 400;
+        res.status(status).json({ message: error.message || 'Failed to archive yield' });
+    }
+};
+exports.removeYield = removeYield;

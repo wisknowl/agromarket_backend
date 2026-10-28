@@ -30,7 +30,8 @@ export const getMyFarms = async (req: AuthRequest, res: Response): Promise<void>
 
 export const getFarmById = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const farm = await farmService.getFarmById(req.params.id, req.user?.id);
+    const includeAll = req.query.includeAllYields === 'true';
+    const farm = await farmService.getFarmById(req.params.id, req.user?.id, includeAll);
     res.status(200).json(farm);
   } catch (error: any) {
     res.status(404).json({ message: error.message || 'Farm not found' });
@@ -84,4 +85,19 @@ export const getPartnerStatus = async (req: AuthRequest, res: Response): Promise
     res.status(500).json({ message: error.message || 'Failed to evaluate partner status' });
   }
 };
+
+export const deleteFarm = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    if (!req.user?.id) {
+      res.status(401).json({ message: 'Authentication required' });
+      return;
+    }
+    const targetFarmId = req.body?.targetFarmId || (req.query?.targetFarmId as string | undefined);
+    const result = await farmService.deleteFarm(req.params.id, req.user.id, targetFarmId);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Failed to delete farm' });
+  }
+};
+
 

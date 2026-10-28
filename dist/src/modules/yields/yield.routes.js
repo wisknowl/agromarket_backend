@@ -10,4 +10,7 @@ router.get('/', yield_controller_1.listYields);
 router.get('/categories', yield_controller_1.getCategories);
 router.get('/:id', yield_controller_1.getYield);
 router.post('/', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.postYield);
+router.put('/:id', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.putYield);
+router.patch('/:id/stock', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.patchYieldStock);
+router.delete('/:id', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.removeYield);
 exports.default = router;

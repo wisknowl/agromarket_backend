@@ -111,6 +111,25 @@ const getRankedFeed = async (context) => {
 };
 exports.getRankedFeed = getRankedFeed;
 const createPost = async (userId, data) => {
+    let resolvedFarmId = data.farmId;
+    if (!resolvedFarmId) {
+        const userFarm = await prisma_1.default.farm.findFirst({
+            where: { userId },
+            orderBy: { createdAt: 'desc' },
+        });
+        if (!userFarm) {
+            throw new Error('A registered farm page is required to publish a harvest story. Please create your farm first.');
+        }
+        resolvedFarmId = userFarm.id;
+    }
+    else {
+        const verifiedFarm = await prisma_1.default.farm.findFirst({
+            where: { id: resolvedFarmId, userId },
+        });
+        if (!verifiedFarm) {
+            throw new Error('Selected farm was not found or unauthorized.');
+        }
+    }
     let farmerId;
     const farmer = await prisma_1.default.farmerProfile.findUnique({
         where: { userId },
@@ -118,13 +137,18 @@ const createPost = async (userId, data) => {
     if (farmer) {
         farmerId = farmer.id;
     }
+    let normalizedMedia = data.mediaUrl;
+    const uploadsIdx = normalizedMedia.indexOf('/uploads/');
+    if (uploadsIdx !== -1) {
+        normalizedMedia = normalizedMedia.substring(uploadsIdx);
+    }
     return prisma_1.default.post.create({
         data: {
             userId,
             farmerId,
-            farmId: data.farmId,
+            farmId: resolvedFarmId,
             content: data.content,
-            mediaUrl: data.mediaUrl,
+            mediaUrl: normalizedMedia,
             isVideo: data.isVideo || false,
             linkedYieldId: data.linkedYieldId,
         },

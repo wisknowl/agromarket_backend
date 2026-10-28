@@ -38,12 +38,14 @@ const handleMediaUpload = async (req, res) => {
         }
         const host = req.get('host') || 'localhost:5000';
         const protocol = req.protocol || 'http';
-        const fileUrl = `${protocol}://${host}/uploads/${file.filename}`;
+        const relativeUrl = `/uploads/${file.filename}`;
+        const fileUrl = `${protocol}://${host}${relativeUrl}`;
         const isVideo = file.mimetype.startsWith('video/') || file.filename.endsWith('.mp4') || file.filename.endsWith('.mov');
         console.log(`📁 [UPLOAD SUCCESS] Saved: ${file.filename} (${(file.size / (1024 * 1024)).toFixed(2)} MB) -> ${fileUrl}`);
         res.status(200).json({
             success: true,
-            url: fileUrl,
+            url: relativeUrl,
+            fullUrl: fileUrl,
             filename: file.filename,
             mimetype: file.mimetype,
             isVideo,

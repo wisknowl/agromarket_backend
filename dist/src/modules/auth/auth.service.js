@@ -149,7 +149,26 @@ const getUserPublicProfile = async (targetUserId, currentUserId) => {
     const user = await prisma_1.default.user.findUnique({
         where: { id: targetUserId },
         include: {
-            farms: true,
+            farms: {
+                include: {
+                    yields: {
+                        where: { isAvailable: true },
+                        include: {
+                            category: true,
+                            farm: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    region: true,
+                                    city: true,
+                                    location: true,
+                                },
+                            },
+                        },
+                        orderBy: { createdAt: 'desc' },
+                    },
+                },
+            },
             farmerProfile: {
                 include: {
                     loanApplications: true,
@@ -231,13 +250,8 @@ const toggleFollowUser = async (followerId, followingId) => {
 };
 exports.toggleFollowUser = toggleFollowUser;
 const updateProfile = async (userId, data) => {
-    const updatedUser = await prisma_1.default.user.update({
+    const currentUser = await prisma_1.default.user.findUnique({
         where: { id: userId },
-        data: {
-            ...(data.name && { name: data.name }),
-            ...(data.phone && { phone: data.phone }),
-            ...(data.avatarUrl && { avatarUrl: data.avatarUrl }),
-        },
         include: {
             farms: true,
             farmerProfile: true,
@@ -246,14 +260,93 @@ const updateProfile = async (userId, data) => {
             financialProfile: true,
         },
     });
-    if (data.bio && updatedUser.farmerProfile) {
-        await prisma_1.default.farmerProfile.update({
-            where: { userId },
-            data: { bio: data.bio },
-        });
+    if (!currentUser) {
+        throw new Error('User not found.');
     }
-    const { passwordHash: _, ...safeUser } = updatedUser;
-    return safeUser;
+    let phoneToUpdate = undefined;
+    if (data.phone && data.phone.trim() !== '') {
+        const trimmedPhone = data.phone.trim();
+        // Only check and update if phone actually changed
+        if (trimmedPhone !== currentUser.phone) {
+            // Check if another account has this exact phone or a normalized variant
+            const digits = trimmedPhone.replace(/\D/g, '');
+            const candidates = [trimmedPhone];
+            if (digits) {
+                candidates.push(digits);
+                candidates.push(`+${digits}`);
+                if (digits.length === 9) {
+                    candidates.push(`+237${digits}`);
+                    candidates.push(`237${digits}`);
+                }
+                else if (digits.startsWith('237') && digits.length === 12) {
+                    candidates.push(digits.slice(3));
+                    candidates.push(`+${digits}`);
+                }
+            }
+            const existingUser = await prisma_1.default.user.findFirst({
+                where: {
+                    id: { not: userId },
+                    phone: { in: Array.from(new Set(candidates)) },
+                },
+                select: { id: true, name: true, phone: true, email: true },
+            });
+            if (existingUser) {
+                throw new Error(`The phone number "${trimmedPhone}" is already registered to another account (${existingUser.name || existingUser.email}). Please use a different phone number or keep your existing one.`);
+            }
+            phoneToUpdate = trimmedPhone;
+        }
+    }
+    try {
+        const updatedUser = await prisma_1.default.user.update({
+            where: { id: userId },
+            data: {
+                ...(data.name && data.name.trim() && { name: data.name.trim() }),
+                ...(phoneToUpdate && { phone: phoneToUpdate }),
+                ...(data.avatarUrl && { avatarUrl: data.avatarUrl }),
+            },
+            include: {
+                farms: true,
+                farmerProfile: true,
+                wholesalerProfile: true,
+                transporterProfile: true,
+                financialProfile: true,
+            },
+        });
+        if (data.bio) {
+            if (updatedUser.farmerProfile) {
+                await prisma_1.default.farmerProfile.update({
+                    where: { userId },
+                    data: { bio: data.bio.trim() },
+                });
+            }
+            else if (updatedUser.role === client_1.UserRole.FARMER) {
+                await prisma_1.default.farmerProfile.create({
+                    data: {
+                        userId,
+                        bio: data.bio.trim(),
+                        farmName: `${updatedUser.name}'s Farm`,
+                        region: 'West Region',
+                        city: 'Foumbot',
+                        creditScore: 500,
+                    },
+                });
+            }
+        }
+        const { passwordHash: _, ...safeUser } = updatedUser;
+        return safeUser;
+    }
+    catch (err) {
+        if (err.code === 'P2002') {
+            const target = err.meta?.target || [];
+            if (target.includes('phone') || String(err.message).includes('phone')) {
+                throw new Error('This phone number is already registered to another account.');
+            }
+            if (target.includes('email') || String(err.message).includes('email')) {
+                throw new Error('This email address is already registered to another account.');
+            }
+        }
+        throw err;
+    }
 };
 exports.updateProfile = updateProfile;
 const saveUserPushToken = async (userId, expoPushToken) => {

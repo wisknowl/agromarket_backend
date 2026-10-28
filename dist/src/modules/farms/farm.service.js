@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.checkPartnerStatus = exports.getMutualPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarmsList = exports.createOrRegisterFarm = void 0;
+exports.deleteFarm = exports.checkPartnerStatus = exports.getMutualPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarmsList = exports.createOrRegisterFarm = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const client_1 = require("@prisma/client");
 const createOrRegisterFarm = async (userId, data) => {
@@ -45,6 +45,59 @@ const createOrRegisterFarm = async (userId, data) => {
         where: { id: userId },
         data: { role: 'FARMER' },
     });
+    // Ensure FarmerProfile is automatically created/synced for the farm owner
+    await prisma_1.default.farmerProfile.upsert({
+        where: { userId },
+        update: {
+            region: data.region,
+            city: data.city,
+            division: data.division,
+        },
+        create: {
+            userId,
+            farmName: data.name,
+            region: data.region,
+            city: data.city,
+            division: data.division,
+            farmSizeHectares: data.sizeHectares || 1.0,
+            primaryCrops: data.primaryProduce || [],
+            creditScore: 500,
+        },
+    });
+    // Process operational parcels/sites
+    let parcelsList = data.parcels || [];
+    if (parcelsList.length === 0) {
+        parcelsList = [
+            {
+                id: `site-${Date.now()}-1`,
+                name: `${data.name} (HQ / Main Plot)`,
+                region: data.region,
+                division: data.division,
+                city: data.city,
+                location: data.location || `${data.city}, ${data.region}`,
+                gpsLatitude: data.gpsLatitude,
+                gpsLongitude: data.gpsLongitude,
+                sizeHectares: data.sizeHectares || 1.0,
+                isHeadquarters: true,
+            },
+        ];
+    }
+    else {
+        parcelsList = parcelsList.map((p, idx) => ({
+            id: p.id || `site-${Date.now()}-${idx + 1}`,
+            name: p.name || `Operating Site ${idx + 1}`,
+            region: p.region || data.region,
+            division: p.division || data.division,
+            city: p.city || data.city,
+            location: p.location || `${p.city || data.city}, ${p.region || data.region}`,
+            gpsLatitude: p.gpsLatitude !== undefined ? Number(p.gpsLatitude) : undefined,
+            gpsLongitude: p.gpsLongitude !== undefined ? Number(p.gpsLongitude) : undefined,
+            sizeHectares: p.sizeHectares !== undefined ? Number(p.sizeHectares) : 1.0,
+            isHeadquarters: p.isHeadquarters !== undefined ? p.isHeadquarters : idx === 0,
+        }));
+    }
+    const totalHectares = parcelsList.reduce((acc, p) => acc + (p.sizeHectares || 0), 0) || data.sizeHectares || 1.0;
+    const primarySite = parcelsList.find((p) => p.isHeadquarters) || parcelsList[0];
     const parsedCategory = data.category || client_1.FarmCategory.CROPS;
     // Create dedicated Farm record
     const farm = await prisma_1.default.farm.create({
@@ -53,13 +106,14 @@ const createOrRegisterFarm = async (userId, data) => {
             name: data.name,
             category: parsedCategory,
             description: data.description,
-            region: data.region,
-            division: data.division,
-            city: data.city,
-            location: data.location || `${data.city}, ${data.region}`,
-            gpsLatitude: data.gpsLatitude,
-            gpsLongitude: data.gpsLongitude,
-            sizeHectares: data.sizeHectares || 1.0,
+            region: primarySite.region,
+            division: primarySite.division || data.division,
+            city: primarySite.city,
+            location: primarySite.location || data.location || `${primarySite.city}, ${primarySite.region}`,
+            gpsLatitude: primarySite.gpsLatitude ?? data.gpsLatitude,
+            gpsLongitude: primarySite.gpsLongitude ?? data.gpsLongitude,
+            sizeHectares: totalHectares,
+            parcels: parcelsList,
             coverPhoto: data.coverPhoto || 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800',
             avatarPhoto: data.avatarPhoto,
             primaryProduce: data.primaryProduce || [],
@@ -96,10 +150,10 @@ const getMyFarmsList = async (userId) => {
     });
 };
 exports.getMyFarmsList = getMyFarmsList;
-const getFarmById = async (farmId, currentUserId) => {
+const getFarmById = async (farmId, currentUserId, includeAllYields = false) => {
     const includeConfig = {
         yields: {
-            where: { isAvailable: true },
+            where: includeAllYields ? undefined : { isAvailable: true },
             include: { category: true },
             orderBy: { createdAt: 'desc' },
         },
@@ -179,6 +233,15 @@ const getFarmById = async (farmId, currentUserId) => {
         isFollowingOwner = Boolean(follow);
     }
     const isOwner = Boolean(currentUserId && currentUserId === farm.userId);
+    // If the caller is the farm owner or explicitly requested all yields (e.g. Farm Management Workspace),
+    // ensure all yields (both active and paused) are returned so the producer can unpause and manage them.
+    if (isOwner || includeAllYields) {
+        farm.yields = await prisma_1.default.agroYield.findMany({
+            where: { farmId: farm.id },
+            include: { category: true },
+            orderBy: { createdAt: 'desc' },
+        });
+    }
     return {
         ...farm,
         isOwner,
@@ -192,6 +255,12 @@ const updateFarm = async (farmId, userId, data) => {
     });
     if (!existing) {
         throw new Error('Farm not found or unauthorized');
+    }
+    let updatedParcels = data.parcels !== undefined ? data.parcels : existing.parcels;
+    let updatedSizeHectares = data.sizeHectares ?? existing.sizeHectares;
+    if (data.parcels && Array.isArray(data.parcels) && data.parcels.length > 0) {
+        updatedSizeHectares =
+            data.parcels.reduce((sum, p) => sum + (Number(p.sizeHectares) || 0), 0) || updatedSizeHectares;
     }
     return prisma_1.default.farm.update({
         where: { id: farmId },
@@ -207,7 +276,8 @@ const updateFarm = async (farmId, userId, data) => {
             description: data.description ?? existing.description,
             coverPhoto: data.coverPhoto ?? existing.coverPhoto,
             avatarPhoto: data.avatarPhoto ?? existing.avatarPhoto,
-            sizeHectares: data.sizeHectares ?? existing.sizeHectares,
+            sizeHectares: updatedSizeHectares,
+            parcels: updatedParcels,
             primaryProduce: data.primaryProduce ?? existing.primaryProduce,
             certifications: data.certifications ?? existing.certifications,
         },
@@ -287,3 +357,92 @@ const checkPartnerStatus = async (userId, targetUserId) => {
     return SocialGraphEngine.evaluatePartnerStatus(userId, targetUserId);
 };
 exports.checkPartnerStatus = checkPartnerStatus;
+const deleteFarm = async (farmId, userId, targetFarmId) => {
+    const existing = await prisma_1.default.farm.findFirst({
+        where: { id: farmId, userId },
+    });
+    if (!existing) {
+        throw new Error('Farm not found or unauthorized');
+    }
+    // Safety check: ensure no active unfulfilled escrow orders exist for produce from this farm
+    const activeOrders = await prisma_1.default.order.findMany({
+        where: {
+            status: { in: ['PENDING_PAYMENT', 'ESCROW_LOCKED', 'CONFIRMED_BY_FARMER', 'DISPATCHED'] },
+            items: {
+                some: {
+                    yield: { farmId },
+                },
+            },
+        },
+        select: { id: true, orderNumber: true },
+    });
+    if (activeOrders.length > 0) {
+        const orderNumbers = activeOrders.map((o) => o.orderNumber || o.id).join(', ');
+        throw new Error(`Cannot delete farm with active unfulfilled orders (${orderNumbers}). Please settle deliveries or resolve escrow orders first.`);
+    }
+    // Case 1: Migrate produce & posts to another farm owned by the same user
+    if (targetFarmId && targetFarmId !== farmId) {
+        const targetFarm = await prisma_1.default.farm.findFirst({
+            where: { id: targetFarmId, userId },
+        });
+        if (!targetFarm) {
+            throw new Error('Target migration farm not found or unauthorized');
+        }
+        // Reassign all yields to target farm
+        await prisma_1.default.agroYield.updateMany({
+            where: { farmId },
+            data: { farmId: targetFarmId },
+        });
+        // Reassign all posts to target farm
+        await prisma_1.default.post.updateMany({
+            where: { farmId },
+            data: { farmId: targetFarmId },
+        });
+        // Delete the old farm
+        await prisma_1.default.farm.delete({
+            where: { id: farmId },
+        });
+        return {
+            success: true,
+            message: `Farm deleted successfully. Produce and stories migrated to ${targetFarm.name}.`,
+            id: farmId,
+            migratedTo: targetFarmId,
+        };
+    }
+    // Case 2: Permanent deletion of farm and all associated produce & posts
+    // 1. Delete all harvest stories tied to this farm (cascade deletes likes & comments)
+    await prisma_1.default.post.deleteMany({
+        where: { farmId },
+    });
+    // 2. Delete or delist all produce lots tied to this farm
+    const farmYields = await prisma_1.default.agroYield.findMany({
+        where: { farmId },
+        include: { orderItems: true },
+    });
+    for (const y of farmYields) {
+        if (y.orderItems && y.orderItems.length > 0) {
+            // Historical order exists: preserve record integrity but delist from marketplace
+            await prisma_1.default.agroYield.update({
+                where: { id: y.id },
+                data: {
+                    isAvailable: false,
+                    stockQuantity: 0,
+                    farmId: null,
+                },
+            });
+        }
+        else {
+            // Delete cart items and saved yields, then hard delete yield
+            await prisma_1.default.cartItem.deleteMany({ where: { yieldId: y.id } });
+            await prisma_1.default.savedYield.deleteMany({ where: { yieldId: y.id } });
+            await prisma_1.default.review.deleteMany({ where: { yieldId: y.id } });
+            await prisma_1.default.agroYield.delete({ where: { id: y.id } });
+        }
+    }
+    // 3. Delete the farm record itself
+    await prisma_1.default.farm.delete({
+        where: { id: farmId },
+    });
+    return { success: true, message: 'Farm and all attached assets deleted successfully', id: farmId };
+};
+exports.deleteFarm = deleteFarm;

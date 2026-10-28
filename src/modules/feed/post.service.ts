@@ -111,6 +111,25 @@ export const createPost = async (
   userId: string,
   data: { content: string; mediaUrl: string; isVideo?: boolean; linkedYieldId?: string; farmId?: string }
 ) => {
+  let resolvedFarmId = data.farmId;
+  if (!resolvedFarmId) {
+    const userFarm = await prisma.farm.findFirst({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
+    if (!userFarm) {
+      throw new Error('A registered farm page is required to publish a harvest story. Please create your farm first.');
+    }
+    resolvedFarmId = userFarm.id;
+  } else {
+    const verifiedFarm = await prisma.farm.findFirst({
+      where: { id: resolvedFarmId, userId },
+    });
+    if (!verifiedFarm) {
+      throw new Error('Selected farm was not found or unauthorized.');
+    }
+  }
+
   let farmerId: string | undefined;
   const farmer = await prisma.farmerProfile.findUnique({
     where: { userId },
@@ -129,7 +148,7 @@ export const createPost = async (
     data: {
       userId,
       farmerId,
-      farmId: data.farmId,
+      farmId: resolvedFarmId,
       content: data.content,
       mediaUrl: normalizedMedia,
       isVideo: data.isVideo || false,
