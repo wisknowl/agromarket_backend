@@ -278,18 +278,31 @@ const updateYield = async (userId, userRole, yieldId, updates) => {
             mappedUnit = 'KG';
         }
     }
-    let targetCategoryId = updates.categoryId;
-    if (!targetCategoryId && updates.categoryName) {
+    let targetCategoryId = undefined;
+    if (updates.categoryId) {
+        const existingCat = await prisma_1.default.category.findUnique({
+            where: { id: updates.categoryId },
+        });
+        if (existingCat) {
+            targetCategoryId = existingCat.id;
+        }
+    }
+    if (!targetCategoryId && (updates.categoryName || updates.categoryId)) {
+        const searchTarget = (updates.categoryName || updates.categoryId);
         const cat = await prisma_1.default.category.findFirst({
             where: {
                 OR: [
-                    { name: { equals: updates.categoryName, mode: 'insensitive' } },
-                    { name: { contains: updates.categoryName.replace(/^cat-/, '').trim(), mode: 'insensitive' } },
+                    { name: { equals: searchTarget, mode: 'insensitive' } },
+                    { name: { contains: searchTarget.replace(/^cat-/, '').trim(), mode: 'insensitive' } },
+                    { frenchName: { contains: searchTarget, mode: 'insensitive' } },
                 ],
             },
         });
         if (cat)
             targetCategoryId = cat.id;
+    }
+    if (!targetCategoryId) {
+        targetCategoryId = yieldItem.categoryId;
     }
     return prisma_1.default.agroYield.update({
         where: { id: yieldId },

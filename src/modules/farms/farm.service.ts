@@ -255,8 +255,16 @@ export const getFarmById = async (
     });
   }
 
+  const formattedYields = (farm.yields || []).map((y: any) => ({
+    ...y,
+    price: Number(y.pricePerUnit || y.price || 0),
+    pricePerUnit: Number(y.pricePerUnit || y.price || 0),
+    image: y.mediaUrls?.[0] || y.image || '',
+  }));
+
   return {
     ...farm,
+    yields: formattedYields,
     isOwner,
     isFollowingOwner,
   };
