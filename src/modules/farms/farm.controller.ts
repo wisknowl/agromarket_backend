@@ -28,6 +28,17 @@ export const getMyFarms = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
+export const checkFarmSlug = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const name = (req.query.name as string) || '';
+    const excludeId = (req.query.excludeId as string) || undefined;
+    const result = await farmService.checkFarmSlugAvailability(name, excludeId);
+    res.status(200).json(result);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Slug check failed' });
+  }
+};
+
 export const getFarmById = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const includeAll = req.query.includeAllYields === 'true';

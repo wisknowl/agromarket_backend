@@ -108,6 +108,8 @@ model User {
 
   // Multi-Farm Ownership
   farms               Farm[]
+  // Multi-Store Ownership
+  stores              Store[]
 
   // Relations
   ordersBuyer         Order[]            @relation("BuyerOrders")
@@ -136,6 +138,7 @@ model Farm {
   user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   
   name            String
+  slug            String?       @unique
   category        FarmCategory  @default(CROPS)
   description     String?
   region          String
@@ -163,6 +166,46 @@ model Farm {
   @@index([userId])
   @@index([region, city])
   @@index([category])
+}
+
+// -------------------------------------------------------------
+// ACTOR 2: REGISTERED STORES & WHOLESALE DEPOTS (MULTI-STORE DOMAIN)
+// -------------------------------------------------------------
+model Store {
+  id                  String        @id @default(uuid())
+  userId              String
+  user                User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name                String
+  slug                String?       @unique
+  storeType           String        @default("WHOLESALE_DEPOT") // WHOLESALE_DEPOT, RETAIL_HUB, COOPERATIVE_SHED, COLD_STORAGE
+  description         String?
+  region              String
+  division            String?
+  city                String
+  marketZone          String?       // e.g. "Marché Sandaga, Quai 4"
+  address             String?
+  gpsLatitude         Float?
+  gpsLongitude        Float?
+  storageCapacityTons Float?        @default(5.0)
+  hasColdStorage      Boolean       @default(false)
+  tradeLicenseNumber  String?
+  linkedFarmId        String?
+  
+  sites               Json?         // Structured array of operational sites/depot sheds: [{ id, name, location, capacityTons, facilityType, operatingHours }]
+  coverPhoto          String?
+  avatarPhoto         String?
+  isVerified          Boolean       @default(false)
+  rating              Float         @default(5.0)
+  totalRatings        Int           @default(0)
+  
+  yields              AgroYield[]
+
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([region, city])
 }
 
 // -------------------------------------------------------------
@@ -287,6 +330,10 @@ model AgroYield {
   farmer                  FarmerProfile?     @relation(fields: [farmerId], references: [id], onDelete: Cascade)
   farmId                  String?
   farm                    Farm?              @relation(fields: [farmId], references: [id], onDelete: SetNull)
+  storeId                 String?
+  store                   Store?             @relation(fields: [storeId], references: [id], onDelete: SetNull)
+  storeSiteId             String?
+  dispatchSiteName        String?
   categoryId              String
   category                Category           @relation(fields: [categoryId], references: [id])
   
@@ -324,6 +371,7 @@ model AgroYield {
   @@index([categoryId])
   @@index([farmerId])
   @@index([farmId])
+  @@index([storeId])
   @@index([originRegion])
 }
 

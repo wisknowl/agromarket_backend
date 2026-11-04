@@ -4,11 +4,13 @@ import { AuthRequest } from '../../core/types';
 
 export const listYields = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { category, region, search, isWholesale, isOrganic } = req.query;
+    const { category, region, search, isWholesale, isOrganic, farmId, storeId } = req.query;
     const yields = await yieldService.getAllYields({
       category: category as string,
       region: region as string,
       search: search as string,
+      farmId: farmId as string,
+      storeId: storeId as string,
       isWholesale: isWholesale ? isWholesale === 'true' : undefined,
       isOrganic: isOrganic ? isOrganic === 'true' : undefined,
     });

@@ -7,15 +7,17 @@ export const getAllYields = async (params: {
   region?: string;
   search?: string;
   farmId?: string;
+  storeId?: string;
   isWholesale?: boolean;
   isOrganic?: boolean;
 }) => {
-  const { category, region, search, farmId, isWholesale, isOrganic } = params;
+  const { category, region, search, farmId, storeId, isWholesale, isOrganic } = params;
 
   return prisma.agroYield.findMany({
     where: {
       isAvailable: true,
       ...(farmId && { farmId }),
+      ...(storeId && { storeId }),
       ...(category && {
         category: {
           name: { contains: category, mode: 'insensitive' },
@@ -80,6 +82,9 @@ export const getYieldById = async (id: string) => {
 };
 export interface CreateYieldDto {
   farmId?: string;
+  storeId?: string;
+  storeSiteId?: string;
+  dispatchSiteName?: string;
   categoryId: string;
   categoryName?: string;
   title: string;
@@ -217,6 +222,9 @@ export const createYield = async (userId: string, data: CreateYieldDto) => {
     data: {
       farmerId,
       farmId: targetFarmId,
+      ...(data.storeId ? { storeId: data.storeId } : {}),
+      ...(data.storeSiteId ? { storeSiteId: data.storeSiteId } : {}),
+      ...(data.dispatchSiteName ? { dispatchSiteName: data.dispatchSiteName } : {}),
       categoryId: category.id,
       title: data.title,
       frenchTitle: data.frenchTitle,

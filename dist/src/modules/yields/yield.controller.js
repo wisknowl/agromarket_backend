@@ -37,11 +37,13 @@ exports.removeYield = exports.patchYieldStock = exports.putYield = exports.getCa
 const yieldService = __importStar(require("./yield.service"));
 const listYields = async (req, res) => {
     try {
-        const { category, region, search, isWholesale, isOrganic } = req.query;
+        const { category, region, search, isWholesale, isOrganic, farmId, storeId } = req.query;
         const yields = await yieldService.getAllYields({
             category: category,
             region: region,
             search: search,
+            farmId: farmId,
+            storeId: storeId,
             isWholesale: isWholesale ? isWholesale === 'true' : undefined,
             isOrganic: isOrganic ? isOrganic === 'true' : undefined,
         });

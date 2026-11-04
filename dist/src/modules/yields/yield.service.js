@@ -6,11 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteYield = exports.updateYield = exports.getAllCategories = exports.createYield = exports.getYieldById = exports.getAllYields = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const getAllYields = async (params) => {
-    const { category, region, search, farmId, isWholesale, isOrganic } = params;
+    const { category, region, search, farmId, storeId, isWholesale, isOrganic } = params;
     return prisma_1.default.agroYield.findMany({
         where: {
             isAvailable: true,
             ...(farmId && { farmId }),
+            ...(storeId && { storeId }),
             ...(category && {
                 category: {
                     name: { contains: category, mode: 'insensitive' },
@@ -182,6 +183,9 @@ const createYield = async (userId, data) => {
         data: {
             farmerId,
             farmId: targetFarmId,
+            ...(data.storeId ? { storeId: data.storeId } : {}),
+            ...(data.storeSiteId ? { storeSiteId: data.storeSiteId } : {}),
+            ...(data.dispatchSiteName ? { dispatchSiteName: data.dispatchSiteName } : {}),
             categoryId: category.id,
             title: data.title,
             frenchTitle: data.frenchTitle,

@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFarm = exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarms = exports.createFarm = void 0;
+exports.deleteFarm = exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.checkFarmSlug = exports.getMyFarms = exports.createFarm = void 0;
 const farmService = __importStar(require("./farm.service"));
 const createFarm = async (req, res) => {
     try {
@@ -63,6 +63,18 @@ const getMyFarms = async (req, res) => {
     }
 };
 exports.getMyFarms = getMyFarms;
+const checkFarmSlug = async (req, res) => {
+    try {
+        const name = req.query.name || '';
+        const excludeId = req.query.excludeId || undefined;
+        const result = await farmService.checkFarmSlugAvailability(name, excludeId);
+        res.status(200).json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Slug check failed' });
+    }
+};
+exports.checkFarmSlug = checkFarmSlug;
 const getFarmById = async (req, res) => {
     try {
         const includeAll = req.query.includeAllYields === 'true';
