@@ -28,6 +28,19 @@ export const getMyStoresHandler = async (req: AuthRequest, res: Response): Promi
   }
 };
 
+export const getAllStoresHandler = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { search, region } = req.query;
+    const stores = await buyamSellamService.getAllPublicStores({
+      search: search as string,
+      region: region as string,
+    });
+    res.status(200).json(stores);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch stores' });
+  }
+};
+
 export const checkStoreSlugHandler = async (req: Request, res: Response): Promise<void> => {
   try {
     const name = (req.query.name as string) || '';
@@ -41,7 +54,8 @@ export const checkStoreSlugHandler = async (req: Request, res: Response): Promis
 
 export const getStoreByIdHandler = async (req: Request, res: Response): Promise<void> => {
   try {
-    const store = await buyamSellamService.getStoreById(req.params.id);
+    const currentUserId = (req as any).user?.id;
+    const store = await buyamSellamService.getStoreById(req.params.id, currentUserId);
     res.status(200).json(store);
   } catch (error: any) {
     res.status(404).json({ message: error.message || 'Store not found' });

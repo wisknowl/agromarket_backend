@@ -179,6 +179,35 @@ export const createOrRegisterFarm = async (userId: string, data: CreateFarmDto) 
   return farm;
 };
 
+export const getAllPublicFarms = async (params?: { search?: string; region?: string; category?: string }) => {
+  const { search, region, category } = params || {};
+  return prisma.farm.findMany({
+    where: {
+      ...(category && { category: category as FarmCategory }),
+      ...(region && { region: { contains: region, mode: 'insensitive' } }),
+      ...(search && {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { city: { contains: search, mode: 'insensitive' } },
+          { region: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ],
+      }),
+    },
+    include: {
+      yields: {
+        where: { isAvailable: true },
+        include: { category: true },
+        take: 4,
+      },
+      user: {
+        select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+      },
+    },
+    orderBy: { rating: 'desc' },
+  });
+};
+
 export const getMyFarmsList = async (userId: string) => {
   return prisma.farm.findMany({
     where: { userId },

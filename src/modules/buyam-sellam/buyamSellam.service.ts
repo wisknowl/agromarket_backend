@@ -89,23 +89,23 @@ export const createOrRegisterStore = async (userId: string, data: CreateStoreDto
   // 2. Prepare default depot site if none provided
   const sites = data.sites && data.sites.length > 0
     ? data.sites.map((s, idx) => ({
-        id: s.id || `site-${Date.now()}-${idx}`,
-        name: s.name || `Depot Site ${idx + 1}`,
-        location: s.location || data.marketZone || data.city,
-        capacityTons: s.capacityTons || 2.5,
-        facilityType: s.facilityType || (data.hasColdStorage ? 'COLD_ROOM' : 'AMBIENT_SHED'),
-        operatingHours: s.operatingHours || '06:00 - 18:00 (Mon - Sat)',
-      }))
+      id: s.id || `site-${Date.now()}-${idx}`,
+      name: s.name || `Depot Site ${idx + 1}`,
+      location: s.location || data.marketZone || data.city,
+      capacityTons: s.capacityTons || 2.5,
+      facilityType: s.facilityType || (data.hasColdStorage ? 'COLD_ROOM' : 'AMBIENT_SHED'),
+      operatingHours: s.operatingHours || '06:00 - 18:00 (Mon - Sat)',
+    }))
     : [
-        {
-          id: `site-${Date.now()}-1`,
-          name: 'Main Dispatch Depot',
-          location: data.marketZone || data.city,
-          capacityTons: data.storageCapacityTons || 5.0,
-          facilityType: data.hasColdStorage ? 'COLD_ROOM' : 'AMBIENT_SHED',
-          operatingHours: '06:00 - 18:00 (Mon - Sat)',
-        },
-      ];
+      {
+        id: `site-${Date.now()}-1`,
+        name: 'Main Dispatch Depot',
+        location: data.marketZone || data.city,
+        capacityTons: data.storageCapacityTons || 5.0,
+        facilityType: data.hasColdStorage ? 'COLD_ROOM' : 'AMBIENT_SHED',
+        operatingHours: '06:00 - 18:00 (Mon - Sat)',
+      },
+    ];
 
   // 3. Create the Store record
   const uniqueSlug = await generateUniqueStoreSlug(data.name);
@@ -198,23 +198,77 @@ export const getMyStores = async (userId: string) => {
   return stores;
 };
 
-export const getStoreById = async (id: string) => {
+export const getAllPublicStores = async (params?: { search?: string; region?: string }) => {
+  const { search, region } = params || {};
+  return (prisma as any).store.findMany({
+    where: {
+      ...(region && { region: { contains: region, mode: 'insensitive' } }),
+      ...(search && {
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { city: { contains: search, mode: 'insensitive' } },
+          { marketZone: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ],
+      }),
+    },
+    include: {
+      yields: {
+        where: { isAvailable: true },
+        include: { category: true },
+        take: 4,
+      },
+      user: {
+        select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+      },
+    },
+    orderBy: { rating: 'desc' },
+  });
+};
+
+export const getStoreById = async (id: string, currentUserId?: string) => {
   const store = await (prisma as any).store.findFirst({
     where: {
       OR: [
         { id },
-        { slug: id }
+        { slug: id },
+        { userId: id }
       ]
     },
     include: {
+      yields: {
+        where: { isAvailable: true },
+        include: {
+          category: true,
+          farm: {
+            select: { id: true, name: true, slug: true, coverPhoto: true, avatarPhoto: true },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      },
       user: {
-        select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+        select: { id: true, name: true, phone: true, email: true, avatarUrl: true, role: true },
       },
     },
   });
 
   if (!store) throw new Error('Store not found');
-  return store;
+
+  let linkedFarm = null;
+  if (store.linkedFarmId) {
+    linkedFarm = await prisma.farm.findUnique({
+      where: { id: store.linkedFarmId },
+      select: { id: true, name: true, slug: true, coverPhoto: true, avatarPhoto: true, region: true, city: true },
+    }).catch(() => null);
+  }
+
+  const isOwner = Boolean(currentUserId && store.userId === currentUserId);
+
+  return {
+    ...store,
+    isOwner,
+    linkedFarm,
+  };
 };
 
 export const updateStore = async (id: string, userId: string, data: Partial<CreateStoreDto>) => {

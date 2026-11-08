@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerOrUpdateWholesaler = exports.getWholesalerProfile = exports.updateStore = exports.getStoreById = exports.getMyStores = exports.createOrRegisterStore = exports.generateUniqueStoreSlug = exports.checkStoreSlugAvailability = void 0;
+exports.registerOrUpdateWholesaler = exports.getWholesalerProfile = exports.updateStore = exports.getStoreById = exports.getAllPublicStores = exports.getMyStores = exports.createOrRegisterStore = exports.generateUniqueStoreSlug = exports.checkStoreSlugAvailability = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const farm_service_1 = require("../farms/farm.service");
 const checkStoreSlugAvailability = async (name, storeIdToExclude) => {
@@ -154,23 +154,74 @@ const getMyStores = async (userId) => {
     return stores;
 };
 exports.getMyStores = getMyStores;
-const getStoreById = async (id) => {
+const getAllPublicStores = async (params) => {
+    const { search, region } = params || {};
+    return prisma_1.default.store.findMany({
+        where: {
+            ...(region && { region: { contains: region, mode: 'insensitive' } }),
+            ...(search && {
+                OR: [
+                    { name: { contains: search, mode: 'insensitive' } },
+                    { city: { contains: search, mode: 'insensitive' } },
+                    { marketZone: { contains: search, mode: 'insensitive' } },
+                    { description: { contains: search, mode: 'insensitive' } },
+                ],
+            }),
+        },
+        include: {
+            yields: {
+                where: { isAvailable: true },
+                include: { category: true },
+                take: 4,
+            },
+            user: {
+                select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+            },
+        },
+        orderBy: { rating: 'desc' },
+    });
+};
+exports.getAllPublicStores = getAllPublicStores;
+const getStoreById = async (id, currentUserId) => {
     const store = await prisma_1.default.store.findFirst({
         where: {
             OR: [
                 { id },
-                { slug: id }
+                { slug: id },
+                { userId: id }
             ]
         },
         include: {
+            yields: {
+                where: { isAvailable: true },
+                include: {
+                    category: true,
+                    farm: {
+                        select: { id: true, name: true, slug: true, coverPhoto: true, avatarPhoto: true },
+                    },
+                },
+                orderBy: { createdAt: 'desc' },
+            },
             user: {
-                select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+                select: { id: true, name: true, phone: true, email: true, avatarUrl: true, role: true },
             },
         },
     });
     if (!store)
         throw new Error('Store not found');
-    return store;
+    let linkedFarm = null;
+    if (store.linkedFarmId) {
+        linkedFarm = await prisma_1.default.farm.findUnique({
+            where: { id: store.linkedFarmId },
+            select: { id: true, name: true, slug: true, coverPhoto: true, avatarPhoto: true, region: true, city: true },
+        }).catch(() => null);
+    }
+    const isOwner = Boolean(currentUserId && store.userId === currentUserId);
+    return {
+        ...store,
+        isOwner,
+        linkedFarm,
+    };
 };
 exports.getStoreById = getStoreById;
 const updateStore = async (id, userId, data) => {

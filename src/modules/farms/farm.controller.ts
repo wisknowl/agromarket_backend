@@ -15,6 +15,20 @@ export const createFarm = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
+export const getAllFarms = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { search, region, category } = req.query;
+    const farms = await farmService.getAllPublicFarms({
+      search: search as string,
+      region: region as string,
+      category: category as string,
+    });
+    res.status(200).json(farms);
+  } catch (error: any) {
+    res.status(500).json({ message: error.message || 'Failed to fetch farms' });
+  }
+};
+
 export const getMyFarms = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     if (!req.user?.id) {

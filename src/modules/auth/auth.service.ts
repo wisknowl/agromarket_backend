@@ -80,6 +80,7 @@ export const registerUser = async (data: RegisterDto) => {
     include: {
       farmerProfile: true,
       wholesalerProfile: true,
+      stores: true,
       transporterProfile: true,
       financialProfile: true,
     },
@@ -104,8 +105,10 @@ export const loginUser = async (emailOrPhone: string, password: string) => {
     },
     include: {
       farms: true,
+      stores: true,
       farmerProfile: true,
       wholesalerProfile: true,
+      stores: true,
       transporterProfile: true,
       financialProfile: true,
     },
@@ -144,6 +147,7 @@ export const getCurrentUserProfile = async (userId: string) => {
         },
       },
       wholesalerProfile: true,
+      stores: true,
       transporterProfile: true,
       financialProfile: true,
       _count: {
@@ -151,6 +155,7 @@ export const getCurrentUserProfile = async (userId: string) => {
           followers: true,
           following: true,
           farms: true,
+          stores: true,
           posts: true,
         },
       },
@@ -170,6 +175,7 @@ export const getCurrentUserProfile = async (userId: string) => {
     followersCount: user._count.followers,
     followingCount: user._count.following,
     farmsCount: user._count.farms,
+    storesCount: user._count.stores,
     postsCount: user._count.posts,
     agroVestorsCount,
   };
@@ -205,6 +211,7 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
         },
       },
       wholesalerProfile: true,
+      stores: true,
       transporterProfile: true,
       posts: {
         orderBy: { createdAt: 'desc' },
@@ -222,6 +229,7 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
           followers: true,
           following: true,
           farms: true,
+          stores: true,
           posts: true,
         },
       },
@@ -255,6 +263,7 @@ export const getUserPublicProfile = async (targetUserId: string, currentUserId?:
     followersCount: user._count.followers,
     followingCount: user._count.following,
     farmsCount: user._count.farms,
+    storesCount: user._count.stores,
     postsCount: user._count.posts,
     agroVestorsCount,
   };
@@ -292,8 +301,10 @@ export const updateProfile = async (
     where: { id: userId },
     include: {
       farms: true,
+      stores: true,
       farmerProfile: true,
       wholesalerProfile: true,
+      stores: true,
       transporterProfile: true,
       financialProfile: true,
     },
@@ -354,6 +365,7 @@ export const updateProfile = async (
         farms: true,
         farmerProfile: true,
         wholesalerProfile: true,
+      stores: true,
         transporterProfile: true,
         financialProfile: true,
       },

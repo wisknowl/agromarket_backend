@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.registerStorefront = exports.getProfile = exports.updateStoreHandler = exports.getStoreByIdHandler = exports.checkStoreSlugHandler = exports.getMyStoresHandler = exports.createStoreHandler = void 0;
+exports.registerStorefront = exports.getProfile = exports.updateStoreHandler = exports.getStoreByIdHandler = exports.checkStoreSlugHandler = exports.getAllStoresHandler = exports.getMyStoresHandler = exports.createStoreHandler = void 0;
 const buyamSellamService = __importStar(require("./buyamSellam.service"));
 const createStoreHandler = async (req, res) => {
     try {
@@ -63,6 +63,20 @@ const getMyStoresHandler = async (req, res) => {
     }
 };
 exports.getMyStoresHandler = getMyStoresHandler;
+const getAllStoresHandler = async (req, res) => {
+    try {
+        const { search, region } = req.query;
+        const stores = await buyamSellamService.getAllPublicStores({
+            search: search,
+            region: region,
+        });
+        res.status(200).json(stores);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch stores' });
+    }
+};
+exports.getAllStoresHandler = getAllStoresHandler;
 const checkStoreSlugHandler = async (req, res) => {
     try {
         const name = req.query.name || '';
@@ -77,7 +91,8 @@ const checkStoreSlugHandler = async (req, res) => {
 exports.checkStoreSlugHandler = checkStoreSlugHandler;
 const getStoreByIdHandler = async (req, res) => {
     try {
-        const store = await buyamSellamService.getStoreById(req.params.id);
+        const currentUserId = req.user?.id;
+        const store = await buyamSellamService.getStoreById(req.params.id, currentUserId);
         res.status(200).json(store);
     }
     catch (error) {

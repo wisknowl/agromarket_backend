@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createFarm,
+  getAllFarms,
   getMyFarms,
   checkFarmSlug,
   getFarmById,
@@ -14,6 +15,7 @@ import { authenticateJWT, optionalAuth } from '../../core/middleware/authMiddlew
 
 const router = Router();
 
+router.get('/', getAllFarms);
 router.post('/', authenticateJWT, createFarm);
 router.get('/my-farms', authenticateJWT, getMyFarms);
 router.get('/partners', authenticateJWT, getPartners);

@@ -36,7 +36,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFarm = exports.checkPartnerStatus = exports.getMutualPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarmsList = exports.createOrRegisterFarm = exports.generateUniqueFarmSlug = exports.checkFarmSlugAvailability = exports.slugify = void 0;
+exports.deleteFarm = exports.checkPartnerStatus = exports.getMutualPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.getMyFarmsList = exports.getAllPublicFarms = exports.createOrRegisterFarm = exports.generateUniqueFarmSlug = exports.checkFarmSlugAvailability = exports.slugify = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const client_1 = require("@prisma/client");
 const slugify = (text) => {
@@ -176,6 +176,35 @@ const createOrRegisterFarm = async (userId, data) => {
     return farm;
 };
 exports.createOrRegisterFarm = createOrRegisterFarm;
+const getAllPublicFarms = async (params) => {
+    const { search, region, category } = params || {};
+    return prisma_1.default.farm.findMany({
+        where: {
+            ...(category && { category: category }),
+            ...(region && { region: { contains: region, mode: 'insensitive' } }),
+            ...(search && {
+                OR: [
+                    { name: { contains: search, mode: 'insensitive' } },
+                    { city: { contains: search, mode: 'insensitive' } },
+                    { region: { contains: search, mode: 'insensitive' } },
+                    { description: { contains: search, mode: 'insensitive' } },
+                ],
+            }),
+        },
+        include: {
+            yields: {
+                where: { isAvailable: true },
+                include: { category: true },
+                take: 4,
+            },
+            user: {
+                select: { id: true, name: true, phone: true, email: true, avatarUrl: true },
+            },
+        },
+        orderBy: { rating: 'desc' },
+    });
+};
+exports.getAllPublicFarms = getAllPublicFarms;
 const getMyFarmsList = async (userId) => {
     return prisma_1.default.farm.findMany({
         where: { userId },

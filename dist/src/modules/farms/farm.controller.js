@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteFarm = exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.checkFarmSlug = exports.getMyFarms = exports.createFarm = void 0;
+exports.deleteFarm = exports.getPartnerStatus = exports.getPartners = exports.getFarmAnalytics = exports.updateFarm = exports.getFarmById = exports.checkFarmSlug = exports.getMyFarms = exports.getAllFarms = exports.createFarm = void 0;
 const farmService = __importStar(require("./farm.service"));
 const createFarm = async (req, res) => {
     try {
@@ -49,6 +49,21 @@ const createFarm = async (req, res) => {
     }
 };
 exports.createFarm = createFarm;
+const getAllFarms = async (req, res) => {
+    try {
+        const { search, region, category } = req.query;
+        const farms = await farmService.getAllPublicFarms({
+            search: search,
+            region: region,
+            category: category,
+        });
+        res.status(200).json(farms);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message || 'Failed to fetch farms' });
+    }
+};
+exports.getAllFarms = getAllFarms;
 const getMyFarms = async (req, res) => {
     try {
         if (!req.user?.id) {

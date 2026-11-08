@@ -69,6 +69,7 @@ app.use('/api/fintech', fintech_1.fintechRoutes);
 app.use('/api/chat', chat_1.chatRoutes);
 app.use('/api/farms', farms_1.farmRoutes);
 app.use('/api/wholesaler', buyam_sellam_1.buyamSellamRoutes);
+app.use('/api/stores', buyam_sellam_1.buyamSellamRoutes);
 app.use('/api/admin', admin_1.adminRoutes);
 app.use('/api/upload', upload_1.uploadRoutes);
 app.use('/api/notifications', notifications_1.notificationRoutes);

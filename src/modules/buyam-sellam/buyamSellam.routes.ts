@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createStoreHandler,
+  getAllStoresHandler,
   getMyStoresHandler,
   checkStoreSlugHandler,
   getStoreByIdHandler,
@@ -13,6 +14,7 @@ import { authenticateJWT, optionalAuth } from '../../core/middleware/authMiddlew
 const router = Router();
 
 // Multi-Store Management Endpoints
+router.get('/', getAllStoresHandler);
 router.post('/', authenticateJWT, createStoreHandler);
 router.get('/my-stores', authenticateJWT, getMyStoresHandler);
 router.get('/me', authenticateJWT, getProfile);
