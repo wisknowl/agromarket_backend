@@ -10,14 +10,16 @@ export const getAllYields = async (params: {
   storeId?: string;
   isWholesale?: boolean;
   isOrganic?: boolean;
+  lifecycleStatus?: string;
 }) => {
-  const { category, region, search, farmId, storeId, isWholesale, isOrganic } = params;
+  const { category, region, search, farmId, storeId, isWholesale, isOrganic, lifecycleStatus } = params;
 
   return prisma.agroYield.findMany({
     where: {
       isAvailable: true,
       ...(farmId && { farmId }),
       ...(storeId && { storeId }),
+      ...(lifecycleStatus && { lifecycleStatus }),
       ...(category && {
         category: {
           name: { contains: category, mode: 'insensitive' },
@@ -104,6 +106,9 @@ export interface CreateYieldDto {
   bulkPricePerUnit?: number;
   isOrganic?: boolean;
   harvestDate?: string;
+  lifecycleStatus?: string;
+  expectedHarvestWindow?: string;
+  nextCycleMonth?: string;
   mediaUrls: string[];
 }
 
@@ -240,6 +245,9 @@ export const createYield = async (userId: string, data: CreateYieldDto) => {
       bulkPricePerUnit: data.bulkPricePerUnit,
       isOrganic: data.isOrganic || false,
       harvestDate: data.harvestDate ? new Date(data.harvestDate) : new Date(),
+      lifecycleStatus: data.lifecycleStatus || 'SELLING',
+      ...(data.expectedHarvestWindow ? { expectedHarvestWindow: data.expectedHarvestWindow } : {}),
+      ...(data.nextCycleMonth ? { nextCycleMonth: data.nextCycleMonth } : {}),
       mediaUrls: data.mediaUrls,
     },
     include: {
@@ -278,6 +286,9 @@ export interface UpdateYieldDto {
   bulkMinQuantity?: number;
   bulkPricePerUnit?: number;
   isOrganic?: boolean;
+  lifecycleStatus?: string;
+  expectedHarvestWindow?: string;
+  nextCycleMonth?: string;
   mediaUrls?: string[];
 }
 
@@ -397,6 +408,9 @@ export const updateYield = async (
       ...(updates.bulkMinQuantity !== undefined && { bulkMinQuantity: updates.bulkMinQuantity }),
       ...(updates.bulkPricePerUnit !== undefined && { bulkPricePerUnit: updates.bulkPricePerUnit }),
       ...(updates.isOrganic !== undefined && { isOrganic: updates.isOrganic }),
+      ...(updates.lifecycleStatus && { lifecycleStatus: updates.lifecycleStatus }),
+      ...(updates.expectedHarvestWindow !== undefined && { expectedHarvestWindow: updates.expectedHarvestWindow }),
+      ...(updates.nextCycleMonth !== undefined && { nextCycleMonth: updates.nextCycleMonth }),
       ...(updates.mediaUrls && { mediaUrls: updates.mediaUrls }),
     },
     include: {

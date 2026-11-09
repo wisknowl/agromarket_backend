@@ -356,6 +356,13 @@ model AgroYield {
   isAvailable             Boolean            @default(true)
   isOrganic               Boolean            @default(false)
   harvestDate             DateTime?
+
+  // Operational Lifecycle & Seasonality
+  lifecycleStatus         String             @default("SELLING") // SELLING, GROWING, OFF_CYCLE
+  expectedHarvestWindow   String?            // e.g. "Dec 15 - Dec 28" or "Mid December"
+  nextCycleMonth          String?            // e.g. "March 2027"
+  waitlistCount           Int                @default(0)
+
   mediaUrls               String[]
   rating                  Float              @default(5.0)
   

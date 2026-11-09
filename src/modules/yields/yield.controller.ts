@@ -4,7 +4,7 @@ import { AuthRequest } from '../../core/types';
 
 export const listYields = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { category, region, search, isWholesale, isOrganic, farmId, storeId } = req.query;
+    const { category, region, search, isWholesale, isOrganic, farmId, storeId, lifecycleStatus } = req.query;
     const yields = await yieldService.getAllYields({
       category: category as string,
       region: region as string,
@@ -13,6 +13,7 @@ export const listYields = async (req: Request, res: Response): Promise<void> => 
       storeId: storeId as string,
       isWholesale: isWholesale ? isWholesale === 'true' : undefined,
       isOrganic: isOrganic ? isOrganic === 'true' : undefined,
+      lifecycleStatus: lifecycleStatus as string,
     });
     res.status(200).json(yields);
   } catch (error: any) {
@@ -76,7 +77,7 @@ export const patchYieldStock = async (req: AuthRequest, res: Response): Promise<
       res.status(401).json({ message: 'Authentication required' });
       return;
     }
-    const { delta, stockQuantity, isAvailable } = req.body;
+    const { delta, stockQuantity, isAvailable, lifecycleStatus, expectedHarvestWindow, nextCycleMonth } = req.body;
     const updatedYield = await yieldService.updateYield(
       req.user.id,
       req.user.role || 'FARMER',
@@ -85,6 +86,9 @@ export const patchYieldStock = async (req: AuthRequest, res: Response): Promise<
         stockDelta: delta !== undefined ? Number(delta) : undefined,
         stockQuantity: stockQuantity !== undefined ? Number(stockQuantity) : undefined,
         isAvailable: isAvailable !== undefined ? Boolean(isAvailable) : undefined,
+        lifecycleStatus: lifecycleStatus !== undefined ? String(lifecycleStatus) : undefined,
+        expectedHarvestWindow: expectedHarvestWindow !== undefined ? String(expectedHarvestWindow) : undefined,
+        nextCycleMonth: nextCycleMonth !== undefined ? String(nextCycleMonth) : undefined,
       }
     );
     res.status(200).json({ message: 'Harvest stock updated successfully', yield: updatedYield });
