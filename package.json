@@ -23,7 +23,9 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.3.0",
-    "pg": "^8.16.2"
+    "pg": "^8.16.2",
+    "prisma": "^6.11.1",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
@@ -32,9 +34,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/multer": "^2.2.0",
     "@types/node": "^22.10.2",
-    "prisma": "^6.11.1",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.8.3"
+    "ts-node-dev": "^2.0.0"
   }
 }
