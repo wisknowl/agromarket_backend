@@ -213,7 +213,10 @@ export const addPostComment = async (postId: string, userId: string, content: st
 export const deletePost = async (postId: string, userId: string, userRole?: string) => {
   const post = await prisma.post.findUnique({
     where: { id: postId },
-    include: { farmer: true },
+    include: {
+      farmer: true,
+      farm: { select: { userId: true } },
+    },
   });
 
   if (!post) {
@@ -221,7 +224,11 @@ export const deletePost = async (postId: string, userId: string, userRole?: stri
   }
 
   // Only post author, farm owner, or admin can delete
-  const isOwner = post.userId === userId || post.farmer?.userId === userId || userRole === 'ADMIN';
+  const isOwner =
+    post.userId === userId ||
+    post.farmer?.userId === userId ||
+    post.farm?.userId === userId ||
+    userRole === 'ADMIN';
   if (!isOwner) {
     throw new Error('Unauthorized to delete this post');
   }
