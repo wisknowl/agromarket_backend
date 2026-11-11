@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "agromarket Backend - Multi-Actor Agri-Commerce & Agri-Fintech API",
-  "main": "dist/app.js",
+  "main": "dist/src/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "node dist/src/app.js",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:seed": "ts-node prisma/seed.ts"
