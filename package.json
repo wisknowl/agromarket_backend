@@ -9,7 +9,8 @@
     "start": "node dist/src/app.js",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:seed": "ts-node prisma/seed.ts"
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "prisma:seed-snapshot": "node prisma/seed-snapshot.js"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

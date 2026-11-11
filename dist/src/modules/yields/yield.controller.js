@@ -37,7 +37,7 @@ exports.removeYield = exports.patchYieldStock = exports.putYield = exports.getCa
 const yieldService = __importStar(require("./yield.service"));
 const listYields = async (req, res) => {
     try {
-        const { category, region, search, isWholesale, isOrganic, farmId, storeId } = req.query;
+        const { category, region, search, isWholesale, isOrganic, farmId, storeId, lifecycleStatus } = req.query;
         const yields = await yieldService.getAllYields({
             category: category,
             region: region,
@@ -46,6 +46,7 @@ const listYields = async (req, res) => {
             storeId: storeId,
             isWholesale: isWholesale ? isWholesale === 'true' : undefined,
             isOrganic: isOrganic ? isOrganic === 'true' : undefined,
+            lifecycleStatus: lifecycleStatus,
         });
         res.status(200).json(yields);
     }
@@ -109,11 +110,14 @@ const patchYieldStock = async (req, res) => {
             res.status(401).json({ message: 'Authentication required' });
             return;
         }
-        const { delta, stockQuantity, isAvailable } = req.body;
+        const { delta, stockQuantity, isAvailable, lifecycleStatus, expectedHarvestWindow, nextCycleMonth } = req.body;
         const updatedYield = await yieldService.updateYield(req.user.id, req.user.role || 'FARMER', req.params.id, {
             stockDelta: delta !== undefined ? Number(delta) : undefined,
             stockQuantity: stockQuantity !== undefined ? Number(stockQuantity) : undefined,
             isAvailable: isAvailable !== undefined ? Boolean(isAvailable) : undefined,
+            lifecycleStatus: lifecycleStatus !== undefined ? String(lifecycleStatus) : undefined,
+            expectedHarvestWindow: expectedHarvestWindow !== undefined ? String(expectedHarvestWindow) : undefined,
+            nextCycleMonth: nextCycleMonth !== undefined ? String(nextCycleMonth) : undefined,
         });
         res.status(200).json({ message: 'Harvest stock updated successfully', yield: updatedYield });
     }

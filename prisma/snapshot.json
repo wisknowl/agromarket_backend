@@ -1,0 +1,3679 @@
+{
+  "exportedAt": "2026-11-11T01:31:09.870Z",
+  "users": [
+    {
+      "id": "d5d8bd5f-f453-4f9c-b7bf-9b31c1c87537",
+      "name": "Advans Agri-Fintech Desk",
+      "email": "finance@agromarket.com",
+      "phone": "+237675555555",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500&auto=format&fit=crop&q=60",
+      "role": "FINANCIAL_OFFICER",
+      "isVerified": true,
+      "expoPushToken": null,
+      "createdAt": "2026-09-01T23:07:06.009Z",
+      "updatedAt": "2026-09-06T22:05:15.464Z"
+    },
+    {
+      "id": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
+      "name": "Sarah Manga",
+      "email": "sarah@agromarket.com",
+      "phone": "+237676666666",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60",
+      "role": "BUYER",
+      "isVerified": true,
+      "expoPushToken": "ExponentPushToken[mZnov1Emg9z26l-agvxflO]",
+      "createdAt": "2026-09-01T23:07:06.031Z",
+      "updatedAt": "2026-11-04T10:33:47.600Z"
+    },
+    {
+      "id": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "name": "Victory Eyong",
+      "email": "user@agromarket.com",
+      "phone": "+237679867071",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "/uploads/agromarket-1793779846060-531845466.jpeg",
+      "role": "FARMER",
+      "isVerified": true,
+      "expoPushToken": "ExponentPushToken[mZnov1Emg9z26l-agvxflO]",
+      "createdAt": "2026-09-01T23:07:05.883Z",
+      "updatedAt": "2026-11-08T02:39:37.955Z"
+    },
+    {
+      "id": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "name": "Magret Agnes",
+      "email": "magretagnes@gmail.com",
+      "phone": "679867072",
+      "passwordHash": "$2b$10$NJuGIw21Eu9C.pzjf6.vR.nwCJnIte5JHBTgUwXhGtI3RkON2BfA6",
+      "avatarUrl": "http://10.136.81.254:5000/uploads/agromarket-1792580969610-147534883.jpeg",
+      "role": "FARMER",
+      "isVerified": true,
+      "expoPushToken": "ExponentPushToken[mZnov1Emg9z26l-agvxflO]",
+      "createdAt": "2026-10-21T11:07:12.772Z",
+      "updatedAt": "2026-10-21T14:53:00.370Z"
+    },
+    {
+      "id": "ab6e3e9c-0cdd-4f8e-933f-f25382dcda52",
+      "name": "Mamma Ngozi Biyeh",
+      "email": "ngozi@agromarket.com",
+      "phone": "+237673333333",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "http://10.64.69.254:5000/uploads/agromarket-1788738591625-509722787.jpeg",
+      "role": "WHOLESALER",
+      "isVerified": true,
+      "expoPushToken": null,
+      "createdAt": "2026-09-01T23:07:05.966Z",
+      "updatedAt": "2026-09-06T23:49:57.665Z"
+    },
+    {
+      "id": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "name": "Ange Mile",
+      "email": "ange@agromarket.com",
+      "phone": "+237679867072",
+      "passwordHash": "$2b$10$UbE08OyJ533kK1sohFHkzOaO6u9ZtqEIBdj8H421YjAzmZfbcb.Mu",
+      "avatarUrl": "http://192.168.1.12:5000/uploads/agromarket-1789321795589-131320000.jpeg",
+      "role": "BUYER",
+      "isVerified": true,
+      "expoPushToken": null,
+      "createdAt": "2026-09-13T17:49:06.139Z",
+      "updatedAt": "2026-09-13T17:50:09.849Z"
+    },
+    {
+      "id": "70f3c56b-bacc-4da4-ba68-cef7c1852170",
+      "name": "Tanyi Boris",
+      "email": "tanyi@agromarket.com",
+      "phone": "+237674444444",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60",
+      "role": "AGRO_TRANSPORTER",
+      "isVerified": true,
+      "expoPushToken": null,
+      "createdAt": "2026-09-01T23:07:05.986Z",
+      "updatedAt": "2026-10-27T15:34:26.572Z"
+    },
+    {
+      "id": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "name": "Mbah Paul Fru",
+      "email": "mbah@agromarket.com",
+      "phone": "+237672222222",
+      "passwordHash": "$2b$10$QOAoq19Lo58wFpdC2q7KquvOxjPJrB0bGTEW2ZY96X5DGRwm26Nx6",
+      "avatarUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=60",
+      "role": "FARMER",
+      "isVerified": true,
+      "expoPushToken": "ExponentPushToken[mZnov1Emg9z26l-agvxflO]",
+      "createdAt": "2026-09-01T23:07:05.945Z",
+      "updatedAt": "2026-11-01T08:25:55.968Z"
+    },
+    {
+      "id": "9a89f0df-fa55-44b9-bcc6-2d5a53f8de25",
+      "name": "Chief Eyong",
+      "email": "admin@agromarket.com",
+      "phone": "+23769867072",
+      "passwordHash": "$2b$10$WTqeWjlz4IntMP0y5ZA7y.hJGXqfIQs4vc6sNapz2nClljh9PeF4y",
+      "avatarUrl": "http://10.64.69.254:5000/uploads/agromarket-1788734404522-536232588.jpeg",
+      "role": "ADMIN",
+      "isVerified": true,
+      "expoPushToken": "ExponentPushToken[mZnov1Emg9z26l-agvxflO]",
+      "createdAt": "2026-09-01T23:07:05.794Z",
+      "updatedAt": "2026-11-01T09:48:51.852Z"
+    }
+  ],
+  "categories": [
+    {
+      "id": "5b81a917-498b-4754-bb7b-c57b0ef962cd",
+      "name": "Cash Crops & Spices",
+      "frenchName": "Cultures de Rente & Épices",
+      "icon": "award",
+      "imageUrl": "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=500&auto=format&fit=crop&q=60",
+      "description": "Penja White Pepper, Arabica Coffee from Bamenda, and organic cocoa beans."
+    },
+    {
+      "id": "cd9d9509-cb9f-4c6f-9db7-eb6502b57f94",
+      "name": "Livestock & Poultry",
+      "frenchName": "Élevage & Volaille",
+      "icon": "egg",
+      "imageUrl": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=500",
+      "description": "Healthy free-range chickens, table eggs, and quality livestock."
+    },
+    {
+      "id": "afdd8ff2-e39e-42ab-931f-bfd5943dbcd8",
+      "name": "Fruits & Berries",
+      "frenchName": "Fruits & Baies",
+      "icon": "apple",
+      "imageUrl": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=500",
+      "description": "Tropical bananas, pineapples, papayas, and citrus fruits."
+    },
+    {
+      "id": "ddad4ebb-e007-4f61-ad11-6f79bd635c7a",
+      "name": "Spices & Herbs",
+      "frenchName": "Épices & Herbes",
+      "icon": "flame",
+      "imageUrl": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500",
+      "description": "Penja pepper, garlic, ginger, and aromatic culinary herbs."
+    },
+    {
+      "id": "f25b5f1b-9264-43ea-bb64-4e14e226b628",
+      "name": "Vegetables & Greens",
+      "frenchName": "Légumes & Maraîchers",
+      "icon": "leaf",
+      "imageUrl": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500",
+      "description": "Fresh organic tomatoes, peppers, cabbages, leafy greens from valley farms."
+    },
+    {
+      "id": "1147c8e2-4076-4965-96ec-bf52f04a5b64",
+      "name": "Tubers & Roots",
+      "frenchName": "Tubercules & Racines",
+      "icon": "sprout",
+      "imageUrl": "https://images.unsplash.com/photo-1570723735746-c9bd51bd7c40?w=500",
+      "description": "Irish potatoes, sweet cassava, yams, and cocoyams from fertile volcanic soils."
+    },
+    {
+      "id": "305c9d88-3984-42db-b781-aac62c3b36bc",
+      "name": "Plantains & Bananas",
+      "frenchName": "Bananes & Plantains",
+      "icon": "tree-palm",
+      "imageUrl": "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=500",
+      "description": "Heavy bunches of plantains and sweet bananas directly from coastal plantations."
+    },
+    {
+      "id": "8a409bd2-ef24-4f86-861e-b5117b3ddf22",
+      "name": "Fruits & Citrus",
+      "frenchName": "Fruits & Agrumes",
+      "icon": "apple",
+      "imageUrl": "https://images.unsplash.com/photo-1619566636858-adf3ef46400b?w=500",
+      "description": "Pineapples, papayas, mangoes, avocados, oranges, and fresh passion fruits."
+    },
+    {
+      "id": "f8cede40-576e-45e1-92f0-015b360b31ce",
+      "name": "Grains & Cereals",
+      "frenchName": "Céréales & Grains",
+      "icon": "wheat",
+      "imageUrl": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=500",
+      "description": "White & yellow maize, Ndop mountain rice, sorghum, and millet."
+    },
+    {
+      "id": "57cf8f5f-fcbd-4442-8e47-467a22a3f1b1",
+      "name": "Legumes, Nuts & Seeds",
+      "frenchName": "Légumineuses & Oléagineux",
+      "icon": "bean",
+      "imageUrl": "https://images.unsplash.com/photo-1515543237350-b3eea1ec8082?w=500",
+      "description": "Red beans, cowpeas, groundnuts (peanuts), egusi melon seeds, and soybeans."
+    },
+    {
+      "id": "ad42b38f-f4d6-49b4-a5b9-e9bdee364192",
+      "name": "Oils & Fats",
+      "frenchName": "Huiles Végétales & Graisses",
+      "icon": "droplet",
+      "imageUrl": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=500",
+      "description": "Pure red palm oil, virgin coconut oil, peanut oil, and raw shea butter."
+    },
+    {
+      "id": "528f0e52-95e4-4e8e-a3f8-f6d0b4002ab8",
+      "name": "Spices & Aromatics",
+      "frenchName": "Épices & Aromates",
+      "icon": "flame",
+      "imageUrl": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=500",
+      "description": "Penja white and black pepper, ginger, garlic, cloves, and local spices."
+    },
+    {
+      "id": "a96d8e09-a1d0-4bbb-935d-373957d3d396",
+      "name": "Poultry & Eggs",
+      "frenchName": "Volaille & Œufs",
+      "icon": "egg",
+      "imageUrl": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=500",
+      "description": "Farm-fresh table eggs, broiler chickens, local chickens, and turkey."
+    },
+    {
+      "id": "b68e42d7-9945-4422-b06d-363904d1be81",
+      "name": "Livestock & Meat",
+      "frenchName": "Élevage & Viandes",
+      "icon": "beef",
+      "imageUrl": "https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?w=500",
+      "description": "Pigs, goats, sheep, grass-fed cattle, and pasture-raised rabbits."
+    },
+    {
+      "id": "fc86789a-6dce-4513-b15d-571de0ccf3c3",
+      "name": "Aquaculture & Fish",
+      "frenchName": "Pisciculture & Poissons",
+      "icon": "fish",
+      "imageUrl": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=500",
+      "description": "Fresh live catfish, tilapia, smoked river fish, and dried sea prawns."
+    }
+  ],
+  "farmerProfiles": [
+    {
+      "id": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "userId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "farmName": "Ma AgnesCocao",
+      "region": "Far North Region",
+      "division": null,
+      "city": "Obala",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "bio": null,
+      "coverPhoto": null,
+      "nationalIdNumber": null,
+      "cooperativeName": null,
+      "rating": 5,
+      "totalRatings": 0,
+      "totalFollowers": 0,
+      "farmSizeHectares": 2,
+      "primaryCrops": [
+        "Cocoa"
+      ],
+      "creditTier": "BRONZE",
+      "creditScore": 300,
+      "createdAt": "2026-10-25T11:45:12.248Z",
+      "updatedAt": "2026-11-05T21:42:10.852Z"
+    },
+    {
+      "id": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "userId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "farmName": "Highland Roots & Arabica Coffee",
+      "region": "Northwest Region",
+      "division": "Mezam",
+      "city": "Bamenda",
+      "gpsLatitude": 5.9631,
+      "gpsLongitude": 10.1591,
+      "bio": "Cool climate potato farming and highland roasted Arabica coffee beans.",
+      "coverPhoto": "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1000&auto=format&fit=crop&q=60",
+      "nationalIdNumber": null,
+      "cooperativeName": "Northwest Cooperative Association (NWCA)",
+      "rating": 4.7,
+      "totalRatings": 88,
+      "totalFollowers": 210,
+      "farmSizeHectares": 12,
+      "primaryCrops": [
+        "Irish Potatoes",
+        "Sweet Potatoes",
+        "Arabica Coffee"
+      ],
+      "creditTier": "BRONZE",
+      "creditScore": 542,
+      "createdAt": "2026-09-01T23:07:05.945Z",
+      "updatedAt": "2026-11-05T21:42:10.915Z"
+    },
+    {
+      "id": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "farmName": "Green Valley Organic Farms",
+      "region": "West Region",
+      "division": "Noun",
+      "city": "Foumbot",
+      "gpsLatitude": 5.5086,
+      "gpsLongitude": 10.6318,
+      "bio": "Leading producer of fresh vine tomatoes, green peppers, and cabbage in the fertile Foumbot valley.",
+      "coverPhoto": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=1000&auto=format&fit=crop&q=60",
+      "nationalIdNumber": null,
+      "cooperativeName": "Foumbot Agricultural Co-op (CAPLAME)",
+      "rating": 4.9,
+      "totalRatings": 142,
+      "totalFollowers": 320,
+      "farmSizeHectares": 8.5,
+      "primaryCrops": [
+        "Vine Tomatoes",
+        "Green Bell Peppers",
+        "Savoy Cabbage"
+      ],
+      "creditTier": "BRONZE",
+      "creditScore": 517,
+      "createdAt": "2026-09-01T23:07:05.883Z",
+      "updatedAt": "2026-11-05T21:42:10.955Z"
+    }
+  ],
+  "wholesalerProfiles": [
+    {
+      "id": "1230970b-6fc5-4c98-a778-c350847736da",
+      "userId": "ab6e3e9c-0cdd-4f8e-933f-f25382dcda52",
+      "businessName": "Ngozi Central Sandaga Wholesale",
+      "tradeLicenseNumber": "RC/DLA/2022/B/1458",
+      "primaryMarketCity": "Douala (Marché Sandaga & Marché Deido)",
+      "buyingCapacityTons": 15,
+      "preferredCommodities": [
+        "Tomatoes",
+        "Irish Potatoes",
+        "Plantains",
+        "Onions"
+      ],
+      "createdAt": "2026-09-01T23:07:05.966Z",
+      "updatedAt": "2026-09-01T23:07:05.966Z"
+    },
+    {
+      "id": "c50a5e72-e003-4c91-84cb-2ae41b5bb615",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "businessName": "testom stoe",
+      "tradeLicenseNumber": "dfdffesdf33221ff",
+      "primaryMarketCity": "Douala • Marché Sandaga, Quai 4",
+      "buyingCapacityTons": 20,
+      "preferredCommodities": [],
+      "createdAt": "2026-11-04T18:59:02.072Z",
+      "updatedAt": "2026-11-06T01:20:06.962Z"
+    }
+  ],
+  "transporterProfiles": [
+    {
+      "id": "ccbf5e46-8e23-497b-bb44-2ec432a7c199",
+      "userId": "70f3c56b-bacc-4da4-ba68-cef7c1852170",
+      "vehicleType": "Mitsubishi Canter (5.0 Ton Ventilated Truck)",
+      "licensePlate": "LT-849-EF",
+      "maxLoadKg": 5000,
+      "operatingCorridors": [
+        "Foumbot -> Bafoussam -> Douala",
+        "Bamenda -> Bafoussam -> Yaounde",
+        "Njombe-Penja -> Douala"
+      ],
+      "isAvailable": true,
+      "currentGpsLat": null,
+      "currentGpsLng": null,
+      "createdAt": "2026-09-01T23:07:05.986Z",
+      "updatedAt": "2026-09-01T23:07:05.986Z"
+    }
+  ],
+  "financialProfiles": [
+    {
+      "id": "fbd23562-b84d-4db3-a810-1c7436471682",
+      "userId": "d5d8bd5f-f453-4f9c-b7bf-9b31c1c87537",
+      "institutionName": "Advans Cameroun Microfinance EMF",
+      "institutionType": "MICROFINANCE_EMF",
+      "licenseNumber": "COBAC/EMF/CAT2/2018/004",
+      "headquartersCity": "Douala",
+      "totalDisbursed": "45000000",
+      "activeLoanCount": 38,
+      "createdAt": "2026-09-01T23:07:06.009Z",
+      "updatedAt": "2026-09-01T23:07:06.009Z"
+    }
+  ],
+  "farms": [
+    {
+      "id": "286bdb99-29d4-4600-b0a6-0b65ad51ba30",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "name": "Highlands Free-Range Poultry",
+      "slug": "highlands-free-range-poultry",
+      "category": "POULTRY",
+      "description": "Pasture-raised organic broilers and fresh farm table eggs in Bafoussam.",
+      "region": "West Region",
+      "division": "Mifi",
+      "city": "Bafoussam",
+      "location": "Bafoussam Rural Bypass",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "sizeHectares": 2,
+      "coverPhoto": "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=800",
+      "avatarPhoto": null,
+      "primaryProduce": [
+        "Broiler Chickens",
+        "Fresh Table Eggs",
+        "Organic Poultry Manure"
+      ],
+      "certifications": [
+        "Veterinary Health Approved"
+      ],
+      "isVerified": true,
+      "rating": 4.8,
+      "totalRatings": 88,
+      "parcels": null,
+      "createdAt": "2026-09-06T17:38:16.136Z",
+      "updatedAt": "2026-11-04T21:21:28.314Z"
+    },
+    {
+      "id": "90ca6a8a-7552-4054-84da-2758721dcaf0",
+      "userId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "name": "Ma AgnesCocao",
+      "slug": "ma-agnescocao",
+      "category": "CROPS",
+      "description": "From cocoa farm to your table",
+      "region": "Far North Region",
+      "division": "Mezam",
+      "city": "Obala",
+      "location": "Mille 4",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "sizeHectares": 2,
+      "coverPhoto": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=800&auto=format&fit=crop&q=80",
+      "avatarPhoto": null,
+      "primaryProduce": [
+        "Cocoa"
+      ],
+      "certifications": [
+        "100% Organic Certified",
+        "Cameroon GAP Approved"
+      ],
+      "isVerified": true,
+      "rating": 5,
+      "totalRatings": 0,
+      "parcels": null,
+      "createdAt": "2026-10-21T12:59:06.895Z",
+      "updatedAt": "2026-11-04T21:21:28.372Z"
+    },
+    {
+      "id": "9d679fc8-fde1-49ad-bfd5-5328e73a76e2",
+      "userId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "name": "Highland Roots & Arabica Coffee",
+      "slug": "highland-roots-arabica-coffee",
+      "category": "CROPS",
+      "description": "",
+      "region": "Northwest Region",
+      "division": null,
+      "city": "Bamenda",
+      "location": "Bamenda, Northwest Region",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "sizeHectares": 12,
+      "coverPhoto": "/uploads/agromarket-1793113943923-976333126.jpeg",
+      "avatarPhoto": null,
+      "primaryProduce": [
+        "Arabica Coffee"
+      ],
+      "certifications": [
+        "Cameroon GAP Verified",
+        "Volcanic Soil Organic"
+      ],
+      "isVerified": true,
+      "rating": 4.9,
+      "totalRatings": 0,
+      "parcels": null,
+      "createdAt": "2026-10-25T11:45:12.312Z",
+      "updatedAt": "2026-11-04T21:21:28.387Z"
+    },
+    {
+      "id": "7ccbff78-5c2d-4991-95f5-09e5c5bb1fa5",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "name": "Mount Fako Frech Basil",
+      "slug": "mount-fako-frech-basil",
+      "category": "CROPS",
+      "description": "Welcome to our farm! We grow fresh, aromatic, and sustainably cultivated basil. From classic sweet Genovese basil to spicy Thai varieties, we nurture every leaf with natural sunlight, clean water, and careful attention from seed to harvest.",
+      "region": "West Region",
+      "division": "Noun",
+      "city": "Foumbot",
+      "location": "Volcanic Highland Corridor",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "sizeHectares": 5,
+      "coverPhoto": "/uploads/agromarket-1793541183127-487312269.jpg",
+      "avatarPhoto": null,
+      "primaryProduce": [
+        "Basil"
+      ],
+      "certifications": [
+        "Natural & Chemical-Free Practice",
+        "Good Agricultural Practice (Self-Reported)"
+      ],
+      "isVerified": true,
+      "rating": 5,
+      "totalRatings": 0,
+      "parcels": [
+        {
+          "id": "site-1",
+          "city": "Foumbot",
+          "name": "Main Base / Headquarters",
+          "region": "West Region",
+          "division": "Noun",
+          "location": "Volcanic Highland Corridor",
+          "sizeHectares": 2.5,
+          "isHeadquarters": true
+        },
+        {
+          "id": "site-1793629660236",
+          "city": "Manyu",
+          "name": "Mile 16 Plot",
+          "region": "Southwest Region",
+          "division": "Fako",
+          "location": "Mile 12 End of Pavements",
+          "sizeHectares": 1.5,
+          "isHeadquarters": false
+        },
+        {
+          "id": "site-1793630526786",
+          "city": "Muyuka",
+          "name": "Mile 4 Plot",
+          "region": "Littoral",
+          "division": "Noum",
+          "location": "Behind Mile 4",
+          "sizeHectares": 1,
+          "isHeadquarters": false
+        }
+      ],
+      "createdAt": "2026-11-01T13:30:04.256Z",
+      "updatedAt": "2026-11-04T21:21:28.401Z"
+    }
+  ],
+  "stores": [
+    {
+      "id": "cfdee59c-651f-49fd-98ff-2fcc418aa1db",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "name": "Highlands Poultry Store",
+      "slug": "highlands-poultry-store",
+      "storeType": "WHOLESALE_DEPOT",
+      "description": "Well Protected warehouse, available to all far and near",
+      "region": "Southwest Region (Buea, Kumba, Penja, Limbe)",
+      "division": "Buea",
+      "city": "Buea",
+      "marketZone": "Mile 4 market",
+      "address": "Mile 4 End of Pavements",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "storageCapacityTons": 20,
+      "hasColdStorage": true,
+      "tradeLicenseNumber": null,
+      "linkedFarmId": "7ccbff78-5c2d-4991-95f5-09e5c5bb1fa5",
+      "sites": [
+        {
+          "id": "site-1",
+          "name": "Dock 4 Cold Room",
+          "location": "Mile 4 market",
+          "capacityTons": 8,
+          "facilityType": "COLD_ROOM",
+          "operatingHours": "05:00 - 18:00 (Mon - Sat)"
+        }
+      ],
+      "coverPhoto": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80",
+      "avatarPhoto": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400",
+      "isVerified": true,
+      "rating": 5,
+      "totalRatings": 0,
+      "createdAt": "2026-11-04T18:59:01.992Z",
+      "updatedAt": "2026-11-04T21:21:28.437Z"
+    },
+    {
+      "id": "7e66a16a-3470-4664-aeda-6e498211684d",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "name": "testom stoe",
+      "slug": "testom-stoe",
+      "storeType": "WHOLESALE_DEPOT",
+      "description": "fafsdfadfwewewfwgweweegwgegw",
+      "region": "Littoral Region (Douala, Loum, Manjo)",
+      "division": "Wouri",
+      "city": "Douala",
+      "marketZone": "Marché Sandaga, Quai 4",
+      "address": "Bepanda omnisports 00000",
+      "gpsLatitude": null,
+      "gpsLongitude": null,
+      "storageCapacityTons": 20,
+      "hasColdStorage": true,
+      "tradeLicenseNumber": "dfdffesdf33221ff",
+      "linkedFarmId": null,
+      "sites": [
+        {
+          "id": "site-1",
+          "name": "Dock 4 Cold Room",
+          "location": "Marché Sandaga - Quai 4 Cold Section",
+          "capacityTons": 8,
+          "facilityType": "COLD_ROOM",
+          "operatingHours": "05:00 - 18:00 (Mon - Sat)"
+        }
+      ],
+      "coverPhoto": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=1000&auto=format&fit=crop&q=80",
+      "avatarPhoto": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400",
+      "isVerified": true,
+      "rating": 5,
+      "totalRatings": 0,
+      "createdAt": "2026-11-06T01:20:06.503Z",
+      "updatedAt": "2026-11-06T01:20:06.503Z"
+    }
+  ],
+  "agroYields": [
+    {
+      "id": "825a1526-9041-48bd-bf12-c4cc5ef1ceaa",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "farmId": "9d679fc8-fde1-49ad-bfd5-5328e73a76e2",
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "5b81a917-498b-4754-bb7b-c57b0ef962cd",
+      "title": "Bamenda Highland Roasted Arabica Coffee",
+      "frenchTitle": "Café Arabica Torréfié des Hauts Plateaux de Bamenda",
+      "description": "Hand-picked premium Arabica beans, sun-dried and medium roasted with chocolate and citrus notes.",
+      "originRegion": "Bamenda, Northwest Region",
+      "pricePerUnit": "4500",
+      "oldPrice": null,
+      "unit": "KG",
+      "stockQuantity": 80,
+      "minOrderQuantity": 1,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 20,
+      "bulkPricePerUnit": "3800",
+      "isAvailable": true,
+      "isOrganic": true,
+      "harvestDate": null,
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=500&auto=format&fit=crop&q=60"
+      ],
+      "rating": 5,
+      "createdAt": "2026-09-01T23:07:06.071Z",
+      "updatedAt": "2026-10-25T11:45:12.332Z"
+    },
+    {
+      "id": "d5379ad7-f07c-426f-adfb-0f5b8e302136",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "farmId": "9d679fc8-fde1-49ad-bfd5-5328e73a76e2",
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "1147c8e2-4076-4965-96ec-bf52f04a5b64",
+      "title": "Bamenda Red Irish Potatoes",
+      "frenchTitle": "Pommes de Terre Rouges de Bamenda (Sac 50kg)",
+      "description": "Firm, highly nutritious mountain potatoes perfect for fries, stews, and roasting.",
+      "originRegion": "Santa / Bamenda, Northwest Region",
+      "pricePerUnit": "1200",
+      "oldPrice": "1500",
+      "unit": "KG",
+      "stockQuantity": 120,
+      "minOrderQuantity": 2,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 5,
+      "bulkPricePerUnit": "28000",
+      "isAvailable": true,
+      "isOrganic": true,
+      "harvestDate": "2026-09-01T23:07:06.057Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=500&auto=format&fit=crop&q=60"
+      ],
+      "rating": 4.8,
+      "createdAt": "2026-09-01T23:07:06.060Z",
+      "updatedAt": "2026-10-27T16:13:40.862Z"
+    },
+    {
+      "id": "5719997a-26af-4139-8fa4-682a2a8e2177",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": "286bdb99-29d4-4600-b0a6-0b65ad51ba30",
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "cd9d9509-cb9f-4c6f-9db7-eb6502b57f94",
+      "title": "Farm-Fresh Free-Range Table Eggs (Crate of 30)",
+      "frenchTitle": "Œufs Frais de Table (Alvéole de 30)",
+      "description": "Nutrient-rich brown eggs from pasture-raised hens fed on natural grains and volcanic greens in Bafoussam.",
+      "originRegion": "Bafoussam, West Region",
+      "pricePerUnit": "2400",
+      "oldPrice": "2800",
+      "unit": "CRATE",
+      "stockQuantity": 117,
+      "minOrderQuantity": 1,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 15,
+      "bulkPricePerUnit": "2100",
+      "isAvailable": true,
+      "isOrganic": true,
+      "harvestDate": "2026-09-06T17:38:16.244Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?w=800",
+        "https://images.unsplash.com/photo-1516467508483-a7212febe31a?w=800"
+      ],
+      "rating": 5,
+      "createdAt": "2026-09-06T17:38:16.248Z",
+      "updatedAt": "2026-10-25T11:45:12.474Z"
+    },
+    {
+      "id": "e5fff342-fff1-41ba-b8ca-62151609a084",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": null,
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "ddad4ebb-e007-4f61-ad11-6f79bd635c7a",
+      "title": "Authentic Penja Black Pepper (1kg Cask)",
+      "frenchTitle": "Poivre Noir de Penja IGP (1kg)",
+      "description": "Geographically protected Penja black pepper with intense aroma and volcanic terroir notes. Handpicked and sun-cured.",
+      "originRegion": "Penja / West Border",
+      "pricePerUnit": "7500",
+      "oldPrice": "9000",
+      "unit": "KG",
+      "stockQuantity": 0,
+      "minOrderQuantity": 1,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 5,
+      "bulkPricePerUnit": "6500",
+      "isAvailable": false,
+      "isOrganic": true,
+      "harvestDate": "2026-09-06T17:38:16.236Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=800"
+      ],
+      "rating": 5,
+      "createdAt": "2026-09-06T17:38:16.238Z",
+      "updatedAt": "2026-10-27T12:57:10.727Z"
+    },
+    {
+      "id": "d1361b48-7503-4e1d-aea8-b8d2c65971cf",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": null,
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "f25b5f1b-9264-43ea-bb64-4e14e226b628",
+      "title": "Fresh Foumbot Vine Tomatoes",
+      "frenchTitle": "Tomates Fraîches de Foumbot (Casier)",
+      "description": "Crisp, sun-ripened organic tomatoes harvested daily from the fertile volcanic soils of Foumbot.",
+      "originRegion": "Foumbot, West Region",
+      "pricePerUnit": "1500",
+      "oldPrice": "1800",
+      "unit": "KG",
+      "stockQuantity": 0,
+      "minOrderQuantity": 1,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 10,
+      "bulkPricePerUnit": "22000",
+      "isAvailable": false,
+      "isOrganic": true,
+      "harvestDate": "2026-09-01T23:07:06.036Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=500&auto=format&fit=crop&q=60",
+        "https://images.unsplash.com/photo-1582284540020-8acbe03f4924?w=500&auto=format&fit=crop&q=60"
+      ],
+      "rating": 4.9,
+      "createdAt": "2026-09-01T23:07:06.043Z",
+      "updatedAt": "2026-10-27T12:57:10.755Z"
+    },
+    {
+      "id": "ff5d5e2b-c97b-410e-b10e-b46b492c0617",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": "7ccbff78-5c2d-4991-95f5-09e5c5bb1fa5",
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "f25b5f1b-9264-43ea-bb64-4e14e226b628",
+      "title": "Basil",
+      "frenchTitle": null,
+      "description": "Quality: Hand-picked, uniform green color, free from blemishes or insect damage.\n\n[Agro Info: Season: YEAR_ROUND • Shelf Life: 14 days]",
+      "originRegion": "Mile 16 Plot (Manyu, Southwest Region)",
+      "pricePerUnit": "1075",
+      "oldPrice": null,
+      "unit": "KG",
+      "stockQuantity": 100,
+      "minOrderQuantity": 5,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 10,
+      "bulkPricePerUnit": "1000",
+      "isAvailable": true,
+      "isOrganic": true,
+      "harvestDate": "2026-11-02T14:45:50.230Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "/uploads/agromarket-1793628794846-68868198.jpg",
+        "/uploads/agromarket-1793642090110-434583294.jpg"
+      ],
+      "rating": 5,
+      "createdAt": "2026-11-02T14:45:50.253Z",
+      "updatedAt": "2026-11-02T17:54:58.109Z"
+    },
+    {
+      "id": "68bbf92b-e557-4f2e-bf2e-09272ff38cea",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": "286bdb99-29d4-4600-b0a6-0b65ad51ba30",
+      "storeId": null,
+      "storeSiteId": null,
+      "dispatchSiteName": null,
+      "categoryId": "cd9d9509-cb9f-4c6f-9db7-eb6502b57f94",
+      "title": "Dressed Organic Broiler Chicken (2.2kg Average)",
+      "frenchTitle": "Poulet de Chair Éviscéré Bio (2.2kg)",
+      "description": "Hygienically dressed and chilled fresh broiler chicken raised on natural diet. No hormones or antibiotics.",
+      "originRegion": "Bafoussam, West Region",
+      "pricePerUnit": "4200",
+      "oldPrice": "5000",
+      "unit": "KG",
+      "stockQuantity": 94,
+      "minOrderQuantity": 1,
+      "isWholesaleBulkAvailable": true,
+      "bulkMinQuantity": 10,
+      "bulkPricePerUnit": "3700",
+      "isAvailable": true,
+      "isOrganic": true,
+      "harvestDate": "2026-09-06T17:38:16.254Z",
+      "lifecycleStatus": "SELLING",
+      "expectedHarvestWindow": null,
+      "nextCycleMonth": null,
+      "waitlistCount": 0,
+      "mediaUrls": [
+        "https://images.unsplash.com/photo-1548550023-2bdb3c5beed7?w=800"
+      ],
+      "rating": 4.9,
+      "createdAt": "2026-09-06T17:38:16.256Z",
+      "updatedAt": "2026-11-08T20:20:49.255Z"
+    }
+  ],
+  "yieldPricingTiers": [],
+  "posts": [
+    {
+      "id": "767898be-85ce-4cce-a2f8-82fcbbe7a946",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": "286bdb99-29d4-4600-b0a6-0b65ad51ba30",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Our new cow milk harvest #DirectFromFarm #OrganicFarming #CameroonAgri",
+      "mediaUrl": "/uploads/agromarket-1788775097318-855894844.jpeg",
+      "isVideo": false,
+      "linkedYieldId": "68bbf92b-e557-4f2e-bf2e-09272ff38cea",
+      "likesCount": 0,
+      "commentsCount": 0,
+      "createdAt": "2026-09-07T09:58:18.465Z",
+      "updatedAt": "2026-10-24T22:03:46.141Z"
+    },
+    {
+      "id": "019b8050-90e3-41af-9375-03d49fbe6e54",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "farmId": "7ccbff78-5c2d-4991-95f5-09e5c5bb1fa5",
+      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Testing Video",
+      "mediaUrl": "/uploads/agromarket-1793640375040-66057023.mp4",
+      "isVideo": true,
+      "linkedYieldId": "ff5d5e2b-c97b-410e-b10e-b46b492c0617",
+      "likesCount": 1,
+      "commentsCount": 0,
+      "createdAt": "2026-11-02T17:26:17.809Z",
+      "updatedAt": "2026-11-08T05:28:35.729Z"
+    }
+  ],
+  "postLikes": [
+    {
+      "id": "6d5e47a0-8c08-4ce7-9232-0b4029655be7",
+      "postId": "019b8050-90e3-41af-9375-03d49fbe6e54",
+      "userId": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
+      "createdAt": "2026-11-08T05:28:35.663Z"
+    }
+  ],
+  "postComments": [],
+  "cartItems": [],
+  "orders": [
+    {
+      "id": "f85646a1-2927-4c6a-ac99-3ce233aa9aed",
+      "orderNumber": "cmtja1lor0001p6pol9affocc",
+      "buyerId": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
+      "status": "ESCROW_LOCKED",
+      "paymentMethod": "MTN_MOMO",
+      "subtotal": "7500",
+      "deliveryFee": "1000",
+      "totalAmount": "8500",
+      "currency": "XAF",
+      "exchangeRateUsd": "0.0016",
+      "deliveryAddress": "Bonapriso, Avenue de Gaulle, Douala",
+      "deliveryCity": "Douala",
+      "deliveryPhone": "+237676666666",
+      "deliveryNotes": null,
+      "paymentReference": "MOMO-2026-0901-84920",
+      "isEscrowReleased": false,
+      "createdAt": "2026-09-01T23:07:06.120Z",
+      "updatedAt": "2026-09-01T23:07:06.120Z"
+    },
+    {
+      "id": "5a9460fc-3a27-4854-9606-39b5517ee66b",
+      "orderNumber": "cmvi0sx7h0001p6049v18lp8d",
+      "buyerId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "status": "ESCROW_LOCKED",
+      "paymentMethod": "MTN_MOMO",
+      "subtotal": "1500",
+      "deliveryFee": "1000",
+      "totalAmount": "2500",
+      "currency": "XAF",
+      "exchangeRateUsd": "0.0016",
+      "deliveryAddress": "Bonapriso, Avenue de Gaulle",
+      "deliveryCity": "Douala",
+      "deliveryPhone": "+237 670 000 000",
+      "deliveryNotes": "",
+      "paymentReference": "MTN_MOMO-1792581600308",
+      "isEscrowReleased": false,
+      "createdAt": "2026-10-21T11:20:03.096Z",
+      "updatedAt": "2026-10-21T11:20:03.096Z"
+    },
+    {
+      "id": "b9d55f04-c45e-4001-8381-3e01f31b9033",
+      "orderNumber": "cmvi7i91p0001p60gwyklhben",
+      "buyerId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "status": "COMPLETED",
+      "paymentMethod": "MTN_MOMO",
+      "subtotal": "17400",
+      "deliveryFee": "1500",
+      "totalAmount": "18900",
+      "currency": "XAF",
+      "exchangeRateUsd": "0.0016",
+      "deliveryAddress": "Bonapriso, Avenue de Gaulle",
+      "deliveryCity": "Douala",
+      "deliveryPhone": "+237 677777777",
+      "deliveryNotes": "",
+      "paymentReference": "f946e34a-a62d-4ef0-9c89-32ee76865717",
+      "isEscrowReleased": true,
+      "createdAt": "2026-10-21T14:27:42.538Z",
+      "updatedAt": "2026-10-21T14:29:13.604Z"
+    },
+    {
+      "id": "8d78d237-db54-4860-84a8-1ddf443abf31",
+      "orderNumber": "cmvi7o2ry0003p60gc4lxgtj2",
+      "buyerId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "status": "COMPLETED",
+      "paymentMethod": "MTN_MOMO",
+      "subtotal": "16500",
+      "deliveryFee": "1500",
+      "totalAmount": "18000",
+      "currency": "XAF",
+      "exchangeRateUsd": "0.0016",
+      "deliveryAddress": "Bonapriso, Avenue de Gaulle",
+      "deliveryCity": "Douala",
+      "deliveryPhone": "+237 679867072",
+      "deliveryNotes": "",
+      "paymentReference": "229e8b34-e497-4fd4-97c8-a498b249b33d",
+      "isEscrowReleased": true,
+      "createdAt": "2026-10-21T14:32:14.350Z",
+      "updatedAt": "2026-10-21T14:35:06.796Z"
+    }
+  ],
+  "orderItems": [
+    {
+      "id": "76b0d3f9-952b-4464-bace-ffa8237adb82",
+      "orderId": "f85646a1-2927-4c6a-ac99-3ce233aa9aed",
+      "yieldId": "d1361b48-7503-4e1d-aea8-b8d2c65971cf",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 5,
+      "unitPrice": "1500",
+      "totalPrice": "7500"
+    },
+    {
+      "id": "ab2a3d0c-eae2-49e9-9b56-c5d3cade6a3e",
+      "orderId": "5a9460fc-3a27-4854-9606-39b5517ee66b",
+      "yieldId": "d1361b48-7503-4e1d-aea8-b8d2c65971cf",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 1,
+      "unitPrice": "1500",
+      "totalPrice": "1500"
+    },
+    {
+      "id": "7f327ee9-fae5-4209-a0e2-686de240c854",
+      "orderId": "b9d55f04-c45e-4001-8381-3e01f31b9033",
+      "yieldId": "5719997a-26af-4139-8fa4-682a2a8e2177",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 1,
+      "unitPrice": "2400",
+      "totalPrice": "2400"
+    },
+    {
+      "id": "37d943c8-58c6-4074-be89-2eaee23671d2",
+      "orderId": "b9d55f04-c45e-4001-8381-3e01f31b9033",
+      "yieldId": "e5fff342-fff1-41ba-b8ca-62151609a084",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 2,
+      "unitPrice": "7500",
+      "totalPrice": "15000"
+    },
+    {
+      "id": "b866069d-84ec-4e66-aaa9-8a046ceb4b06",
+      "orderId": "8d78d237-db54-4860-84a8-1ddf443abf31",
+      "yieldId": "68bbf92b-e557-4f2e-bf2e-09272ff38cea",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 1,
+      "unitPrice": "4200",
+      "totalPrice": "4200"
+    },
+    {
+      "id": "51349426-a169-49f8-93d0-42c09274718b",
+      "orderId": "8d78d237-db54-4860-84a8-1ddf443abf31",
+      "yieldId": "5719997a-26af-4139-8fa4-682a2a8e2177",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 2,
+      "unitPrice": "2400",
+      "totalPrice": "4800"
+    },
+    {
+      "id": "3846b441-45b6-4de0-9105-0addab8b20ce",
+      "orderId": "8d78d237-db54-4860-84a8-1ddf443abf31",
+      "yieldId": "e5fff342-fff1-41ba-b8ca-62151609a084",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "quantity": 1,
+      "unitPrice": "7500",
+      "totalPrice": "7500"
+    }
+  ],
+  "escrowRecords": [
+    {
+      "id": "a0293520-2417-47ca-a4b4-afd4b9051afb",
+      "orderId": "f85646a1-2927-4c6a-ac99-3ce233aa9aed",
+      "amountHeld": "8500",
+      "farmerPayout": "7000",
+      "transporterFee": "1000",
+      "platformFee": "500",
+      "isDisputed": false,
+      "disputeReason": null,
+      "releasedAt": null,
+      "createdAt": "2026-09-01T23:07:06.120Z",
+      "updatedAt": "2026-09-01T23:07:06.120Z"
+    },
+    {
+      "id": "cfe5bd3e-2be6-49b2-ba03-59b04f41a0cb",
+      "orderId": "5a9460fc-3a27-4854-9606-39b5517ee66b",
+      "amountHeld": "2500",
+      "farmerPayout": "1447.5",
+      "transporterFee": "1000",
+      "platformFee": "52.5",
+      "isDisputed": false,
+      "disputeReason": null,
+      "releasedAt": null,
+      "createdAt": "2026-10-21T11:20:03.096Z",
+      "updatedAt": "2026-10-21T11:20:03.096Z"
+    },
+    {
+      "id": "6b5483ba-82ab-4391-aa08-164795c37ffd",
+      "orderId": "b9d55f04-c45e-4001-8381-3e01f31b9033",
+      "amountHeld": "18900",
+      "farmerPayout": "16791",
+      "transporterFee": "1500",
+      "platformFee": "609",
+      "isDisputed": false,
+      "disputeReason": null,
+      "releasedAt": "2026-10-21T14:29:13.610Z",
+      "createdAt": "2026-10-21T14:27:42.538Z",
+      "updatedAt": "2026-10-21T14:29:13.613Z"
+    },
+    {
+      "id": "3f4ab02f-488c-422f-87e6-c83db5597a89",
+      "orderId": "8d78d237-db54-4860-84a8-1ddf443abf31",
+      "amountHeld": "18000",
+      "farmerPayout": "15922.5",
+      "transporterFee": "1500",
+      "platformFee": "577.5",
+      "isDisputed": false,
+      "disputeReason": null,
+      "releasedAt": "2026-10-21T14:35:06.804Z",
+      "createdAt": "2026-10-21T14:32:14.350Z",
+      "updatedAt": "2026-10-21T14:35:06.806Z"
+    }
+  ],
+  "deliveryTrips": [],
+  "loanProducts": [
+    {
+      "id": "5e07e00b-3f99-4e3b-ae6c-22321cfd1a3e",
+      "financialProfileId": "fbd23562-b84d-4db3-a810-1c7436471682",
+      "title": "Seasonal Planting Season Fertilizer & Input Advance",
+      "frenchTitle": "Avance Engrais & Intrants de Campagne Agricole",
+      "description": "Comprehensive planting season credit for bulk NPK/Urea fertilizers, pest management, and tools.",
+      "minAmount": "100000",
+      "maxAmount": "1500000",
+      "interestRatePercent": 4.5,
+      "durationMonths": 6,
+      "requiredCreditTier": "SILVER",
+      "createdAt": "2026-09-01T23:07:06.097Z"
+    },
+    {
+      "id": "f6a4e3c9-b22d-426b-9b8d-1bcff3df1ca6",
+      "financialProfileId": "fbd23562-b84d-4db3-a810-1c7436471682",
+      "title": "Rapid Agro-Input & Seedling Advance",
+      "frenchTitle": "Crédit Intrants & Semis Rapide (Coopérative Njangi)",
+      "description": "Quick micro-loan for certified hybrid seeds, seedling trays, and organic starter fertilizer.",
+      "minAmount": "50000",
+      "maxAmount": "500000",
+      "interestRatePercent": 3.5,
+      "durationMonths": 3,
+      "requiredCreditTier": "BRONZE",
+      "createdAt": "2026-09-06T23:09:15.227Z"
+    },
+    {
+      "id": "26fbe6e7-11c3-48b0-8ba5-2412cc4cf0d3",
+      "financialProfileId": "fbd23562-b84d-4db3-a810-1c7436471682",
+      "title": "Solar Drip Irrigation & Water Pump Loan",
+      "frenchTitle": "Financement Irrigation Solaire & Motopompe",
+      "description": "Dry season irrigation equipment credit with direct supplier delivery to farm coordinates.",
+      "minAmount": "250000",
+      "maxAmount": "3500000",
+      "interestRatePercent": 5,
+      "durationMonths": 12,
+      "requiredCreditTier": "GOLD",
+      "createdAt": "2026-09-06T23:09:15.253Z"
+    },
+    {
+      "id": "4c775fb9-ac9a-4104-8541-ec7af84ffa9a",
+      "financialProfileId": "fbd23562-b84d-4db3-a810-1c7436471682",
+      "title": "Greenhouse & Climate-Smart Storage Facility Credit",
+      "frenchTitle": "Crédit Serre Agricole & Entrepôt de Stockage",
+      "description": "Long-term infrastructure financing underwritten by Advans Cameroun & Afriland MC2 Rural Fund.",
+      "minAmount": "500000",
+      "maxAmount": "10000000",
+      "interestRatePercent": 4,
+      "durationMonths": 18,
+      "requiredCreditTier": "PLATINUM",
+      "createdAt": "2026-09-06T23:09:15.267Z"
+    }
+  ],
+  "loanApplications": [
+    {
+      "id": "401a51c2-f706-4475-a4c2-4c863f1872fc",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "productId": "5e07e00b-3f99-4e3b-ae6c-22321cfd1a3e",
+      "purpose": "Purchasing high-yield organic tomato seeds and solar drip irrigation kit",
+      "requestedAmount": "500000",
+      "approvedAmount": "500000",
+      "interestRate": 4.5,
+      "durationMonths": 6,
+      "status": "REPAID",
+      "repaymentDeductionPct": 20,
+      "totalRepaidAmount": "0",
+      "disbursedAt": "2026-09-01T23:07:06.103Z",
+      "dueAt": null,
+      "createdAt": "2026-09-01T23:07:06.105Z",
+      "updatedAt": "2026-09-07T01:56:34.049Z"
+    }
+  ],
+  "farmerCreditAuditSnapshots": [
+    {
+      "id": "6441567e-6dd0-4558-9b9d-eed38f693b10",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:32:43.483Z"
+    },
+    {
+      "id": "128e3db0-01ca-4d24-a82e-bedc5cde44d5",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:32:45.812Z"
+    },
+    {
+      "id": "f976ca5c-629b-40d9-becf-f881f988d8e0",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:02.314Z"
+    },
+    {
+      "id": "52e0f857-a7b0-48d8-a1db-bf238da517d9",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:04.964Z"
+    },
+    {
+      "id": "224928c0-f1fb-4d39-beea-25ba308bd102",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:10.182Z"
+    },
+    {
+      "id": "07caac87-f10a-40a6-a439-0e76c3221394",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:26.627Z"
+    },
+    {
+      "id": "64c2462d-ce56-4841-983e-bb8aa86f6d18",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:28.521Z"
+    },
+    {
+      "id": "8f6cc908-de18-4096-973c-1408c95b2344",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:43.738Z"
+    },
+    {
+      "id": "9584b3e1-7ef1-42c4-97e3-3a48f9606c2b",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:43.872Z"
+    },
+    {
+      "id": "614959d2-ab3c-468e-b740-15c6e0f2882b",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:48.522Z"
+    },
+    {
+      "id": "ef23881b-6677-43cb-98cc-651928cc7a58",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:50:48.640Z"
+    },
+    {
+      "id": "e9d57a8b-d30c-4049-8e26-d9f552db3ea6",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:52:25.517Z"
+    },
+    {
+      "id": "f40909cf-fbd9-4255-8af9-2fb63be9765f",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T21:52:43.425Z"
+    },
+    {
+      "id": "8ffa66cc-23e8-44b5-8e1e-d0e9f04a4611",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T22:09:58.120Z"
+    },
+    {
+      "id": "72e9fbad-0ebb-40af-b6ff-bb1b556349dd",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T22:09:59.999Z"
+    },
+    {
+      "id": "1970adfa-a309-499a-b0d1-78a5bf61331e",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-09T22:10:02.689Z"
+    },
+    {
+      "id": "be46a5d8-6a47-4519-b409-059f730ff44d",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-10T11:05:33.111Z"
+    },
+    {
+      "id": "5e6e095e-e3f3-4062-8754-de00b05ed977",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-10T11:05:36.233Z"
+    },
+    {
+      "id": "64c64e8b-fc0a-4811-b1f3-9517e08af497",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-10T11:17:57.549Z"
+    },
+    {
+      "id": "90801d45-d3e4-443a-8cbd-353818c98d6f",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-10T11:17:59.608Z"
+    },
+    {
+      "id": "2ea61098-9bb1-49a2-b6b7-144d9ef28f44",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T15:19:40.858Z"
+    },
+    {
+      "id": "a755b387-965a-4aff-b638-6338347c8e61",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T15:19:40.857Z"
+    },
+    {
+      "id": "bdc879c8-cb3f-4734-837a-be48db9dccad",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T15:19:41.004Z"
+    },
+    {
+      "id": "d8c72fba-277b-4b5c-a478-293abb9474f3",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T15:19:41.057Z"
+    },
+    {
+      "id": "9c34efec-814e-4701-bf00-bc79b5cc5567",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T15:19:43.636Z"
+    },
+    {
+      "id": "8a532f73-0638-4cdb-a55f-626357a82d10",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T15:21:13.518Z"
+    },
+    {
+      "id": "ab5b20e9-9530-410c-8e44-272fb4dc13de",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T16:56:04.698Z"
+    },
+    {
+      "id": "28b24db5-d0df-4412-b309-a2fd63d660ab",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T16:56:06.268Z"
+    },
+    {
+      "id": "1190231a-58f9-48fb-a61a-02e43d18f0fc",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T16:56:06.318Z"
+    },
+    {
+      "id": "2323badd-1862-49c7-be7e-f685ca1e8c44",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-12T16:56:06.369Z"
+    },
+    {
+      "id": "445741de-b87d-4183-8023-49e28ed8c8c6",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T16:56:08.469Z"
+    },
+    {
+      "id": "d458ca0a-0bf3-4f3b-9ea3-ca39085f8520",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T16:56:31.833Z"
+    },
+    {
+      "id": "5d9f6d36-5a2d-46e0-99d0-8d424239db3c",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T17:27:09.379Z"
+    },
+    {
+      "id": "868cb4b0-75d9-471f-bd18-e7363fee409f",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T17:27:11.697Z"
+    },
+    {
+      "id": "66a23520-9eba-437f-aade-20cc65370c8e",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T17:32:46.413Z"
+    },
+    {
+      "id": "8f4da675-21d5-41d3-8c9b-77ed8498edac",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-12T17:32:48.244Z"
+    },
+    {
+      "id": "b0f0c50c-c5e1-47bd-94ac-5337b1aec11a",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-15T06:04:46.763Z"
+    },
+    {
+      "id": "ffcd93e0-296a-40bf-8ad0-92b0359ccb11",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-15T06:04:46.760Z"
+    },
+    {
+      "id": "259bbb3c-844c-4c2c-a2d1-7acf2aee7ded",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-15T06:04:46.841Z"
+    },
+    {
+      "id": "21b26a90-9279-4bed-9eda-334af38bae80",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-09-15T06:04:46.890Z"
+    },
+    {
+      "id": "0d58f306-0c7b-4a8c-9af6-909bbedee547",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-09-15T06:04:50.467Z"
+    },
+    {
+      "id": "4587b9b9-b2fc-4c4d-b31a-311155c77f35",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-07T19:09:03.956Z"
+    },
+    {
+      "id": "745e1249-6da3-4689-8e32-9093c930921c",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-07T19:09:03.957Z"
+    },
+    {
+      "id": "8761ff3f-4fde-4bcc-b618-d0a7fb5b4b58",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 526,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 10,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-07T19:09:04.052Z"
+    },
+    {
+      "id": "e144cf50-dd45-4486-b00e-42bd2a049497",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-07T19:09:04.088Z"
+    },
+    {
+      "id": "559838a8-ff94-44af-b83f-9ccebcf79059",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-07T19:09:07.941Z"
+    },
+    {
+      "id": "96ef31bf-095e-4851-a766-6e84cae4d5fc",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-07T19:09:26.220Z"
+    },
+    {
+      "id": "b94acf92-8678-497e-89b8-b9d8b2f2b12d",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-21T13:01:37.582Z"
+    },
+    {
+      "id": "4f3b8d47-0580-48e8-b5dc-95d9b98724b1",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 526,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 10,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-21T13:01:37.658Z"
+    },
+    {
+      "id": "4834a738-4976-45f2-b6ec-42a4cf69f308",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-21T13:01:37.696Z"
+    },
+    {
+      "id": "f63f161f-b633-465c-8170-c2c37f339df0",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 4,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "ORDER_COMPLETED_b9d55f04-c45e-4001-8381-3e01f31b9033",
+      "calculatedAt": "2026-10-21T14:29:14.370Z"
+    },
+    {
+      "id": "701e17bb-e68f-45e1-90b3-10292d0cae06",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 493,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "ORDER_COMPLETED_8d78d237-db54-4860-84a8-1ddf443abf31",
+      "calculatedAt": "2026-10-21T14:35:07.255Z"
+    },
+    {
+      "id": "849fcf21-dfba-47ec-869c-b81eb3c0ee29",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 493,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T07:08:13.541Z"
+    },
+    {
+      "id": "4f41e32b-a7ac-4846-ac4d-1568ed39fab1",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 493,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T07:08:13.539Z"
+    },
+    {
+      "id": "46066717-6df9-4b53-a338-e038a192a7f2",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 526,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 10,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T07:08:13.647Z"
+    },
+    {
+      "id": "10a20b83-e2c5-4133-ab19-a83d17533278",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 493,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T07:08:13.700Z"
+    },
+    {
+      "id": "492625ee-a283-410e-9404-1c4f9ffe3d74",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 493,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 5,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T07:08:17.536Z"
+    },
+    {
+      "id": "2c8d02b3-e36c-412e-b84a-68c30d9f0912",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T13:05:25.947Z"
+    },
+    {
+      "id": "4495292e-8d3a-4cd2-b89c-f5473f1699ba",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T13:05:25.938Z"
+    },
+    {
+      "id": "9d9b7d22-3dd8-466d-a645-8a12bc73870b",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T13:05:26.024Z"
+    },
+    {
+      "id": "53b85ab2-a2ab-4eca-a96e-36e2cead9692",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T13:05:26.058Z"
+    },
+    {
+      "id": "913616bf-4606-48a5-a05c-c938754e0300",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T13:05:29.434Z"
+    },
+    {
+      "id": "56f7770e-3e95-470d-a55d-b000f831bf64",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T21:20:25.447Z"
+    },
+    {
+      "id": "eb02a800-521d-43c5-bf37-456d08c09fc2",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T21:20:25.441Z"
+    },
+    {
+      "id": "90f92ac1-1339-4ae4-9467-1db407cb2989",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T21:20:25.526Z"
+    },
+    {
+      "id": "f81c816f-4806-47ed-b27c-0b77af0de626",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-25T21:20:25.562Z"
+    },
+    {
+      "id": "cf5b0bdf-2f62-426f-9000-661812fa70b4",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 545,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 100,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-25T21:20:29.336Z"
+    },
+    {
+      "id": "4d309855-9308-4a76-a4e3-b00d90fc141d",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:11:15.967Z"
+    },
+    {
+      "id": "a03db58c-fbb9-4e4f-83cc-24b261d6c336",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-27T14:11:15.990Z"
+    },
+    {
+      "id": "f13f8841-15cd-49fd-a8da-f63f51ad2f23",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-27T14:11:16.038Z"
+    },
+    {
+      "id": "9176c76c-078f-4174-acb6-fd178e13c2ca",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-10-27T14:11:16.076Z"
+    },
+    {
+      "id": "eb6996f2-27f0-4347-b03b-5d9abe633087",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:11:18.943Z"
+    },
+    {
+      "id": "6c2cae23-46be-44e0-901c-c69c6e656442",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:02.542Z"
+    },
+    {
+      "id": "1e0677ae-29a8-484d-b077-87eb851c8712",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:02.573Z"
+    },
+    {
+      "id": "b4811ea7-c5e3-4aa2-bb65-ea4326c45998",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:07.943Z"
+    },
+    {
+      "id": "76e5efc0-2096-4db3-9e66-c642f3dbc67c",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:08.028Z"
+    },
+    {
+      "id": "3946eb4e-05ef-45a6-a60f-112057629671",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:08.220Z"
+    },
+    {
+      "id": "c813f9bb-bb3d-4723-b6bd-37e39633fb68",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-10-27T14:13:12.630Z"
+    },
+    {
+      "id": "2d34e879-1676-4a89-9ccb-2a0cbed5f487",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T09:53:26.057Z"
+    },
+    {
+      "id": "63e337d7-b134-4013-bc30-29279cbe59b2",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T09:53:26.060Z"
+    },
+    {
+      "id": "ccc6633b-8a09-40e8-b930-9e70f5d6b1a9",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T09:53:26.153Z"
+    },
+    {
+      "id": "a8d84d81-552a-4b82-adae-b547cadbcc8c",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T09:53:26.185Z"
+    },
+    {
+      "id": "395b0b4b-d669-44c4-957c-06cdc63b6e53",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T09:53:29.338Z"
+    },
+    {
+      "id": "4a75c3c9-43ef-47e1-974f-cbf2db8581cc",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T10:31:23.017Z"
+    },
+    {
+      "id": "4e66d228-75bd-4373-8534-54baef721d57",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T10:31:22.998Z"
+    },
+    {
+      "id": "305f500b-07f1-4711-a71c-a6c3eab7cdd8",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T10:31:23.185Z"
+    },
+    {
+      "id": "1145d373-23a9-4fb7-935f-7b37c05073a9",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-01T10:31:23.255Z"
+    },
+    {
+      "id": "d3a369ec-5b20-43ad-a629-a29274e85b7c",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T10:31:23.271Z"
+    },
+    {
+      "id": "8bcaed08-b624-400a-8751-b5a27475eece",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T12:12:03.987Z"
+    },
+    {
+      "id": "8e9f6ca2-abd4-41e3-84a3-1bc87880066f",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T12:12:04.180Z"
+    },
+    {
+      "id": "76927ecb-2d3f-4642-ab58-6563e164e4b7",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T14:01:47.263Z"
+    },
+    {
+      "id": "8f6ecb8b-1107-449d-a0ef-2ad1354ed230",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-01T14:01:47.429Z"
+    },
+    {
+      "id": "f053a9b7-96ae-4f11-aa4a-82185a23e5f8",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-02T13:08:38.826Z"
+    },
+    {
+      "id": "fe64438e-ad17-4724-977d-dd7dff2a5fa6",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T13:08:38.820Z"
+    },
+    {
+      "id": "9333d7cd-e7e4-4709-af50-7a42a76b2577",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T13:08:38.975Z"
+    },
+    {
+      "id": "a8b392c0-4944-4664-a054-18c9fe4556f0",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T13:08:39.023Z"
+    },
+    {
+      "id": "2a26fd77-f477-4906-bf48-9bc0c97fad7f",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 501,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-02T13:08:42.115Z"
+    },
+    {
+      "id": "aa4f146b-3958-4893-b720-3a8c24c2cb20",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T21:29:13.118Z"
+    },
+    {
+      "id": "5e66cdf8-5541-477e-bbc9-dd2503145acf",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T21:29:13.340Z"
+    },
+    {
+      "id": "2b634197-3f16-49ff-bdb7-fe44fdfc13c1",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-02T21:29:13.380Z"
+    },
+    {
+      "id": "eb2fb1d0-1609-4a26-a1c7-2e3547b09cc2",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T05:49:35.215Z"
+    },
+    {
+      "id": "9e865d6d-4b85-4111-a4ae-efbb8e1796b9",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T05:49:35.333Z"
+    },
+    {
+      "id": "4cb1d749-277e-4f56-8422-5a9b25727b66",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T05:49:35.364Z"
+    },
+    {
+      "id": "1e0c55a0-2d3d-4de8-9221-bb299b919428",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T06:51:22.698Z"
+    },
+    {
+      "id": "41cc5ae3-ff8c-457a-95e2-b0ba0715cc16",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T06:51:22.903Z"
+    },
+    {
+      "id": "427349ff-b4f8-47d2-be32-1880387109e2",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T06:51:23.038Z"
+    },
+    {
+      "id": "94ee9d6d-f8dd-4ca7-9808-3fa65cefdf9c",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T06:51:23.090Z"
+    },
+    {
+      "id": "dac20bc3-77aa-4121-91fc-b23050bb7c07",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-04T06:51:23.133Z"
+    },
+    {
+      "id": "5556d498-75a3-4738-b88b-dd4a9ef45c13",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T06:56:12.187Z"
+    },
+    {
+      "id": "4db57d11-704f-4a6d-aae8-3a6454d027d0",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T06:56:12.308Z"
+    },
+    {
+      "id": "fedd9030-4497-4389-b8e4-c880a1756b8a",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:03:40.856Z"
+    },
+    {
+      "id": "bc4a9050-4558-4ffc-93c0-1697c8a8863e",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:03:43.742Z"
+    },
+    {
+      "id": "1f81207f-b8fb-437d-92cf-58fc84865250",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:20:23.563Z"
+    },
+    {
+      "id": "14c6d08b-f185-4f3d-9214-fb904e3d1044",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:20:23.942Z"
+    },
+    {
+      "id": "23d4813b-0cba-4de6-8bd2-8e62b3227053",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:22:42.199Z"
+    },
+    {
+      "id": "f46a2382-4a04-4077-85f5-634260c7506a",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T07:22:42.481Z"
+    },
+    {
+      "id": "144c5fdf-91c1-479f-a74f-18a5bb409557",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T08:27:01.981Z"
+    },
+    {
+      "id": "d6c4944c-fec0-4ef0-a5de-6beda4371715",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-04T08:27:02.777Z"
+    },
+    {
+      "id": "8b68b7bb-6518-44f3-92e0-ed39e2bb78a4",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-05T21:42:10.678Z"
+    },
+    {
+      "id": "c7e9a294-1b41-41b7-bd2d-d5f8d357c200",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-05T21:42:10.740Z"
+    },
+    {
+      "id": "44894321-a410-4279-8439-552ac7e407d6",
+      "farmerId": "b4af43f3-85b9-4f90-b68c-85f87bea3bfe",
+      "score": 300,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 0,
+        "kycCompliance": 0,
+        "reviewBayesian": 75,
+        "listingFrequency": 0,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-05T21:42:10.852Z"
+    },
+    {
+      "id": "abca7477-308a-4318-b814-b83f21d9cf20",
+      "farmerId": "ba4d61cf-de47-4e9f-a64e-3d71c20e5227",
+      "score": 542,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 20,
+        "salesFulfillment": 0,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 100,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "AGROVESTOR_SEED",
+      "calculatedAt": "2026-11-05T21:42:10.915Z"
+    },
+    {
+      "id": "68b26b9e-10ec-4679-8430-9e08fdfab388",
+      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
+      "score": 517,
+      "tier": "BRONZE",
+      "algorithmVersion": "v1.0.0-tabi",
+      "metricsSnapshot": {
+        "networkReach": 100,
+        "kycCompliance": 70,
+        "reviewBayesian": 75,
+        "listingFrequency": 50,
+        "salesFulfillment": 10,
+        "engagementVelocity": 0,
+        "repaymentIntegrity": 0,
+        "deliveryReliability": 100
+      },
+      "triggeredBy": "API_GET_CREDIT_SCORE",
+      "calculatedAt": "2026-11-05T21:42:10.955Z"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "61ea21da-143b-49f2-aa89-c75fa31363e7",
+      "participantAId": "70f3c56b-bacc-4da4-ba68-cef7c1852170",
+      "participantBId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "lastMessage": "Hello what's up",
+      "updatedAt": "2026-09-12T19:09:33.566Z"
+    },
+    {
+      "id": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "participantAId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "participantBId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "lastMessage": "Yes what's up",
+      "updatedAt": "2026-09-13T18:54:17.507Z"
+    },
+    {
+      "id": "7e84786d-55a4-4436-a95a-44bc85bddabf",
+      "participantAId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "participantBId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "lastMessage": "Hi",
+      "updatedAt": "2026-10-21T11:57:42.377Z"
+    },
+    {
+      "id": "22fbb96c-4630-4b63-9992-73ea8dfd9177",
+      "participantAId": "9a89f0df-fa55-44b9-bcc6-2d5a53f8de25",
+      "participantBId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "lastMessage": "Conversation started",
+      "updatedAt": "2026-10-25T13:12:38.970Z"
+    },
+    {
+      "id": "b1de3878-ba80-43db-a5f7-352c917e8c89",
+      "participantAId": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
+      "participantBId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "lastMessage": "Greetings Victoy from Green valley",
+      "updatedAt": "2026-10-27T15:04:00.902Z"
+    },
+    {
+      "id": "d33deec2-f51c-4af7-8e1a-38efb22ed680",
+      "participantAId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "participantBId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "lastMessage": "hello eyong what can i do for you",
+      "updatedAt": "2026-11-01T08:56:29.520Z"
+    }
+  ],
+  "messages": [
+    {
+      "id": "d8ebdd89-ae19-47d7-b3a9-4360ab2bc9fd",
+      "conversationId": "61ea21da-143b-49f2-aa89-c75fa31363e7",
+      "senderId": "70f3c56b-bacc-4da4-ba68-cef7c1852170",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Hello eyong",
+      "isRead": false,
+      "createdAt": "2026-09-12T19:06:50.935Z"
+    },
+    {
+      "id": "f760b915-b06c-4d00-a157-c4589536f23f",
+      "conversationId": "61ea21da-143b-49f2-aa89-c75fa31363e7",
+      "senderId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "receiverId": "70f3c56b-bacc-4da4-ba68-cef7c1852170",
+      "content": "Hello what's up",
+      "isRead": false,
+      "createdAt": "2026-09-12T19:09:33.578Z"
+    },
+    {
+      "id": "71bd7040-9318-48a1-a451-2293d76d35d0",
+      "conversationId": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "senderId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Hello green Valley farm",
+      "isRead": false,
+      "createdAt": "2026-09-13T17:52:16.455Z"
+    },
+    {
+      "id": "3214e5b3-61ae-4662-b4b6-8df5cf03a0df",
+      "conversationId": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "senderId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "receiverId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "content": "Hello",
+      "isRead": false,
+      "createdAt": "2026-09-13T18:08:37.628Z"
+    },
+    {
+      "id": "8768b884-3501-4d70-8cef-f5e3a44f9387",
+      "conversationId": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "senderId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "How much for...",
+      "isRead": false,
+      "createdAt": "2026-09-13T18:47:49.247Z"
+    },
+    {
+      "id": "85dbba25-c0cd-4b4e-9344-30d5cf392451",
+      "conversationId": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "senderId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Heo",
+      "isRead": false,
+      "createdAt": "2026-09-13T18:53:54.494Z"
+    },
+    {
+      "id": "cd6ec11b-900f-419d-b310-7c3695711ac4",
+      "conversationId": "a5929b4c-972c-41dd-885d-d08e8e6f9af3",
+      "senderId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "receiverId": "e963c0ee-3dbd-4500-9fcb-d64f600e72d1",
+      "content": "Yes what's up",
+      "isRead": false,
+      "createdAt": "2026-09-13T18:54:17.514Z"
+    },
+    {
+      "id": "4777b097-4b4c-4170-8763-9028bb885fa0",
+      "conversationId": "7e84786d-55a4-4436-a95a-44bc85bddabf",
+      "senderId": "e05d88c1-9aff-4558-90cd-c20c26c5bce9",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Hi",
+      "isRead": false,
+      "createdAt": "2026-10-21T11:57:42.409Z"
+    },
+    {
+      "id": "1bd20d90-fda4-4e89-a10e-a97f7dbbeab9",
+      "conversationId": "d33deec2-f51c-4af7-8e1a-38efb22ed680",
+      "senderId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "receiverId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "content": "Good morning sir",
+      "isRead": false,
+      "createdAt": "2026-10-27T13:34:41.689Z"
+    },
+    {
+      "id": "5cd3a3d8-6b48-48ca-a5a6-eca78a76e91a",
+      "conversationId": "d33deec2-f51c-4af7-8e1a-38efb22ed680",
+      "senderId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Hello green valley",
+      "isRead": false,
+      "createdAt": "2026-10-27T13:47:39.615Z"
+    },
+    {
+      "id": "e984ad6b-9bf8-424b-a56b-f0ae4eda63bd",
+      "conversationId": "b1de3878-ba80-43db-a5f7-352c917e8c89",
+      "senderId": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "Greetings Victoy from Green valley",
+      "isRead": false,
+      "createdAt": "2026-10-27T15:04:00.916Z"
+    },
+    {
+      "id": "8ff5d43b-cead-402e-8bbd-d16294d3ca5d",
+      "conversationId": "d33deec2-f51c-4af7-8e1a-38efb22ed680",
+      "senderId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "receiverId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "content": "hello greate guy",
+      "isRead": false,
+      "createdAt": "2026-11-01T08:54:15.713Z"
+    },
+    {
+      "id": "6aaa3436-c859-4977-a8be-2224ccebc903",
+      "conversationId": "d33deec2-f51c-4af7-8e1a-38efb22ed680",
+      "senderId": "051d8b36-510c-4de3-82dd-f96c1e675479",
+      "receiverId": "6e8b6dbd-6407-4688-881e-705743c62a78",
+      "content": "hello eyong what can i do for you",
+      "isRead": false,
+      "createdAt": "2026-11-01T08:56:29.550Z"
+    }
+  ],
+  "reviews": [],
+  "savedYields": [],
+  "follows": []
+}

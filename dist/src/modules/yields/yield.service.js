@@ -6,12 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteYield = exports.updateYield = exports.getAllCategories = exports.createYield = exports.getYieldById = exports.getAllYields = void 0;
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const getAllYields = async (params) => {
-    const { category, region, search, farmId, storeId, isWholesale, isOrganic } = params;
+    const { category, region, search, farmId, storeId, isWholesale, isOrganic, lifecycleStatus } = params;
     return prisma_1.default.agroYield.findMany({
         where: {
             isAvailable: true,
             ...(farmId && { farmId }),
             ...(storeId && { storeId }),
+            ...(lifecycleStatus && { lifecycleStatus }),
             ...(category && {
                 category: {
                     name: { contains: category, mode: 'insensitive' },
@@ -201,6 +202,9 @@ const createYield = async (userId, data) => {
             bulkPricePerUnit: data.bulkPricePerUnit,
             isOrganic: data.isOrganic || false,
             harvestDate: data.harvestDate ? new Date(data.harvestDate) : new Date(),
+            lifecycleStatus: data.lifecycleStatus || 'SELLING',
+            ...(data.expectedHarvestWindow ? { expectedHarvestWindow: data.expectedHarvestWindow } : {}),
+            ...(data.nextCycleMonth ? { nextCycleMonth: data.nextCycleMonth } : {}),
             mediaUrls: data.mediaUrls,
         },
         include: {
@@ -328,6 +332,9 @@ const updateYield = async (userId, userRole, yieldId, updates) => {
             ...(updates.bulkMinQuantity !== undefined && { bulkMinQuantity: updates.bulkMinQuantity }),
             ...(updates.bulkPricePerUnit !== undefined && { bulkPricePerUnit: updates.bulkPricePerUnit }),
             ...(updates.isOrganic !== undefined && { isOrganic: updates.isOrganic }),
+            ...(updates.lifecycleStatus && { lifecycleStatus: updates.lifecycleStatus }),
+            ...(updates.expectedHarvestWindow !== undefined && { expectedHarvestWindow: updates.expectedHarvestWindow }),
+            ...(updates.nextCycleMonth !== undefined && { nextCycleMonth: updates.nextCycleMonth }),
             ...(updates.mediaUrls && { mediaUrls: updates.mediaUrls }),
         },
         include: {
