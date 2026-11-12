@@ -26,8 +26,22 @@ const PORT = process.env.PORT || 5000;
 // Middlewares
 app.use((0, cors_1.default)({ origin: '*' }));
 app.use(express_1.default.json());
-// Serve Static Uploads (Videos & Images)
-app.use('/uploads', express_1.default.static(path_1.default.join(process.cwd(), 'uploads')));
+// Serve Static Uploads (Videos & Images) with full CORS, byte-range streaming, and cross-origin resource policy
+app.use('/uploads', (0, cors_1.default)({ origin: '*' }), express_1.default.static(path_1.default.join(process.cwd(), 'uploads'), {
+    acceptRanges: true,
+    maxAge: '7d',
+    setHeaders: (res, filePath) => {
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+        res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+        if (filePath.endsWith('.mp4') || filePath.endsWith('.mov')) {
+            res.setHeader('Content-Type', 'video/mp4');
+        }
+        else if (filePath.endsWith('.webm')) {
+            res.setHeader('Content-Type', 'video/webm');
+        }
+    },
+}));
 // Request Logger (Prints visited URLs & methods to CLI)
 app.use((req, res, next) => {
     const start = Date.now();

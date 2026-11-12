@@ -7,6 +7,24 @@ exports.handleMediaUpload = exports.uploadMiddleware = void 0;
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const multer_1 = __importDefault(require("multer"));
+const cloudinary_1 = require("cloudinary");
+// Configure Cloudinary if environment variables are provided
+if (process.env.CLOUDINARY_URL) {
+    cloudinary_1.v2.config();
+}
+else if (process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET) {
+    cloudinary_1.v2.config({
+        cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+        api_key: process.env.CLOUDINARY_API_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+}
+const isCloudinaryConfigured = Boolean(process.env.CLOUDINARY_URL ||
+    (process.env.CLOUDINARY_CLOUD_NAME &&
+        process.env.CLOUDINARY_API_KEY &&
+        process.env.CLOUDINARY_API_SECRET));
 // Ensure uploads folder exists
 const uploadsDir = path_1.default.join(process.cwd(), 'uploads');
 if (!fs_1.default.existsSync(uploadsDir)) {
@@ -41,6 +59,40 @@ const handleMediaUpload = async (req, res) => {
         const relativeUrl = `/uploads/${file.filename}`;
         const fileUrl = `${protocol}://${host}${relativeUrl}`;
         const isVideo = file.mimetype.startsWith('video/') || file.filename.endsWith('.mp4') || file.filename.endsWith('.mov');
+        // If Cloudinary is configured (e.g., in production to prevent ephemeral disk wipeout), upload to Cloudinary CDN
+        if (isCloudinaryConfigured) {
+            try {
+                console.log(`☁️ [CLOUDINARY] Uploading ${file.filename} (${(file.size / (1024 * 1024)).toFixed(2)} MB)...`);
+                const result = await cloudinary_1.v2.uploader.upload(file.path, {
+                    resource_type: isVideo ? 'video' : 'auto',
+                    folder: 'agromarket_media',
+                    use_filename: true,
+                    unique_filename: true,
+                });
+                // Clean up temporary local file after successful cloud upload
+                try {
+                    fs_1.default.unlinkSync(file.path);
+                }
+                catch {
+                    // ignore cleanup error
+                }
+                console.log(`☁️ [CLOUDINARY SUCCESS] Permanent URL: ${result.secure_url}`);
+                res.status(200).json({
+                    success: true,
+                    url: result.secure_url,
+                    fullUrl: result.secure_url,
+                    filename: file.filename,
+                    mimetype: file.mimetype,
+                    isVideo,
+                    size: file.size,
+                    provider: 'cloudinary',
+                });
+                return;
+            }
+            catch (cloudErr) {
+                console.warn('⚠️ [CLOUDINARY FALLBACK] Cloud upload failed, falling back to local disk:', cloudErr?.message || cloudErr);
+            }
+        }
         console.log(`📁 [UPLOAD SUCCESS] Saved: ${file.filename} (${(file.size / (1024 * 1024)).toFixed(2)} MB) -> ${fileUrl}`);
         res.status(200).json({
             success: true,
@@ -50,6 +102,7 @@ const handleMediaUpload = async (req, res) => {
             mimetype: file.mimetype,
             isVideo,
             size: file.size,
+            provider: 'local',
         });
     }
     catch (error) {

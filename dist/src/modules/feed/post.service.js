@@ -209,13 +209,19 @@ exports.addPostComment = addPostComment;
 const deletePost = async (postId, userId, userRole) => {
     const post = await prisma_1.default.post.findUnique({
         where: { id: postId },
-        include: { farmer: true },
+        include: {
+            farmer: true,
+            farm: { select: { userId: true } },
+        },
     });
     if (!post) {
         throw new Error('Post not found');
     }
     // Only post author, farm owner, or admin can delete
-    const isOwner = post.userId === userId || post.farmer?.userId === userId || userRole === 'ADMIN';
+    const isOwner = post.userId === userId ||
+        post.farmer?.userId === userId ||
+        post.farm?.userId === userId ||
+        userRole === 'ADMIN';
     if (!isOwner) {
         throw new Error('Unauthorized to delete this post');
     }
