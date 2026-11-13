@@ -870,30 +870,9 @@
       "commentsCount": 0,
       "createdAt": "2026-09-07T09:58:18.465Z",
       "updatedAt": "2026-10-24T22:03:46.141Z"
-    },
-    {
-      "id": "019b8050-90e3-41af-9375-03d49fbe6e54",
-      "farmerId": "30d1403f-a55e-494e-9649-e107e7fcff21",
-      "farmId": "7ccbff78-5c2d-4991-95f5-09e5c5bb1fa5",
-      "userId": "6e8b6dbd-6407-4688-881e-705743c62a78",
-      "content": "Testing Video",
-      "mediaUrl": "/uploads/agromarket-1793640375040-66057023.mp4",
-      "isVideo": true,
-      "linkedYieldId": "ff5d5e2b-c97b-410e-b10e-b46b492c0617",
-      "likesCount": 1,
-      "commentsCount": 0,
-      "createdAt": "2026-11-02T17:26:17.809Z",
-      "updatedAt": "2026-11-08T05:28:35.729Z"
     }
   ],
-  "postLikes": [
-    {
-      "id": "6d5e47a0-8c08-4ce7-9232-0b4029655be7",
-      "postId": "019b8050-90e3-41af-9375-03d49fbe6e54",
-      "userId": "296ab545-bf8a-4e37-aa69-f6e5a4cb5e3b",
-      "createdAt": "2026-11-08T05:28:35.663Z"
-    }
-  ],
+  "postLikes": [],
   "postComments": [],
   "cartItems": [],
   "orders": [
