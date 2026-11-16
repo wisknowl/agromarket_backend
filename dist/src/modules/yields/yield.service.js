@@ -9,7 +9,26 @@ const getAllYields = async (params) => {
     const { category, region, search, farmId, storeId, isWholesale, isOrganic, lifecycleStatus } = params;
     return prisma_1.default.agroYield.findMany({
         where: {
-            isAvailable: true,
+            AND: [
+                {
+                    OR: [
+                        { isAvailable: true },
+                        { lifecycleStatus: 'OFF_CYCLE' },
+                    ],
+                },
+                ...(search
+                    ? [
+                        {
+                            OR: [
+                                { title: { contains: search, mode: 'insensitive' } },
+                                { frenchTitle: { contains: search, mode: 'insensitive' } },
+                                { description: { contains: search, mode: 'insensitive' } },
+                                { originRegion: { contains: search, mode: 'insensitive' } },
+                            ],
+                        },
+                    ]
+                    : []),
+            ],
             ...(farmId && { farmId }),
             ...(storeId && { storeId }),
             ...(lifecycleStatus && { lifecycleStatus }),
@@ -23,14 +42,6 @@ const getAllYields = async (params) => {
             }),
             ...(isWholesale !== undefined && { isWholesaleBulkAvailable: isWholesale }),
             ...(isOrganic !== undefined && { isOrganic }),
-            ...(search && {
-                OR: [
-                    { title: { contains: search, mode: 'insensitive' } },
-                    { frenchTitle: { contains: search, mode: 'insensitive' } },
-                    { description: { contains: search, mode: 'insensitive' } },
-                    { originRegion: { contains: search, mode: 'insensitive' } },
-                ],
-            }),
         },
         include: {
             category: true,
