@@ -32,9 +32,26 @@ const getUserConversations = async (userId) => {
             avatarUrl: true,
             role: true,
             isVerified: true,
+            farms: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
+            stores: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
             farmerProfile: {
                 select: {
                     farmName: true,
+                    coverPhoto: true,
                     creditTier: true,
                     creditScore: true,
                 },
@@ -49,14 +66,24 @@ const getUserConversations = async (userId) => {
         const timeFormatted = conv.updatedAt
             ? new Date(conv.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             : 'Just now';
+        const resolvedAvatar = otherUser?.avatarUrl ||
+            otherUser?.farms?.[0]?.avatarPhoto ||
+            otherUser?.stores?.[0]?.avatarPhoto ||
+            otherUser?.farmerProfile?.coverPhoto ||
+            null;
+        const resolvedName = otherUser?.farms?.[0]?.name ||
+            otherUser?.farmerProfile?.farmName ||
+            otherUser?.stores?.[0]?.name ||
+            otherUser?.name ||
+            'AgroMarket User';
         return {
             id: conv.id,
             participantId: otherId,
             participantName: otherUser?.name || 'AgroMarket User',
-            participantAvatar: otherUser?.avatarUrl || null,
+            participantAvatar: resolvedAvatar,
             participantRole: otherUser?.role || 'BUYER',
-            farmerName: otherUser?.farmerProfile?.farmName || otherUser?.name,
-            farmerAvatar: otherUser?.avatarUrl || null,
+            farmerName: resolvedName,
+            farmerAvatar: resolvedAvatar,
             isVerified: otherUser?.isVerified || false,
             creditTier: otherUser?.farmerProfile?.creditTier || 'BRONZE',
             isOnline: true,
@@ -95,18 +122,56 @@ const getOrCreateConversationWithUser = async (userId, targetUserId) => {
             avatarUrl: true,
             role: true,
             isVerified: true,
+            farms: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
+            stores: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
             farmerProfile: {
                 select: {
                     farmName: true,
+                    coverPhoto: true,
                     creditTier: true,
                     creditScore: true,
                 },
             },
         },
     });
+    const resolvedAvatar = targetUser?.avatarUrl ||
+        targetUser?.farms?.[0]?.avatarPhoto ||
+        targetUser?.stores?.[0]?.avatarPhoto ||
+        targetUser?.farmerProfile?.coverPhoto ||
+        null;
+    const resolvedName = targetUser?.farms?.[0]?.name ||
+        targetUser?.farmerProfile?.farmName ||
+        targetUser?.stores?.[0]?.name ||
+        targetUser?.name ||
+        'AgroMarket User';
     return {
-        conversation,
-        targetUser,
+        conversation: {
+            ...conversation,
+            participantId: targetUserId,
+            participantName: targetUser?.name || 'AgroMarket User',
+            participantAvatar: resolvedAvatar,
+            farmerName: resolvedName,
+            farmerAvatar: resolvedAvatar,
+            isVerified: targetUser?.isVerified || false,
+        },
+        targetUser: {
+            ...targetUser,
+            avatarUrl: resolvedAvatar,
+        },
     };
 };
 exports.getOrCreateConversationWithUser = getOrCreateConversationWithUser;
@@ -125,18 +190,56 @@ const getConversationById = async (conversationId, currentUserId) => {
             avatarUrl: true,
             role: true,
             isVerified: true,
+            farms: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
+            stores: {
+                select: {
+                    id: true,
+                    name: true,
+                    avatarPhoto: true,
+                },
+                take: 1,
+            },
             farmerProfile: {
                 select: {
                     farmName: true,
+                    coverPhoto: true,
                     creditTier: true,
                     creditScore: true,
                 },
             },
         },
     });
+    const resolvedAvatar = otherUser?.avatarUrl ||
+        otherUser?.farms?.[0]?.avatarPhoto ||
+        otherUser?.stores?.[0]?.avatarPhoto ||
+        otherUser?.farmerProfile?.coverPhoto ||
+        null;
+    const resolvedName = otherUser?.farms?.[0]?.name ||
+        otherUser?.farmerProfile?.farmName ||
+        otherUser?.stores?.[0]?.name ||
+        otherUser?.name ||
+        'AgroMarket User';
     return {
-        conversation,
-        targetUser: otherUser,
+        conversation: {
+            ...conversation,
+            participantId: otherId,
+            participantName: otherUser?.name || 'AgroMarket User',
+            participantAvatar: resolvedAvatar,
+            farmerName: resolvedName,
+            farmerAvatar: resolvedAvatar,
+            isVerified: otherUser?.isVerified || false,
+        },
+        targetUser: {
+            ...otherUser,
+            avatarUrl: resolvedAvatar,
+        },
     };
 };
 exports.getConversationById = getConversationById;
