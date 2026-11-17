@@ -123,6 +123,7 @@ model User {
   posts               Post[]             @relation("UserPosts")
   following           Follow[]           @relation("UserFollowing")
   followers           Follow[]           @relation("UserFollowers")
+  waitlistSubscriptions ProduceWaitlist[]
 
   @@index([role])
   @@index([email])
@@ -371,6 +372,7 @@ model AgroYield {
   savedBy                 SavedYield[]
   reviews                 Review[]
   pricingTiers            YieldPricingTier[]
+  waitlistEntries         ProduceWaitlist[]
   
   createdAt               DateTime           @default(now())
   updatedAt               DateTime           @updatedAt
@@ -391,6 +393,23 @@ model YieldPricingTier {
   unitPrice    Decimal   @db.Decimal(10, 2)
 
   @@index([yieldId])
+}
+
+model ProduceWaitlist {
+  id          String     @id @default(uuid())
+  yieldId     String
+  yield       AgroYield  @relation(fields: [yieldId], references: [id], onDelete: Cascade)
+  userId      String?
+  user        User?      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phone       String?
+  email       String?
+  notified    Boolean    @default(false)
+  notifiedAt  DateTime?
+  createdAt   DateTime   @default(now())
+
+  @@index([yieldId])
+  @@index([userId])
+  @@index([phone])
 }
 
 // -------------------------------------------------------------

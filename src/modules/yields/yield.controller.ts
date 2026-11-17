@@ -112,3 +112,37 @@ export const removeYield = async (req: AuthRequest, res: Response): Promise<void
   }
 };
 
+export const joinYieldWaitlist = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const yieldId = req.params.id;
+    const userId = req.user?.id;
+    const { phone, email } = req.body;
+
+    const result = await yieldService.joinWaitlistService(yieldId, {
+      userId,
+      phone,
+      email,
+    });
+    res.status(200).json({ success: true, ...result });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Failed to join waitlist' });
+  }
+};
+
+export const leaveYieldWaitlist = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const yieldId = req.params.id;
+    const userId = req.user?.id;
+    const { phone, email } = req.body;
+
+    const result = await yieldService.leaveWaitlistService(yieldId, {
+      userId,
+      phone,
+      email,
+    });
+    res.status(200).json({ success: true, ...result });
+  } catch (error: any) {
+    res.status(400).json({ message: error.message || 'Failed to leave waitlist' });
+  }
+};
+

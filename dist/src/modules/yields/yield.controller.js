@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeYield = exports.patchYieldStock = exports.putYield = exports.getCategories = exports.postYield = exports.getYield = exports.listYields = void 0;
+exports.leaveYieldWaitlist = exports.joinYieldWaitlist = exports.removeYield = exports.patchYieldStock = exports.putYield = exports.getCategories = exports.postYield = exports.getYield = exports.listYields = void 0;
 const yieldService = __importStar(require("./yield.service"));
 const listYields = async (req, res) => {
     try {
@@ -142,3 +142,37 @@ const removeYield = async (req, res) => {
     }
 };
 exports.removeYield = removeYield;
+const joinYieldWaitlist = async (req, res) => {
+    try {
+        const yieldId = req.params.id;
+        const userId = req.user?.id;
+        const { phone, email } = req.body;
+        const result = await yieldService.joinWaitlistService(yieldId, {
+            userId,
+            phone,
+            email,
+        });
+        res.status(200).json({ success: true, ...result });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to join waitlist' });
+    }
+};
+exports.joinYieldWaitlist = joinYieldWaitlist;
+const leaveYieldWaitlist = async (req, res) => {
+    try {
+        const yieldId = req.params.id;
+        const userId = req.user?.id;
+        const { phone, email } = req.body;
+        const result = await yieldService.leaveWaitlistService(yieldId, {
+            userId,
+            phone,
+            email,
+        });
+        res.status(200).json({ success: true, ...result });
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message || 'Failed to leave waitlist' });
+    }
+};
+exports.leaveYieldWaitlist = leaveYieldWaitlist;

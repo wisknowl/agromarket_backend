@@ -25,15 +25,15 @@ export const getAllYields = async (params: {
         },
         ...(search
           ? [
-              {
-                OR: [
-                  { title: { contains: search, mode: 'insensitive' as const } },
-                  { frenchTitle: { contains: search, mode: 'insensitive' as const } },
-                  { description: { contains: search, mode: 'insensitive' as const } },
-                  { originRegion: { contains: search, mode: 'insensitive' as const } },
-                ],
-              },
-            ]
+            {
+              OR: [
+                { title: { contains: search, mode: 'insensitive' as const } },
+                { frenchTitle: { contains: search, mode: 'insensitive' as const } },
+                { description: { contains: search, mode: 'insensitive' as const } },
+                { originRegion: { contains: search, mode: 'insensitive' as const } },
+              ],
+            },
+          ]
           : []),
       ],
       ...(farmId && { farmId }),
@@ -399,7 +399,7 @@ export const updateYield = async (
     targetCategoryId = yieldItem.categoryId;
   }
 
-  return prisma.agroYield.update({
+  const updatedYield = await prisma.agroYield.update({
     where: { id: yieldId },
     data: {
       ...(updates.title && { title: updates.title.trim() }),
@@ -431,6 +431,31 @@ export const updateYield = async (
       pricingTiers: true,
     },
   });
+
+  // Automated notification when produce returns from OFF_CYCLE
+  if (
+    yieldItem.lifecycleStatus === 'OFF_CYCLE' &&
+    updates.lifecycleStatus &&
+    updates.lifecycleStatus !== 'OFF_CYCLE'
+  ) {
+    try {
+      const waitlistSubs = await (prisma as any).produceWaitlist.findMany({
+        where: { yieldId, notified: false },
+        include: { user: true },
+      });
+      if (waitlistSubs.length > 0) {
+        console.log(`[WAITLIST NOTIFY] ${waitlistSubs.length} subscriber(s) notified for "${yieldItem.title}" returning to ${updates.lifecycleStatus}!`);
+        await (prisma as any).produceWaitlist.updateMany({
+          where: { yieldId },
+          data: { notified: true, notifiedAt: new Date() },
+        });
+      }
+    } catch (err) {
+      console.warn('Waitlist notification trigger error:', err);
+    }
+  }
+
+  return updatedYield;
 };
 
 export const deleteYield = async (userId: string, userRole: string, yieldId: string) => {
@@ -465,6 +490,83 @@ export const deleteYield = async (userId: string, userRole: string, yieldId: str
       data: { isAvailable: false, stockQuantity: 0, farmId: null },
     });
   }
+};
+
+export const joinWaitlistService = async (
+  yieldId: string,
+  data: { userId?: string; phone?: string; email?: string }
+) => {
+  const yieldItem = await prisma.agroYield.findUnique({ where: { id: yieldId } });
+  if (!yieldItem) throw new Error('Produce listing not found');
+
+  let phone = data.phone?.trim();
+  let email = data.email?.trim();
+
+  if (data.userId) {
+    const u = await prisma.user.findUnique({ where: { id: data.userId } });
+    if (u) {
+      phone = phone || u.phone;
+      email = email || u.email;
+    }
+  }
+
+  if (!data.userId && !phone && !email) {
+    throw new Error('Please provide a phone number or email to join the waitlist');
+  }
+
+  // Check if already on waitlist
+  const existing = await (prisma as any).produceWaitlist.findFirst({
+    where: {
+      yieldId,
+      OR: [
+        ...(data.userId ? [{ userId: data.userId }] : []),
+        ...(phone ? [{ phone }] : []),
+        ...(email ? [{ email }] : []),
+      ],
+    },
+  });
+
+  if (!existing) {
+    await (prisma as any).produceWaitlist.create({
+      data: {
+        yieldId,
+        userId: data.userId || null,
+        phone: phone || null,
+        email: email || null,
+      },
+    });
+
+    await prisma.agroYield.update({
+      where: { id: yieldId },
+      data: { waitlistCount: { increment: 1 } },
+    });
+  }
+
+  return { message: `You are on the waitlist for ${yieldItem.title}`, title: yieldItem.title };
+};
+
+export const leaveWaitlistService = async (
+  yieldId: string,
+  data: { userId?: string; phone?: string; email?: string }
+) => {
+  await (prisma as any).produceWaitlist.deleteMany({
+    where: {
+      yieldId,
+      OR: [
+        ...(data.userId ? [{ userId: data.userId }] : []),
+        ...(data.phone ? [{ phone: data.phone }] : []),
+        ...(data.email ? [{ email: data.email }] : []),
+      ],
+    },
+  });
+
+  const count = await (prisma as any).produceWaitlist.count({ where: { yieldId } });
+  await prisma.agroYield.update({
+    where: { id: yieldId },
+    data: { waitlistCount: count },
+  });
+
+  return { message: 'Removed from waitlist' };
 };
 
 

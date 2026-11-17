@@ -13,4 +13,6 @@ router.post('/', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireR
 router.put('/:id', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.putYield);
 router.patch('/:id/stock', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.patchYieldStock);
 router.delete('/:id', authMiddleware_1.authenticateJWT, (0, roleMiddleware_1.requireRole)([client_1.UserRole.FARMER, client_1.UserRole.ADMIN]), yield_controller_1.removeYield);
+router.post('/:id/waitlist', authMiddleware_1.optionalAuth, yield_controller_1.joinYieldWaitlist);
+router.delete('/:id/waitlist', authMiddleware_1.optionalAuth, yield_controller_1.leaveYieldWaitlist);
 exports.default = router;
