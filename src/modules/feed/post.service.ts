@@ -2,7 +2,7 @@ import prisma from '../../core/database/prisma';
 import { FeedRankingEngine, CandidatePost, UserContext } from './engine';
 
 export const getAllPosts = async (params?: { farmId?: string; userId?: string }) => {
-  return prisma.post.findMany({
+  const posts = await prisma.post.findMany({
     where: {
       ...(params?.farmId && { farmId: params.farmId }),
       ...(params?.userId && {
@@ -38,6 +38,20 @@ export const getAllPosts = async (params?: { farmId?: string; userId?: string })
     },
     orderBy: { createdAt: 'desc' },
   });
+
+  const yieldIds = Array.from(
+    new Set(posts.map((p) => p.linkedYieldId).filter(Boolean))
+  ) as string[];
+  const yields =
+    yieldIds.length > 0
+      ? await prisma.agroYield.findMany({ where: { id: { in: yieldIds } } })
+      : [];
+  const yieldMap = new Map(yields.map((y) => [y.id, y]));
+
+  return posts.map((p) => ({
+    ...p,
+    linkedYield: p.linkedYieldId ? yieldMap.get(p.linkedYieldId) || null : null,
+  }));
 };
 
 export const getRankedFeed = async (context?: UserContext & { limit?: number }) => {
@@ -93,9 +107,19 @@ export const getRankedFeed = async (context?: UserContext & { limit?: number }) 
     comments: p.comments,
   }));
 
+  const yieldIds = Array.from(
+    new Set(posts.map((p) => p.linkedYieldId).filter(Boolean))
+  ) as string[];
+  const yields =
+    yieldIds.length > 0
+      ? await prisma.agroYield.findMany({ where: { id: { in: yieldIds } } })
+      : [];
+  const yieldMap = new Map(yields.map((y) => [y.id, y]));
+
   const rankedScores = FeedRankingEngine.rankPosts(candidates, context);
   return rankedScores.map((s) => ({
     ...s.post,
+    linkedYield: s.post.linkedYieldId ? yieldMap.get(s.post.linkedYieldId) || null : null,
     rankingMetadata: {
       totalRankScore: s.totalRankScore,
       affinityScore: s.affinityScore,

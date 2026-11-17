@@ -7,7 +7,7 @@ exports.deletePost = exports.addPostComment = exports.toggleLikePost = exports.c
 const prisma_1 = __importDefault(require("../../core/database/prisma"));
 const engine_1 = require("./engine");
 const getAllPosts = async (params) => {
-    return prisma_1.default.post.findMany({
+    const posts = await prisma_1.default.post.findMany({
         where: {
             ...(params?.farmId && { farmId: params.farmId }),
             ...(params?.userId && {
@@ -43,6 +43,15 @@ const getAllPosts = async (params) => {
         },
         orderBy: { createdAt: 'desc' },
     });
+    const yieldIds = Array.from(new Set(posts.map((p) => p.linkedYieldId).filter(Boolean)));
+    const yields = yieldIds.length > 0
+        ? await prisma_1.default.agroYield.findMany({ where: { id: { in: yieldIds } } })
+        : [];
+    const yieldMap = new Map(yields.map((y) => [y.id, y]));
+    return posts.map((p) => ({
+        ...p,
+        linkedYield: p.linkedYieldId ? yieldMap.get(p.linkedYieldId) || null : null,
+    }));
 };
 exports.getAllPosts = getAllPosts;
 const getRankedFeed = async (context) => {
@@ -96,9 +105,15 @@ const getRankedFeed = async (context) => {
         likes: p.likes,
         comments: p.comments,
     }));
+    const yieldIds = Array.from(new Set(posts.map((p) => p.linkedYieldId).filter(Boolean)));
+    const yields = yieldIds.length > 0
+        ? await prisma_1.default.agroYield.findMany({ where: { id: { in: yieldIds } } })
+        : [];
+    const yieldMap = new Map(yields.map((y) => [y.id, y]));
     const rankedScores = engine_1.FeedRankingEngine.rankPosts(candidates, context);
     return rankedScores.map((s) => ({
         ...s.post,
+        linkedYield: s.post.linkedYieldId ? yieldMap.get(s.post.linkedYieldId) || null : null,
         rankingMetadata: {
             totalRankScore: s.totalRankScore,
             affinityScore: s.affinityScore,
